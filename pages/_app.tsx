@@ -1,12 +1,20 @@
-import '../styles/globals.css'
-import { NextUIProvider } from '@nextui-org/react'
+import "../styles/globals.css";
+import { NextUIProvider } from "@nextui-org/react";
+import { Space_Mono } from "@next/font/google";
 
-import type { AppProps } from 'next/app'
+const spaceMono = Space_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+});
+
+import type { AppProps } from "next/app";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
     <NextUIProvider>
-      <Component {...pageProps} />
+      <main className={spaceMono.className}>
+        <Component {...pageProps} />
+      </main>
     </NextUIProvider>
-  )
+  );
 }
