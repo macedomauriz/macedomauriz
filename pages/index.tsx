@@ -1,7 +1,6 @@
 import Head from "next/head";
 // import Image from "next/image";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -21,7 +20,7 @@ export default function Home() {
           padding: "0 10px",
         }}
       >
-        <Image src="/logo.svg" alt="logo" width={40} height={40} />
+        <img src="/logo.svg" alt="logo" width={40} height={40} />
         <h1 style={{ display: "inline", fontSize: 30, color: "white" }}>
           macedo<span style={{ fontWeight: 400, fontSize: 30 }}>mauriz</span>
         </h1>
