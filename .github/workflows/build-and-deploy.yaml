@@ -27,7 +27,7 @@ jobs:
       - name: Install dependencies
         run: |
           node --version
-          npm ci --production
+          npm ci
 
       - name: Build
         run: npm run build
