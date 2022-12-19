@@ -22,7 +22,7 @@ export default function Home() {
       >
         <img src="/logo.svg" alt="logo" width={40} height={40} />
         <h1 style={{ display: "inline", fontSize: 30, color: "white" }}>
-          macedo<span style={{ fontWeight: 400, fontSize: 30 }}>mauriz</span>
+          macedo<span style={{ fontWeight: 400, fontSize: 30 }}>mauriz</span> hola
         </h1>
       </div>
     </>
