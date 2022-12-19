@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BUCKET: macedomauriz.com
-      DIST: xxx
+      DIST: out
       REGION: us-west-1
       DIST_ID: EAEQCK2VGFN8X
 
