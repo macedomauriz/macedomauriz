@@ -1,13 +1,10 @@
-import { Collapse, Text } from '@nextui-org/react'
+import { Collapse, Text } from "@nextui-org/react"
 
 const CustomCollapse = () => {
   return (
     <Collapse.Group>
       <Collapse title="Option A">
-        <Text>
-          I have had my invitation to this world's festival, and thus my life
-          has been blessed.
-        </Text>
+        <Text>hola</Text>
       </Collapse>
       <Collapse title="Option B">
         <Text>
