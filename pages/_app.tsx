@@ -2,6 +2,9 @@ import { createTheme, NextUIProvider } from "@nextui-org/react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { Layout } from "../components/Layout"
 import { Nunito } from "@next/font/google"
+import { config } from "@fortawesome/fontawesome-svg-core"
+import "@fortawesome/fontawesome-svg-core/styles.css"
+config.autoAddCss = false
 
 const themeOverrides = {
   colors: {

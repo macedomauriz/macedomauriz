@@ -1,5 +1,14 @@
-import { useTheme, Text, Container, Navbar, Switch } from "@nextui-org/react"
+import {
+  useTheme,
+  // Text,
+  Container,
+  Navbar,
+  Switch,
+  Button,
+} from "@nextui-org/react"
 import { useTheme as useNextTheme } from "next-themes"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons"
 
 const AppBar = () => {
   const { setTheme } = useNextTheme()
@@ -17,10 +26,19 @@ const AppBar = () => {
         <Navbar.Link href="#">Pricing</Navbar.Link>
         <Navbar.Link href="#">Company</Navbar.Link>
       </Navbar.Content>
-      <Switch
-        checked={isDark}
-        onChange={e => setTheme(e.target.checked ? "dark" : "light")}
-      />
+      <Button
+        size="lg"
+        light
+        auto
+        ripple={false}
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+      >
+        {isDark ? (
+          <FontAwesomeIcon icon={faMoon} />
+        ) : (
+          <FontAwesomeIcon icon={faSun} />
+        )}
+      </Button>
     </Navbar>
   )
 }
