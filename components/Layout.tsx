@@ -13,7 +13,7 @@ const AppBar = () => {
   const { setTheme } = useNextTheme()
   const { isDark, type } = useTheme()
   return (
-    <Navbar isBordered variant="sticky">
+    <Navbar variant="floating">
       <Navbar.Brand css={{ filter: `invert(${!isDark ? 1 : 0})` }}>
         <img src="/logo.svg" alt="logo" width={40} height={40} />
       </Navbar.Brand>
@@ -28,6 +28,7 @@ const AppBar = () => {
         light
         auto
         ripple={false}
+        size="sm"
         onClick={() => setTheme(isDark ? "light" : "dark")}
       >
         {isDark ? (
@@ -55,7 +56,7 @@ interface LayoutProps {
 
 export function Layout({ children, className }: LayoutProps) {
   return (
-    <Container className={className}>
+    <Container className={className} gap={0}>
       <AppBar />
       <main>{children}</main>
       <Footer />
