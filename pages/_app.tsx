@@ -1,21 +1,41 @@
-import "../styles/globals.css"
 import { createTheme, NextUIProvider } from "@nextui-org/react"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { Layout } from "../components/Layout"
-import { Space_Mono } from "@next/font/google"
+import { Nunito } from "@next/font/google"
+
+const themeOverrides = {
+  colors: {
+    // brand colors
+    primaryLight: "$pink200",
+    primaryLightHover: "$pink300", // commonly used on hover state
+    primaryLightActive: "$pink400", // commonly used on pressed state
+    primaryLightContrast: "$pink600", // commonly used for text inside the component
+    primary: "$pink600",
+    primaryBorder: "$pink500",
+    primaryBorderHover: "$pink600",
+    primarySolidHover: "$pink700",
+    primarySolidContrast: "$white", // commonly used for text inside the component
+    link: "$pink600",
+  },
+  fonts: {
+    sans: `'Nunito', 'Roboto',
+    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'`,
+    mono: `Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
+    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono'`,
+  },
+}
 
 const lightTheme = createTheme({
   type: "light",
-  // theme: {
-  //   colors: {...}, // optional
-  // }
+  theme: themeOverrides,
 })
 
 const darkTheme = createTheme({
   type: "dark",
+  theme: themeOverrides,
 })
 
-const spaceMono = Space_Mono({
+const nunito = Nunito({
   weight: ["400", "700"],
   subsets: ["latin"],
 })
@@ -33,7 +53,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
       }}
     >
       <NextUIProvider>
-        <Layout className={spaceMono.className}>
+        <Layout className={nunito.className}>
           <Component {...pageProps} />
         </Layout>
       </NextUIProvider>

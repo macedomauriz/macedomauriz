@@ -1,22 +1,11 @@
 import { useTheme, Text, Container, Navbar, Switch } from "@nextui-org/react"
-import {
-  useTheme as useNextTheme,
-  ThemeProvider as NextThemesProvider,
-} from "next-themes"
+import { useTheme as useNextTheme } from "next-themes"
 
 const AppBar = () => {
   const { setTheme } = useNextTheme()
   const { isDark, type } = useTheme()
   return (
-    <Navbar
-      isBordered
-      variant="sticky"
-      css={{
-        display: "flex",
-        alignItems: "center",
-        gap: 10,
-      }}
-    >
+    <Navbar isBordered variant="sticky">
       <Navbar.Brand>
         <img src="/logo.svg" alt="logo" width={40} height={40} />
       </Navbar.Brand>
@@ -32,9 +21,6 @@ const AppBar = () => {
         checked={isDark}
         onChange={e => setTheme(e.target.checked ? "dark" : "light")}
       />
-      <Text style={{ display: "inline", fontSize: 30, color: "white" }}>
-        macedo<span style={{ fontWeight: 400, fontSize: 30 }}>mauriz</span>
-      </Text>
     </Navbar>
   )
 }
