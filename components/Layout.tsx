@@ -14,16 +14,15 @@ const AppBar = () => {
   const { isDark, type } = useTheme()
   return (
     <Navbar isBordered variant="sticky">
-      <Navbar.Brand>
+      <Navbar.Brand css={{ filter: `invert(${!isDark ? 1 : 0})` }}>
         <img src="/logo.svg" alt="logo" width={40} height={40} />
       </Navbar.Brand>
       <Navbar.Content hideIn="xs">
-        <Navbar.Link href="#">Features</Navbar.Link>
         <Navbar.Link isActive href="#">
-          Customers
+          Home
         </Navbar.Link>
-        <Navbar.Link href="#">Pricing</Navbar.Link>
-        <Navbar.Link href="#">Company</Navbar.Link>
+        <Navbar.Link href="#">Projects</Navbar.Link>
+        <Navbar.Link href="#">Blog</Navbar.Link>
       </Navbar.Content>
       <Button
         light
