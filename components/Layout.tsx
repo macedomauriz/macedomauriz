@@ -3,7 +3,6 @@ import {
   // Text,
   Container,
   Navbar,
-  Switch,
   Button,
 } from "@nextui-org/react"
 import { useTheme as useNextTheme } from "next-themes"
@@ -27,16 +26,15 @@ const AppBar = () => {
         <Navbar.Link href="#">Company</Navbar.Link>
       </Navbar.Content>
       <Button
-        size="lg"
         light
         auto
         ripple={false}
         onClick={() => setTheme(isDark ? "light" : "dark")}
       >
         {isDark ? (
-          <FontAwesomeIcon icon={faMoon} />
+          <FontAwesomeIcon icon={faMoon} size="xl" />
         ) : (
-          <FontAwesomeIcon icon={faSun} />
+          <FontAwesomeIcon icon={faSun} size="xl" />
         )}
       </Button>
     </Navbar>
