@@ -61,11 +61,15 @@ const AppBar = () => {
     <Navbar variant="floating">
       <Navbar.Collapse disableAnimation>
         {navigation.map(i => {
-          return <Navbar.CollapseItem isActive>{i.text}</Navbar.CollapseItem>
+          return (
+            <Navbar.CollapseItem key={i.text} isActive>
+              {i.text}
+            </Navbar.CollapseItem>
+          )
         })}
         {socialMedia.map(i => {
           return (
-            <Navbar.CollapseItem>
+            <Navbar.CollapseItem key={i.icon.toString()}>
               <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
             </Navbar.CollapseItem>
           )
@@ -86,7 +90,7 @@ const AppBar = () => {
         <ThemeSwitch />
         {socialMedia.map(i => {
           return (
-            <Navbar.Link href={i.href}>
+            <Navbar.Link key={i.href} href={i.href}>
               <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
             </Navbar.Link>
           )
