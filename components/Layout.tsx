@@ -8,6 +8,7 @@ import {
 import { useTheme as useNextTheme } from "next-themes"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons"
+import { faGithubAlt, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
 
 const AppBar = () => {
   const { setTheme } = useNextTheme()
@@ -24,19 +25,23 @@ const AppBar = () => {
         <Navbar.Link href="#">Projects</Navbar.Link>
         <Navbar.Link href="#">Blog</Navbar.Link>
       </Navbar.Content>
-      <Button
-        light
-        auto
-        ripple={false}
-        size="sm"
-        onClick={() => setTheme(isDark ? "light" : "dark")}
-      >
-        {isDark ? (
-          <FontAwesomeIcon icon={faMoon} size="xl" />
-        ) : (
-          <FontAwesomeIcon icon={faSun} size="xl" />
-        )}
-      </Button>
+      <Navbar.Content>
+        <Button
+          light
+          auto
+          ripple={false}
+          size="sm"
+          onClick={() => setTheme(isDark ? "light" : "dark")}
+        >
+          {isDark ? (
+            <FontAwesomeIcon icon={faMoon} size="xl" />
+          ) : (
+            <FontAwesomeIcon icon={faSun} size="xl" />
+          )}
+        </Button>
+        <FontAwesomeIcon icon={faGithubAlt} size="xl" />
+        <FontAwesomeIcon icon={faLinkedinIn} size="xl" />
+      </Navbar.Content>
     </Navbar>
   )
 }
