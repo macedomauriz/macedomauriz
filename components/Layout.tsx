@@ -127,6 +127,10 @@ const AppBar = () => {
   const { isDark } = useTheme()
   const CollapseItem = styled(Navbar.CollapseItem, {
     justifyContent: "center",
+    height: 50,
+  })
+  const BrandImage = styled("img", {
+    filter: `invert(${isDark ? 0 : 1})`,
   })
   return (
     <Navbar variant="sticky" disableShadow isBordered>
@@ -152,8 +156,8 @@ const AppBar = () => {
           <GetInTouchButton />
         </CollapseItem>
       </Navbar.Collapse>
-      <Navbar.Brand css={{ filter: `invert(${!isDark ? 1 : 0})` }}>
-        <img src="/logo.svg" alt="logo" width={40} height={40} />
+      <Navbar.Brand>
+        <BrandImage src="/logo.svg" alt="logo" width={40} height={40} />
       </Navbar.Brand>
       <Navbar.Toggle showIn="xs" />
       <Navbar.Content hideIn="xs">
