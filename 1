@@ -8,18 +8,13 @@ import {
   Modal,
   Text,
   Input,
+  Row,
+  Checkbox,
   Button,
-  Textarea,
-  styled,
 } from "@nextui-org/react"
 import { useTheme as useNextTheme } from "next-themes"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faSun,
-  faMoon,
-  faEnvelope,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons"
+import { faSun, faMoon } from "@fortawesome/free-solid-svg-icons"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faGithubAlt, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
 
@@ -76,8 +71,8 @@ const GetInTouchButton = () => {
 
   return (
     <>
-      <Button auto size="xs" onClick={handler}>
-        Get in touch
+      <Button auto shadow onClick={handler}>
+        Open modal
       </Button>
       <Modal
         closeButton
@@ -87,7 +82,10 @@ const GetInTouchButton = () => {
       >
         <Modal.Header>
           <Text id="modal-title" size={18}>
-            Get in touch
+            Welcome to
+            <Text b size={18}>
+              NextUI
+            </Text>
           </Text>
         </Modal.Header>
         <Modal.Body>
@@ -95,27 +93,33 @@ const GetInTouchButton = () => {
             clearable
             bordered
             fullWidth
+            color="primary"
             size="lg"
-            placeholder="Name"
-            contentLeft={<FontAwesomeIcon icon={faUser} />}
+            placeholder="Email"
+            contentLeft={<FontAwesomeIcon icon="linkedin-in" />}
           />
           <Input
             clearable
             bordered
             fullWidth
+            color="primary"
             size="lg"
-            placeholder="Email"
-            contentLeft={<FontAwesomeIcon icon={faEnvelope} />}
+            placeholder="Password"
+            contentLeft={<FontAwesomeIcon icon="linkedin-in" />}
           />
-          <Textarea
-            bordered
-            placeholder="Enter your amazing ideas..."
-            size="lg"
-          />
+          <Row justify="space-between">
+            <Checkbox>
+              <Text size={14}>Remember me</Text>
+            </Checkbox>
+            <Text size={14}>Forgot password?</Text>
+          </Row>
         </Modal.Body>
         <Modal.Footer>
+          <Button auto flat color="error" onClick={closeHandler}>
+            Close
+          </Button>
           <Button auto onClick={closeHandler}>
-            Send
+            Sign in
           </Button>
         </Modal.Footer>
       </Modal>
@@ -125,32 +129,24 @@ const GetInTouchButton = () => {
 
 const AppBar = () => {
   const { isDark } = useTheme()
-  const CollapseItem = styled(Navbar.CollapseItem, {
-    justifyContent: "center",
-  })
   return (
     <Navbar variant="sticky" disableShadow isBordered>
       <Navbar.Collapse disableAnimation>
         {navigation.map(i => {
           return (
-            <CollapseItem key={i.text} isActive>
+            <Navbar.CollapseItem key={i.text} isActive>
               {i.text}
-            </CollapseItem>
+            </Navbar.CollapseItem>
           )
         })}
         {socialMedia.map(i => {
           return (
-            <CollapseItem key={i.icon.toString()}>
+            <Navbar.CollapseItem key={i.icon.toString()}>
               <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
-            </CollapseItem>
+            </Navbar.CollapseItem>
           )
         })}
-        <CollapseItem>
-          <ThemeSwitch />
-        </CollapseItem>
-        <CollapseItem>
-          <GetInTouchButton />
-        </CollapseItem>
+        <ThemeSwitch />
       </Navbar.Collapse>
       <Navbar.Brand css={{ filter: `invert(${!isDark ? 1 : 0})` }}>
         <img src="/logo.svg" alt="logo" width={40} height={40} />
@@ -162,7 +158,7 @@ const AppBar = () => {
         </Navbar.Link>
         <Navbar.Link href="#">Blog</Navbar.Link>
       </Navbar.Content>
-      <Navbar.Content hideIn="xs">
+      <Navbar.Content hideIn="sm">
         {socialMedia.map(i => {
           return (
             <Navbar.Link key={i.href} href={i.href}>
@@ -170,8 +166,9 @@ const AppBar = () => {
             </Navbar.Link>
           )
         })}
-        <GetInTouchButton />
+        <Button size="xs">Get in touch</Button>
         <ThemeSwitch />
+				<GetInTouchButton />
       </Navbar.Content>
     </Navbar>
   )
