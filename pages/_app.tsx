@@ -51,6 +51,9 @@ export default function MyApp({ Component, pageProps }: AppProps) {
         * {
           font-family: ${nunito.style.fontFamily} !important;
         }
+        code {
+          font-family: Menlo !important;
+        }
       `}</style>
       <NextThemesProvider
         defaultTheme="system"

@@ -16,7 +16,7 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         <link rel="icon" href="/favicon.ico" />
       </Head>
       content
-      <code>code</code>
+      <code>code ii 00</code>
     </>
   )
 }
