@@ -4,12 +4,11 @@ import { Footer } from "./layout/Footer"
 
 interface LayoutProps {
   children: React.ReactNode
-  className: string
 }
 
-export function Layout({ children, className }: LayoutProps) {
+export function Layout({ children }: LayoutProps) {
   return (
-    <Container className={className} gap={0}>
+    <Container>
       <AppBar />
       <Container as="main">{children}</Container>
       <Footer />

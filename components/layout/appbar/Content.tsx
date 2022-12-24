@@ -83,7 +83,9 @@ const GetInTouch = () => {
         onClose={closeHandler}
       >
         <Modal.Header>
-          <Text size={18}>Get in touch</Text>
+          <Text id="modal-title" size={18}>
+            Get in touch
+          </Text>
         </Modal.Header>
         <Modal.Body>
           <Input
@@ -118,60 +120,33 @@ const GetInTouch = () => {
   )
 }
 
-export const AppBar = () => {
-  const { isDark } = useTheme()
+export const MobileContent = () => {
   const CollapseItem = styled(Navbar.CollapseItem, {
     justifyContent: "center",
     height: 50,
   })
-  const BrandImage = styled("img", {
-    filter: `invert(${isDark ? 0 : 1})`,
-  })
   return (
-    <Navbar variant="sticky" disableShadow isBordered>
-      <Navbar.Collapse disableAnimation>
-        {navigation.map(i => {
-          return (
-            <CollapseItem key={i.text} isActive>
-              {i.text}
-            </CollapseItem>
-          )
-        })}
-        {socialMedia.map(i => {
-          return (
-            <CollapseItem key={i.icon.toString()}>
-              <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
-            </CollapseItem>
-          )
-        })}
-        <CollapseItem>
-          <ThemeSwitch />
-        </CollapseItem>
-        <CollapseItem>
-          <GetInTouch />
-        </CollapseItem>
-      </Navbar.Collapse>
-      <Navbar.Brand>
-        <BrandImage src="/logo.svg" alt="logo" width={40} height={40} />
-      </Navbar.Brand>
-      <Navbar.Toggle showIn="xs" />
-      <Navbar.Content hideIn="xs">
-        <Navbar.Link isActive href="#">
-          Home
-        </Navbar.Link>
-        <Navbar.Link href="#">Blog</Navbar.Link>
-      </Navbar.Content>
-      <Navbar.Content hideIn="xs">
-        {socialMedia.map(i => {
-          return (
-            <Navbar.Link key={i.href} href={i.href}>
-              <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
-            </Navbar.Link>
-          )
-        })}
-        <GetInTouch />
+    <Navbar.Collapse disableAnimation>
+      {navigation.map(i => {
+        return (
+          <CollapseItem key={i.text} isActive>
+            {i.text}
+          </CollapseItem>
+        )
+      })}
+      {socialMedia.map(i => {
+        return (
+          <CollapseItem key={i.icon.toString()}>
+            <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
+          </CollapseItem>
+        )
+      })}
+      <CollapseItem>
         <ThemeSwitch />
-      </Navbar.Content>
-    </Navbar>
+      </CollapseItem>
+      <CollapseItem>
+        <GetInTouch />
+      </CollapseItem>
+    </Navbar.Collapse>
   )
 }

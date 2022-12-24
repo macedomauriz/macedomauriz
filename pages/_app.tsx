@@ -39,7 +39,6 @@ const darkTheme = createTheme({
 })
 
 const nunito = Nunito({
-  weight: ["400", "700"],
   subsets: ["latin"],
 })
 
@@ -47,19 +46,26 @@ import type { AppProps } from "next/app"
 
 export default function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <NextThemesProvider
-      defaultTheme="system"
-      attribute="class"
-      value={{
-        light: lightTheme.className,
-        dark: darkTheme.className,
-      }}
-    >
-      <NextUIProvider>
-        <Layout className={nunito.className}>
-          <Component {...pageProps} />
-        </Layout>
-      </NextUIProvider>
-    </NextThemesProvider>
+    <>
+      <style jsx global>{`
+        * {
+          font-family: ${nunito.style.fontFamily} !important;
+        }
+      `}</style>
+      <NextThemesProvider
+        defaultTheme="system"
+        attribute="class"
+        value={{
+          light: lightTheme.className,
+          dark: darkTheme.className,
+        }}
+      >
+        <NextUIProvider>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </NextUIProvider>
+      </NextThemesProvider>
+    </>
   )
 }
