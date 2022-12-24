@@ -1,24 +1,10 @@
 import { useState } from "react"
-import {
-  useTheme,
-  Navbar,
-  Modal,
-  Text,
-  Input,
-  Button,
-  Textarea,
-  styled,
-} from "@nextui-org/react"
-import { useTheme as useNextTheme } from "next-themes"
+import { Navbar, Link, styled } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import {
-  faSun,
-  faMoon,
-  faEnvelope,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faGithubAlt, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
+import { ThemeSwitch } from "./content/ThemeSwitch"
+import { GetInTouch } from "./content/GetInTouch"
 
 // check if a media-query hook is worth it for duplication of content
 const socialMedia = [
@@ -43,79 +29,29 @@ const navigation = [
   },
 ]
 
-const ThemeSwitch = () => {
-  const { setTheme } = useNextTheme()
-  const { isDark } = useTheme()
-  return (
-    <Button
-      light
-      auto
-      ripple={false}
-      size="sm"
-      onClick={() => setTheme(isDark ? "light" : "dark")}
-    >
-      {isDark ? (
-        <FontAwesomeIcon icon={faMoon} size="xl" />
-      ) : (
-        <FontAwesomeIcon icon={faSun} size="xl" />
-      )}
-    </Button>
-  )
-}
-
-const GetInTouch = () => {
-  const [visible, setVisible] = useState(false)
-  const handler = () => setVisible(true)
-
-  const closeHandler = () => {
-    setVisible(false)
-  }
-
+export const DesktopContent = () => {
   return (
     <>
-      <Button auto size="xs" onClick={handler}>
-        Get in touch
-      </Button>
-      <Modal
-        closeButton
-        aria-labelledby="modal-title"
-        open={visible}
-        onClose={closeHandler}
-      >
-        <Modal.Header>
-          <Text id="modal-title" size={18}>
-            Get in touch
-          </Text>
-        </Modal.Header>
-        <Modal.Body>
-          <Input
-            clearable
-            bordered
-            fullWidth
-            size="lg"
-            placeholder="Name"
-            contentLeft={<FontAwesomeIcon icon={faUser} />}
-          />
-          <Input
-            clearable
-            bordered
-            fullWidth
-            size="lg"
-            placeholder="Email"
-            contentLeft={<FontAwesomeIcon icon={faEnvelope} />}
-          />
-          <Textarea
-            bordered
-            placeholder="Enter your amazing ideas..."
-            size="lg"
-          />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button auto onClick={closeHandler}>
-            Send
-          </Button>
-        </Modal.Footer>
-      </Modal>
+      <Navbar.Content hideIn="xs">
+        {navigation.map(i => {
+          return (
+            <Navbar.Link key={i.text} isActive>
+              {i.text}
+            </Navbar.Link>
+          )
+        })}
+      </Navbar.Content>
+      <Navbar.Content hideIn="xs">
+        {socialMedia.map(i => {
+          return (
+            <Navbar.Link key={i.href} href={i.href} target="_blank">
+              <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
+            </Navbar.Link>
+          )
+        })}
+        <GetInTouch />
+        <ThemeSwitch />
+      </Navbar.Content>
     </>
   )
 }
@@ -137,7 +73,9 @@ export const MobileContent = () => {
       {socialMedia.map(i => {
         return (
           <CollapseItem key={i.icon.toString()}>
-            <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
+            <Link href={i.href} target="_blank" css={{ color: "$white" }}>
+              <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
+            </Link>
           </CollapseItem>
         )
       })}

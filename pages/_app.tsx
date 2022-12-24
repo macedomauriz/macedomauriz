@@ -7,25 +7,25 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 config.autoAddCss = false
 
 const themeOverrides = {
-  colors: {
-    // brand colors
-    primaryLight: "$pink200",
-    primaryLightHover: "$pink300", // commonly used on hover state
-    primaryLightActive: "$pink400", // commonly used on pressed state
-    primaryLightContrast: "$pink600", // commonly used for text inside the component
-    primary: "$pink600",
-    primaryBorder: "$pink500",
-    primaryBorderHover: "$pink600",
-    primarySolidHover: "$pink700",
-    primarySolidContrast: "$white", // commonly used for text inside the component
-    link: "$pink600",
-  },
-  fonts: {
-    sans: `'Nunito', 'Roboto',
-    'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'`,
-    mono: `Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
-    'DejaVu Sans Mono', 'Bitstream Vera Sans Mono'`,
-  },
+  // colors: {
+  //   // brand colors
+  //   primaryLight: "$pink200",
+  //   primaryLightHover: "$pink300", // commonly used on hover state
+  //   primaryLightActive: "$pink400", // commonly used on pressed state
+  //   primaryLightContrast: "$pink600", // commonly used for text inside the component
+  //   primary: "$pink600",
+  //   primaryBorder: "$pink500",
+  //   primaryBorderHover: "$pink600",
+  //   primarySolidHover: "$pink700",
+  //   primarySolidContrast: "$white", // commonly used for text inside the component
+  //   link: "$pink600",
+  // },
+  // fonts: {
+  //   sans: `'Nunito', 'Roboto',
+  //   'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue'`,
+  //   mono: `Menlo, Monaco, 'Lucida Console', 'Liberation Mono',
+  //   'DejaVu Sans Mono', 'Bitstream Vera Sans Mono'`,
+  // },
 }
 
 const lightTheme = createTheme({
