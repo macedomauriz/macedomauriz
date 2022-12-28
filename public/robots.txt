@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://macedomauriz.com
+
+# Sitemaps
+Sitemap: https://macedomauriz.com/sitemap.xml
