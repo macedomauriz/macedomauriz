@@ -1,9 +1,12 @@
 import { createTheme, NextUIProvider } from "@nextui-org/react"
+import React from "react"
+import { useRouter } from "next/router"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { Layout } from "../components/Layout"
 import { Nunito } from "@next/font/google"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import "@fortawesome/fontawesome-svg-core/styles.css"
+import type { AppProps } from "next/app"
 config.autoAddCss = false
 
 const lightTheme = createTheme({
@@ -18,9 +21,11 @@ const nunito = Nunito({
   subsets: ["latin"],
 })
 
-import type { AppProps } from "next/app"
+type ThemeProviderProps = {
+  children: React.ReactNode
+}
 
-export default function MyApp({ Component, pageProps }: AppProps) {
+const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   return (
     <>
       <style jsx global>{`
@@ -39,12 +44,29 @@ export default function MyApp({ Component, pageProps }: AppProps) {
           dark: darkTheme.className,
         }}
       >
-        <NextUIProvider>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </NextUIProvider>
+        <NextUIProvider>{children}</NextUIProvider>
       </NextThemesProvider>
+    </>
+  )
+}
+
+export default function MyApp({ Component, pageProps }: AppProps) {
+  const router = useRouter()
+
+  if (router.pathname === "/404")
+    return (
+      <ThemeProvider>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    )
+
+  return (
+    <>
+      <ThemeProvider>
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
+      </ThemeProvider>
     </>
   )
 }
