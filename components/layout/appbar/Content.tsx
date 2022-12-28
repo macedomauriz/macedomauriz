@@ -36,21 +36,9 @@ function matchURL(r: any, text: string) {
 }
 
 export const DesktopContent = () => {
-  const router = useRouter()
   return (
     <>
-      <Navbar.Content hideIn="xs">
-        {navigation.map(i => {
-          return (
-            <Navbar.Link
-              key={i.text}
-              isActive={matchURL(router.asPath, i.text)}
-            >
-              {i.text}
-            </Navbar.Link>
-          )
-        })}
-      </Navbar.Content>
+      <Navbar.Content hideIn="xs"></Navbar.Content>
       <Navbar.Content hideIn="xs">
         {socialMedia.map(i => {
           return (
@@ -90,7 +78,7 @@ export const MobileContent = () => {
       })}
       {socialMedia.map(i => {
         return (
-          <CollapseItem key={i.icon.toString()}>
+          <CollapseItem key={i.href}>
             <Link href={i.href} target="_blank" css={{ color: "$white" }}>
               <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
             </Link>

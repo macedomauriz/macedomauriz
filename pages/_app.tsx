@@ -1,3 +1,4 @@
+import "normalize.css"
 import { createTheme, NextUIProvider } from "@nextui-org/react"
 import React from "react"
 import { useRouter } from "next/router"
