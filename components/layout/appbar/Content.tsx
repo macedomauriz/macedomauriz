@@ -73,7 +73,14 @@ export const MobileContent = () => {
     height: 50,
   })
   return (
-    <Navbar.Collapse disableAnimation>
+    <Navbar.Collapse
+      disableAnimation
+      css={{
+        "@xs": {
+          display: "none",
+        },
+      }}
+    >
       {navigation.map(i => {
         return (
           <CollapseItem key={i.text} isActive={matchURL(router.asPath, i.text)}>
