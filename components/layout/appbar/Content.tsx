@@ -1,11 +1,11 @@
 import { useState } from "react"
+import { useRouter } from "next/router"
 import { Navbar, Link, styled } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faGithubAlt, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
 import { ThemeSwitch } from "./content/ThemeSwitch"
 import { GetInTouch } from "./content/GetInTouch"
-import { useRouter } from "next/router"
 
 // check if a media-query hook is worth it for duplication of content
 const socialMedia = [
@@ -32,7 +32,7 @@ const navigation = [
 
 function matchURL(r: any, text: string) {
   const url = r.replace(/\//g, "")
-  return (url === "" && text === "Home") ?? url === text
+  return (url === "" && text === "Home") ?? url === text.toLowerCase()
 }
 
 export const DesktopContent = () => {
