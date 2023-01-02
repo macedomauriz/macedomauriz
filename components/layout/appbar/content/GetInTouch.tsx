@@ -16,7 +16,7 @@ export const GetInTouch = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        "https://jsd325wgi7.execute-api.us-east-1.amazonaws.com/email/send"
+        "https://kr7f9vwkfl.execute-api.us-east-1.amazonaws.com/dev/send-mail"
       )
       const json = await response.json()
       console.log(json)
