@@ -49,6 +49,7 @@ export const GetInTouch = () => {
             size="lg"
             placeholder="Name"
             contentLeft={<FontAwesomeIcon icon={faUser} />}
+            aria-labelledby="Name"
           />
           <Input
             clearable
@@ -57,11 +58,13 @@ export const GetInTouch = () => {
             size="lg"
             placeholder="Email"
             contentLeft={<FontAwesomeIcon icon={faEnvelope} />}
+            aria-labelledby="Email"
           />
           <Textarea
             bordered
             placeholder="Enter your amazing ideas..."
             size="lg"
+            aria-labelledby="Body"
           />
         </Modal.Body>
         <Modal.Footer>
