@@ -4,11 +4,25 @@ import { Modal, Text, Input, Button, Textarea } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const GetInTouch = () => {
+  const [data, setData] = useState(null)
+  const [error, setError] = useState(null)
   const [visible, setVisible] = useState(false)
   const handler = () => setVisible(true)
 
   const closeHandler = () => {
     setVisible(false)
+  }
+
+  const fetchData = async () => {
+    try {
+      const response = await fetch(
+        "https://jsd325wgi7.execute-api.us-east-1.amazonaws.com/email/send"
+      )
+      const json = await response.json()
+      console.log(json)
+    } catch (error) {
+      console.log("NO DATA")
+    }
   }
 
   return (
@@ -51,7 +65,7 @@ export const GetInTouch = () => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button auto onClick={closeHandler}>
+          <Button auto onClick={fetchData}>
             Send
           </Button>
         </Modal.Footer>
