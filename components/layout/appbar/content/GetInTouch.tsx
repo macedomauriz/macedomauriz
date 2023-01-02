@@ -27,7 +27,7 @@ export const GetInTouch = () => {
 
   return (
     <>
-      <Button auto size="xs" onClick={handler}>
+      <Button auto size="xs" onPress={handler}>
         Get in touch
       </Button>
       <Modal
@@ -65,7 +65,7 @@ export const GetInTouch = () => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button auto onClick={fetchData}>
+          <Button auto onPress={fetchData}>
             Send
           </Button>
         </Modal.Footer>
