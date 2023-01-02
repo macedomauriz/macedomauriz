@@ -4,9 +4,8 @@ import { Modal, Text, Input, Button, Textarea } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 export const GetInTouch = () => {
-  const [data, setData] = useState(null)
-  const [error, setError] = useState(null)
   const [visible, setVisible] = useState(false)
+
   const handler = () => setVisible(true)
 
   const closeHandler = () => {
