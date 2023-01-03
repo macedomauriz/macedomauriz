@@ -12,9 +12,7 @@ export const GetInTouch = () => {
     setVisible(false)
   }
 
-  const fetchData = event => {
-    event.preventDefault()
-
+  const fetchData = () => {
     // Make the PUT request
     fetch(
       "https://kr7f9vwkfl.execute-api.us-east-1.amazonaws.com/dev/send-mail",
