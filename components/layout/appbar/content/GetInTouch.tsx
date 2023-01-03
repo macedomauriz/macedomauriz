@@ -12,16 +12,30 @@ export const GetInTouch = () => {
     setVisible(false)
   }
 
-  const fetchData = async () => {
-    try {
-      const response = await fetch(
-        "https://kr7f9vwkfl.execute-api.us-east-1.amazonaws.com/dev/send-mail"
-      )
-      const json = await response.json()
-      console.log(json)
-    } catch (error) {
-      console.log("NO DATA")
-    }
+  const fetchData = event => {
+    event.preventDefault()
+
+    // Make the PUT request
+    fetch(
+      "https://kr7f9vwkfl.execute-api.us-east-1.amazonaws.com/dev/send-mail",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          body: "hola",
+          subject: "Ro",
+        }),
+      }
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log(data)
+      })
+      .catch(error => {
+        console.error(error)
+      })
   }
 
   return (
