@@ -17,7 +17,7 @@ export const GetInTouch = () => {
     fetch(
       "https://kr7f9vwkfl.execute-api.us-east-1.amazonaws.com/dev/send-mail",
       {
-        method: "PUT",
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
