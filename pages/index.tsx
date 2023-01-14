@@ -1,4 +1,5 @@
 import Head from "next/head"
+import { Text } from "@nextui-org/react"
 // import Image from "next/image";
 // import dynamic from "next/dynamic"
 
@@ -17,6 +18,12 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
       </Head>
       content
       <code>code ii 00</code>
+      <Text h1>hola</Text>
+      <Text h2>hola</Text>
+      <Text h3>hola</Text>
+      <Text h4>hola</Text>
+      <Text h5>hola</Text>
+      <Text h6>hola</Text>
     </>
   )
 }
