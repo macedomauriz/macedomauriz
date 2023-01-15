@@ -49,10 +49,10 @@ export const GetInTouch = () => {
       },
       body: JSON.stringify({
         body: `
-          <p style="color: rebeccapurple; font-weight: bold;">Name: ${data.name}</p>
-          <p style="font-weight: bold;">Company: ${data.company}</p>
-          <p style="font-weight: bold;">Email: ${data.email}</p>
-          <p style="font-weight: bold;">Message: ${data.body}</p>
+          <p>Name: ${data.name}</p>
+          <p>Company: ${data.company}</p>
+          <p>Email: ${data.email}</p>
+          <p>Message: ${data.body}</p>
         `,
         subject: `${data.name} from ${data.company} at macedomauriz.com`,
       }),
