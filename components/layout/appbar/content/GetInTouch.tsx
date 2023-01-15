@@ -49,25 +49,22 @@ export const GetInTouch = () => {
       },
       body: JSON.stringify({
         body: `
-          <!DOCTYPE html>
-          <html>
-            <body>
-              <p>Name: ${data.name}</p>
-              <p>Company: ${data.company}</p>
-              <p>Email: ${data.email}</p>
-              <p>Message: ${data.body}</p>
-            </body>
-          </html>
+          <p>Name: ${data.name}</p>
+          <p>Company: ${data.company}</p>
+          <p>Email: ${data.email}</p>
+          <p>Message: ${data.body}</p>
         `,
         subject: `${data.name} from ${data.company} at macedomauriz.com`,
       }),
     })
       .then(response => response.json())
       .then(data => {
+        console.log("data: ", data)
         setResponse(data)
         setIsLoading(false)
       })
-      .catch(() => {
+      .catch(error => {
+        console.log("error: ", error)
         setIsLoading(false)
       })
   }
