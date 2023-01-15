@@ -49,7 +49,7 @@ export const GetInTouch = () => {
       },
       body: JSON.stringify({
         body: `
-          <p style="font-weight: bold;">Name: ${data.name}</p>
+          <p style="color: rebeccapurple; font-weight: bold;">Name: ${data.name}</p>
           <p style="font-weight: bold;">Company: ${data.company}</p>
           <p style="font-weight: bold;">Email: ${data.email}</p>
           <p style="font-weight: bold;">Message: ${data.body}</p>
