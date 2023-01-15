@@ -42,7 +42,7 @@ export const GetInTouch = () => {
 
   const fetchData = (data: GetInTouchProps) => {
     setIsLoading(true)
-    fetch("https://qij43y18a5.execute-api.us-east-1.amazonaws.com/email/dev", {
+    fetch("https://xbwmbypk8i.execute-api.us-east-1.amazonaws.com/prod/send", {
       method: "POST",
       headers: {
         "Content-Type": "text/html",
