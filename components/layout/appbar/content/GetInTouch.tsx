@@ -59,12 +59,10 @@ export const GetInTouch = () => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("data: ", data)
         setResponse(data)
         setIsLoading(false)
       })
-      .catch(error => {
-        console.log("error: ", error)
+      .catch(() => {
         setIsLoading(false)
       })
   }
@@ -162,16 +160,22 @@ export const GetInTouch = () => {
         <Status>
           {isLoading ? (
             <Loading type="points-opacity" />
+          ) : response?.message ? (
+            <Text
+              css={{
+                color: response.statusCode === 200 ? "$green700" : "$red700",
+              }}
+            >
+              {response.message}
+            </Text>
           ) : (
-            response?.message && (
-              <Text
-                css={{
-                  color: response.statusCode === 200 ? "$green700" : "$red700",
-                }}
-              >
-                {response.message}
-              </Text>
-            )
+            <Text
+              css={{
+                color: "$red700",
+              }}
+            >
+              Server error
+            </Text>
           )}
         </Status>
         <Modal.Footer>

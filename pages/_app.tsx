@@ -3,7 +3,7 @@ import React from "react"
 import { useRouter } from "next/router"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { Layout } from "../components/Layout"
-import { Nunito } from "@next/font/google"
+import { Nunito, Ubuntu_Mono } from "@next/font/google"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { AppProps } from "next/app"
@@ -15,6 +15,11 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   type: "dark",
+})
+
+const ubuntuMono = Ubuntu_Mono({
+  subsets: ["latin"],
+  weight: "400",
 })
 
 const nunito = Nunito({
@@ -33,7 +38,7 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
           font-family: ${nunito.style.fontFamily} !important;
         }
         code {
-          font-family: Menlo !important;
+          font-family: ${ubuntuMono.style.fontFamily} !important;
         }
       `}</style>
       <NextThemesProvider
