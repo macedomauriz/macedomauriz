@@ -1,5 +1,5 @@
 import Head from "next/head"
-import { Text, Spacer } from "@nextui-org/react"
+import { Text, Spacer, Grid } from "@nextui-org/react"
 import Link from "next/link"
 // import Image from "next/image";
 // import dynamic from "next/dynamic"
@@ -17,33 +17,43 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Spacer y={1} />
-      <Text as="p" weight="extrabold" size="$2xl">
+      <Spacer y={2} />
+      <Text size="$3xl" weight="extrabold">
         Rodrigo Macedo
       </Text>
-      <Text weight="light" as="span" color="$gray800">
+      <Text size="$lg" weight="light" as="span" color="$gray800">
         Web developer at <Link href="https://tryolabs.com/">Tryolabs</Link>
       </Text>
       <Spacer y={1} />
-      <Text size="$lg" weight="light">
-        Hello, my name is Rodrigo and I am a{" "}
-        <Text weight="bold" as="span">
-          full-stack web developer
-        </Text>{" "}
-        with over 5 years of experience in creating and maintaining websites and
-        web applications. I specialize in creating responsive and user-friendly
-        designs using React and Next.js, with experience in Server Side
-        Rendering (SSR) and Static Site Generation (SSG). I also have experience
-        in using TypeScript and CSS. I have been working closely with designers
-        and have experience in using tools like Figma, Photoshop, and
-        Illustrator. Additionally, I have been fully engaged in brand redesign
-        and design system making and implementation. I am also interested in
-        DevOps culture, Linux and currently getting into AWS. Furthermore, I
-        have relevant experience in tackling SEO challenges. I also have
-        experience in backend development with Python and Node in frameworks
-        such as Django, Flask and Express, and interested in diving into
-        languages like Go and Rust.
-      </Text>
+      <Grid.Container gap={2}>
+        <Grid xs={12} md={6} direction="column" css={{ padding: 0 }}>
+          <Text size="$lg" weight="light" css={{ margin: "0 0 0.5em 0" }}>
+            Hello! My name is Rodrigo. I am a <b>full-stack developer</b> with
+            over 5 years of experience.
+          </Text>
+          <Text size="$lg" weight="light" css={{ margin: "0 0 0.5em 0" }}>
+            I specialize in creating responsive and user-friendly applications
+            using <b>React</b> with <b>Next JS</b>, <b>Typescript</b> and modern{" "}
+            <b>CSS</b>.
+          </Text>
+          <Text size="$lg" weight="light" css={{ margin: "0 0 0.5em 0" }}>
+            I have worked closely with designers and marketers in{" "}
+            <b>product redesign</b>, technical <b>SEO</b>, and the construction
+            of <b>UI/UX systems</b>.
+          </Text>
+          <Text size="$lg" weight="light" css={{ margin: "0 0 0.5em 0" }}>
+            I have experience in backend development with <b>Python</b> and{" "}
+            <b>Node</b> in frameworks such as <b>Django</b>, <b>Flask</b>,{" "}
+            <b>Strapi</b>, <b>Express</b>, and faced <b>CD/CI</b> challenges
+            with <b>AWS</b> services, <b>Docker</b> and <b>Github Actions</b>.
+          </Text>
+          <Text size="$lg" weight="light">
+            I am engaged in writing <b>clean</b> and{" "}
+            <b>documented high-quality code</b>, while having the flexibility
+            for fast paced progress when agility is key.
+          </Text>
+        </Grid>
+      </Grid.Container>
     </>
   )
 }

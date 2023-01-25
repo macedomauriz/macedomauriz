@@ -3,7 +3,7 @@ import React from "react"
 import { useRouter } from "next/router"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { Layout } from "../components/Layout"
-import { Nunito, Ubuntu_Mono } from "@next/font/google"
+import { Roboto_Slab, Ubuntu_Mono } from "@next/font/google"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { AppProps } from "next/app"
@@ -22,7 +22,7 @@ const ubuntuMono = Ubuntu_Mono({
   weight: "400",
 })
 
-const nunito = Nunito({
+const robotoSlab = Roboto_Slab({
   subsets: ["latin"],
 })
 
@@ -35,7 +35,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     <>
       <style jsx global>{`
         * {
-          font-family: ${nunito.style.fontFamily} !important;
+          font-family: ${robotoSlab.style.fontFamily} !important;
+          letter-spacing: normal !important;
         }
         code {
           font-family: ${ubuntuMono.style.fontFamily} !important;
