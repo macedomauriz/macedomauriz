@@ -1,4 +1,4 @@
-import { Container } from "@nextui-org/react"
+import { Container, Spacer } from "@nextui-org/react"
 import { AppBar } from "./layout/AppBar"
 import { Footer } from "./layout/Footer"
 
@@ -6,12 +6,18 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
-export function Layout({ children }: LayoutProps) {
+export function Layout({ children }: LayoutProps): JSX.Element {
   return (
-    <Container>
-      <AppBar />
-      <Container as="main">{children}</Container>
-      <Footer />
-    </Container>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <div style={{ maxWidth: 1200 }}>
+        <AppBar />
+        <Spacer y={3} />
+        <Container as="main" fluid>
+          {children}
+        </Container>
+        <Spacer y={2} />
+        <Footer />
+      </div>
+    </div>
   )
 }

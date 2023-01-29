@@ -1,10 +1,11 @@
 import Head from "next/head"
 import { Text, Spacer, Grid } from "@nextui-org/react"
 import Link from "next/link"
+import { AnimationHero } from "../components/AnimationHero"
 // import Image from "next/image";
 // import dynamic from "next/dynamic"
 
-export default function Home() {
+export default function Home(): JSX.Element {
   return (
     <>
       <Head>
@@ -17,16 +18,18 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Spacer y={2} />
-      <Text size="$3xl" weight="extrabold">
-        Rodrigo Macedo
-      </Text>
-      <Text size="$lg" weight="light" as="span" color="$gray800">
-        Web developer at <Link href="https://tryolabs.com/">Tryolabs</Link>
-      </Text>
-      <Spacer y={1} />
-      <Grid.Container gap={2}>
-        <Grid xs={12} md={6} direction="column" css={{ padding: 0 }}>
+      <Grid.Container justify="center" direction="row">
+        <Grid xs={6} direction="column">
+          <Text size="$3xl" weight="extrabold">
+            Rodrigo Macedo
+          </Text>
+          <Text size="$lg" weight="light" as="span" color="$gray800">
+            Web developer at{" "}
+            <b>
+              <Link href="https://tryolabs.com/">Tryolabs</Link>
+            </b>
+          </Text>
+          <Spacer y={1} />
           <Text size="$lg" weight="light" css={{ margin: "0 0 0.5em 0" }}>
             Hello! My name is Rodrigo. I am a <b>full-stack developer</b> with
             over 5 years of experience.
@@ -52,6 +55,9 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
             <b>documented high-quality code</b>, while having the flexibility
             for fast paced progress when agility is key.
           </Text>
+        </Grid>
+        <Grid xs={6} justify="center" alignItems="center">
+          <AnimationHero />
         </Grid>
       </Grid.Container>
     </>

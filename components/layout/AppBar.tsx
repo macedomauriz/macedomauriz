@@ -1,5 +1,4 @@
 import { useTheme, Navbar } from "@nextui-org/react"
-
 import { styled } from "@nextui-org/react"
 import { DesktopContent, MobileContent } from "./appbar/Content"
 

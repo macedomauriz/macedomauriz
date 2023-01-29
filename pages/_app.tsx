@@ -15,6 +15,12 @@ const lightTheme = createTheme({
 
 const darkTheme = createTheme({
   type: "dark",
+  theme: {
+    colors: {
+      background: "#0c0d0f",
+      backgroundAlpha: "rgba(12, 13, 15, 0.8)",
+    },
+  },
 })
 
 const ubuntuMono = Ubuntu_Mono({
