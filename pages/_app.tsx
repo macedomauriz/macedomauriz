@@ -3,7 +3,7 @@ import React from "react"
 import { useRouter } from "next/router"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
 import { Layout } from "../components/Layout"
-import { Roboto_Slab, Ubuntu_Mono } from "@next/font/google"
+import { Roboto_Slab, Ubuntu_Mono, VT323 } from "@next/font/google"
 import { config } from "@fortawesome/fontawesome-svg-core"
 import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { AppProps } from "next/app"
@@ -11,19 +11,34 @@ config.autoAddCss = false
 
 const lightTheme = createTheme({
   type: "light",
+  theme: {
+    colors: {
+      // background: "#25282a",
+      // backgroundAlpha: "rgba(37, 40, 42, 0.8)",
+      heroShadow1: "rgba(141, 168, 211, 0.4)",
+      heroShadow2: "rgba(141, 168, 211, 0.1)",
+    },
+  },
 })
 
 const darkTheme = createTheme({
   type: "dark",
   theme: {
     colors: {
-      background: "#0c0d0f",
-      backgroundAlpha: "rgba(12, 13, 15, 0.8)",
+      background: "#25282a",
+      backgroundAlpha: "rgba(37, 40, 42, 0.8)",
+      heroShadow1: "rgba(141, 168, 211, 0.2)",
+      heroShadow2: "rgba(141, 168, 211, 0.05)",
     },
   },
 })
 
 const ubuntuMono = Ubuntu_Mono({
+  subsets: ["latin"],
+  weight: "400",
+})
+
+const vt323 = VT323({
   subsets: ["latin"],
   weight: "400",
 })
@@ -46,6 +61,11 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
         }
         code {
           font-family: ${ubuntuMono.style.fontFamily} !important;
+        }
+        .pixelFont {
+          font-family: ${vt323.style.fontFamily} !important;
+          font-size: 24px;
+          line-height: 24px;
         }
       `}</style>
       <NextThemesProvider

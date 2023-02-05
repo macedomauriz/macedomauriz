@@ -11,7 +11,7 @@ export const AppBar = () => {
   return (
     <Navbar variant="sticky" disableShadow isBordered>
       <Navbar.Brand>
-        <BrandImage src="/logo.svg" alt="logo" width={40} height={40} />
+        <BrandImage src="/logo.svg" alt="logo" width={45} height={45} />
       </Navbar.Brand>
       <Navbar.Toggle showIn="xs" />
       <DesktopContent />

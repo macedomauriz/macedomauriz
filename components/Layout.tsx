@@ -11,11 +11,10 @@ export function Layout({ children }: LayoutProps): JSX.Element {
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={{ maxWidth: 1200 }}>
         <AppBar />
-        <Spacer y={3} />
-        <Container as="main" fluid>
+        <Container as="main" fluid gap={0}>
           {children}
         </Container>
-        <Spacer y={2} />
+        <Spacer y={1} />
         <Footer />
       </div>
     </div>

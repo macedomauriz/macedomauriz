@@ -1,3 +1,4 @@
+import { Text } from "@nextui-org/react"
 import { styled, keyframes } from "@nextui-org/react"
 import { useTheme } from "@nextui-org/react"
 
@@ -15,9 +16,7 @@ export function AnimationHero() {
     width: 200,
     height: 300,
     background: "url('/sprites/rodrigo.png')",
-    filter: `drop-shadow(0 0 ${isDark ? "0.15rem" : "0.25rem"} ${
-      isDark ? "skyblue" : "darkblue"
-    })`,
+    filter: `brightness(${isDark ? "1" : "1.3"})`,
     animationName: `${sprite(1400)}`,
     animationDuration: "0.4s",
     animationTimingFunction: "steps(7)",
@@ -27,12 +26,12 @@ export function AnimationHero() {
   })
   const RodrigoFloor = styled("div", {
     position: "absolute",
-    bottom: "-8px",
+    bottom: "-4px",
     left: 0,
     width: 200,
     height: 10,
     background: "url('/sprites/rodrigo-floor.png')",
-    filter: `brightness(${isDark ? "1" : "8"})`,
+    filter: `brightness(${isDark ? "1.3" : "10"})`,
     animationName: `${sprite(1400)}`,
     animationDuration: "0.4s",
     animationTimingFunction: "steps(7)",
@@ -46,7 +45,6 @@ export function AnimationHero() {
     width: 200,
     height: 300,
     background: "url('/sprites/glasses.png')",
-    filter: "drop-shadow(0 0 0.15rem skyblue)",
     animationName: `${sprite(1400)}`,
     animationDuration: "0.4s",
     animationTimingFunction: "steps(7)",
@@ -61,7 +59,6 @@ export function AnimationHero() {
     width: 110,
     height: 110,
     background: "url('/sprites/wilson.png')",
-    filter: "drop-shadow(0 0 0.15rem skyblue)",
     animationName: `${sprite(440)}`,
     animationDuration: "0.25s",
     animationTimingFunction: "steps(4)",
@@ -71,11 +68,12 @@ export function AnimationHero() {
   })
   const WilsonFloor = styled("div", {
     position: "absolute",
-    bottom: "13px",
+    bottom: "16px",
     left: "-60px",
     width: 110,
     height: 6,
     background: "url('/sprites/wilson-floor.png')",
+    filter: `brightness(${isDark ? "1.3" : "8"})`,
     animationName: `${sprite(440)}`,
     animationDuration: "0.25s",
     animationTimingFunction: "steps(4)",

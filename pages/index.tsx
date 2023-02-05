@@ -18,12 +18,12 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Grid.Container justify="center" direction="row">
-        <Grid xs={6} direction="column">
-          <Text size="$3xl" weight="extrabold">
-            Rodrigo Macedo
+      <Grid.Container justify="center" direction="row" gap={4}>
+        <Grid xs={12} md={6} direction="column">
+          <Text size="$5xl" weight="extrabold">
+            Mr. Rodrigo Macedo
           </Text>
-          <Text size="$lg" weight="light" as="span" color="$gray800">
+          <Text size="$2xl" weight="light" as="span" color="$gray800">
             Web developer at{" "}
             <b>
               <Link href="https://tryolabs.com/">Tryolabs</Link>
@@ -31,8 +31,7 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
           </Text>
           <Spacer y={1} />
           <Text size="$lg" weight="light" css={{ margin: "0 0 0.5em 0" }}>
-            Hello! My name is Rodrigo. I am a <b>full-stack developer</b> with
-            over 5 years of experience.
+            I am a <b>full-stack developer</b> with over 5 years of experience.
           </Text>
           <Text size="$lg" weight="light" css={{ margin: "0 0 0.5em 0" }}>
             I specialize in creating responsive and user-friendly applications
@@ -56,7 +55,16 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
             for fast paced progress when agility is key.
           </Text>
         </Grid>
-        <Grid xs={6} justify="center" alignItems="center">
+        <Grid
+          xs={12}
+          md={6}
+          justify="center"
+          alignItems="center"
+          css={{
+            background:
+              "linear-gradient(to bottom, transparent 66%, $background 66%), radial-gradient($heroShadow1 18%, $heroShadow2 45%, transparent 70%), transparent",
+          }}
+        >
           <AnimationHero />
         </Grid>
       </Grid.Container>
