@@ -21,6 +21,7 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
       </Head>
       <Grid.Container justify="center" direction="row" gap={4}>
         <Grid xs={12} md={6} direction="column">
+          <Typography>hola</Typography>
           <Text h1>Rodrigo Macedo</Text>
           <Text h3 color="$gray800">
             Web developer at{" "}

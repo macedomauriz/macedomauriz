@@ -1,4 +1,3 @@
-import { Text } from "@nextui-org/react"
 import { styled, keyframes } from "@nextui-org/react"
 import { useTheme } from "@nextui-org/react"
 

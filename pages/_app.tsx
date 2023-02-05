@@ -45,6 +45,9 @@ const darkTheme = createTheme({
       heroShadow1: "rgba(141, 168, 211, 0.2)",
       heroShadow2: "rgba(141, 168, 211, 0.05)",
     },
+    fontWeights: {
+      h1: 200,
+    },
   },
 })
 

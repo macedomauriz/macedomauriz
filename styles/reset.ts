@@ -48,5 +48,6 @@ export const fontReset = (robotoSlab, roboto, ubuntuMono) => `
   button,
   input[type=submit] {
     font-family: ${roboto.style.fontFamily};
+    text-transform: uppercase
   }
 `
