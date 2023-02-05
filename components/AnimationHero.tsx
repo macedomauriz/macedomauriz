@@ -31,7 +31,7 @@ export function AnimationHero() {
     width: 200,
     height: 10,
     background: "url('/sprites/rodrigo-floor.png')",
-    filter: `brightness(${isDark ? "1.3" : "10"})`,
+    filter: `brightness(${isDark ? "1.3" : "9"})`,
     animationName: `${sprite(1400)}`,
     animationDuration: "0.4s",
     animationTimingFunction: "steps(7)",
