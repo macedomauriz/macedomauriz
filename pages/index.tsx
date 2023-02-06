@@ -4,7 +4,6 @@ import Link from "next/link"
 import { AnimationHero } from "../components/AnimationHero"
 import { Typography } from "../components/Typography"
 // import Image from "next/image";
-// import dynamic from "next/dynamic"
 
 export default function Home(): JSX.Element {
   return (
