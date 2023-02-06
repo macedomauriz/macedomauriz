@@ -6,7 +6,7 @@ export const AppBar = () => {
   const { isDark } = useTheme()
 
   const BrandImage = styled("img", {
-    filter: `invert(${isDark ? 0 : 1})`,
+    filter: `invert(${isDark ? 0.08 : 0.97})`,
   })
   return (
     <Navbar variant="sticky" disableShadow isBordered>

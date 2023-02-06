@@ -6,6 +6,7 @@ import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faGithubAlt, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
 import { ThemeSwitch } from "./content/ThemeSwitch"
 import { GetInTouch } from "./content/GetInTouch"
+import { Typography } from "../../Typography"
 
 // check if a media-query hook is worth it for duplication of content
 const socialMedia = [
@@ -79,8 +80,10 @@ export const MobileContent = () => {
       {socialMedia.map(i => {
         return (
           <CollapseItem key={i.href}>
-            <Link href={i.href} target="_blank" css={{ color: "$white" }}>
-              <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
+            <Link href={i.href} target="_blank">
+              <Typography as="span" color="$foreground">
+                <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
+              </Typography>
             </Link>
           </CollapseItem>
         )
