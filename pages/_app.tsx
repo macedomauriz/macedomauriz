@@ -12,7 +12,7 @@ config.autoAddCss = false
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "500"],
 })
 
 const ubuntuMono = Ubuntu_Mono({
@@ -44,9 +44,6 @@ const darkTheme = createTheme({
       backgroundAlpha: "rgba(37, 40, 42, 0.8)",
       heroShadow1: "rgba(141, 168, 211, 0.2)",
       heroShadow2: "rgba(141, 168, 211, 0.05)",
-    },
-    fontWeights: {
-      h1: 200,
     },
   },
 })

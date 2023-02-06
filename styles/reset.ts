@@ -1,5 +1,5 @@
 // @ts-nocheck
-export const fontReset = (robotoSlab, roboto, ubuntuMono) => `
+export const fontReset = (body, button, mono) => `
   *,
   p,
   h1,
@@ -8,7 +8,6 @@ export const fontReset = (robotoSlab, roboto, ubuntuMono) => `
   h4,
   h5,
   h6,
-  span,
   strong,
   em,
   i,
@@ -29,8 +28,6 @@ export const fontReset = (robotoSlab, roboto, ubuntuMono) => `
   samp,
   kbd,
   var,
-  code,
-  pre,
   s,
   time,
   bdo,
@@ -38,16 +35,21 @@ export const fontReset = (robotoSlab, roboto, ubuntuMono) => `
   rt,
   rp,
   wbr {
-    font-family: ${robotoSlab.style.fontFamily};
+    font-family: ${body.style.fontFamily};
     letter-spacing: normal;
   }
   code,
   pre {
-    font-family: ${ubuntuMono.style.fontFamily};
+    font-family: ${mono.style.fontFamily};
   }
   button,
   input[type=submit] {
-    font-family: ${roboto.style.fontFamily};
-    text-transform: uppercase
+    font-family: ${button.style.fontFamily};
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  span {
+    font-family: inherit;
+    letter-spacing: inherit;
   }
 `

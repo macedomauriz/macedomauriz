@@ -21,8 +21,9 @@ export function Typography({
   return (
     <Text
       {...props}
+      size={!isHeading ? "$lg" : undefined}
       weight={isDark && !isHeading ? "light" : undefined}
-      css={{ mb: paragraph ? "0.05em" : "inherit" }}
+      css={paragraph ? { margin: "0 0 0.8em 0" } : undefined}
     >
       {children}
     </Text>

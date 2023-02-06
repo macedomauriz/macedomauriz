@@ -91,8 +91,8 @@ export const GetInTouch = () => {
 
   return (
     <>
-      <Button auto size="xs" onPress={handler}>
-        <span style={{ fontFamily: "Roboto" }}>GET IN TOUCH</span>
+      <Button auto size="sm" onPress={handler} css={{ fontWeight: 500 }}>
+        get in touch
       </Button>
       <Modal
         closeButton
