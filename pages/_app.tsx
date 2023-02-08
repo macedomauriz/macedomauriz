@@ -30,8 +30,8 @@ const lightTheme = createTheme({
     colors: {
       background: "#FFFAFA",
       backgroundAlpha: "rgb(255, 250, 250, 0.8)",
-      heroShadow1: "rgba(141, 168, 211, 0.4)",
-      heroShadow2: "rgba(141, 168, 211, 0.1)",
+      heroShadow1: "rgba(141, 168, 211, 0.5)",
+      heroShadow2: "rgba(141, 168, 211, 0.15)",
     },
   },
 })

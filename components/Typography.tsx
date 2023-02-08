@@ -1,6 +1,7 @@
 import { Text, TextProps } from "@nextui-org/react"
 import { useTheme } from "@nextui-org/react"
 
+// TODO: exclude headings when paragraph prop is present
 interface TypographyProps
   extends Pick<
     TextProps,
