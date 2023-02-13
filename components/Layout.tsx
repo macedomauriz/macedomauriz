@@ -11,7 +11,7 @@ export function Layout({ children }: LayoutProps): JSX.Element {
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={{ maxWidth: 1200 }}>
         <AppBar />
-        <Container as="main" gap={1}>
+        <Container as="main" gap={2}>
           {children}
         </Container>
         <Spacer y={1} />
