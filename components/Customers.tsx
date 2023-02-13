@@ -67,6 +67,9 @@ export function Customers(): JSX.Element {
     flexWrap: "wrap",
     columnGap: 80,
     rowGap: 30,
+    "@media (max-width: 600px)": {
+      flexDirection: "column",
+    },
     img: {
       filter: `invert(${isDark ? "0.45" : "0.6"})`,
       cursor: "pointer",
