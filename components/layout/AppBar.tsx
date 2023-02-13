@@ -6,7 +6,7 @@ export const AppBar = () => {
   const { isDark } = useTheme()
   const AppBarWrapper = styled(Navbar, {
     "> div": {
-      padding: "0 10px",
+      padding: "0 20px",
     },
   })
   const BrandImage = styled("img", {

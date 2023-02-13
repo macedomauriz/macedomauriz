@@ -5,7 +5,7 @@ import { Typography } from "../components/Typography"
 
 export function Hero(): JSX.Element {
   return (
-    <Grid.Container justify="center" direction="row" css={{ padding: 0 }}>
+    <Grid.Container justify="center" direction="row">
       <Grid xs={12} md={6} direction="column">
         <Spacer y={1} />
         <Typography h1>Rodrigo Macedo</Typography>
