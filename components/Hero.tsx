@@ -21,7 +21,7 @@ export function Hero(): JSX.Element {
         <Typography paragraph>
           I specialize in creating responsive and user-friendly applications
           using <b>React</b> with <b>Next JS</b>, <b>Typescript</b> and modern{" "}
-          <b>CSS</b>.
+          <b>CSS</b> among other technologies.
         </Typography>
         <Typography paragraph>
           I have worked closely with designers and marketers in{" "}
