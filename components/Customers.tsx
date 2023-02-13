@@ -77,7 +77,7 @@ export function Customers(): JSX.Element {
   })
   return (
     <CustomersWrapper>
-      <Typography h5 color="$gray800">
+      <Typography h6 overline color="$gray800">
         Worked with amazing companies
       </Typography>
       <Spacer y={2} />

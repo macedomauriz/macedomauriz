@@ -18,23 +18,30 @@ interface TypographyProps
     | "small"
   > {
   paragraph?: boolean
+  overline?: boolean
   children: React.ReactNode
 }
 
 export function Typography({
   children,
   paragraph,
+  overline,
   ...props
 }: TypographyProps): JSX.Element {
   const { isDark } = useTheme()
   const isHeading =
     props.h1 || props.h2 || props.h3 || props.h4 || props.h5 || props.h6
+  const overlineCSS = overline && {
+    fontFamily: "Roboto",
+    textTransform: "uppercase",
+  }
+  const paragraphCSS = paragraph && { margin: "0 0 0.8em 0" }
   return (
     <Text
       {...props}
       size={!isHeading && !props.small ? "$lg" : undefined}
       weight={isDark && !isHeading ? "light" : undefined}
-      css={paragraph ? { margin: "0 0 0.8em 0", ...props.css } : props.css}
+      css={{ ...paragraphCSS, ...overlineCSS, ...props.css }}
     >
       {children}
     </Text>
