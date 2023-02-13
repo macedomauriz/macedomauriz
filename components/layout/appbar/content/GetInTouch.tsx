@@ -151,15 +151,15 @@ export const GetInTouch = () => {
           <Error>{errors.body ? errors.body.message : " "}</Error>
         </Modal.Body>
         <Status>
-          {isLoading ? (
-            <Loading type="points-opacity" />
-          ) : response?.message ? (
+          {isLoading && <Loading type="points-opacity" />}
+          {response?.message && (
             <Typography
               color={response.statusCode === 200 ? "$success" : "$error"}
             >
               {response.message}
             </Typography>
-          ) : (
+          )}
+          {response && !response?.message && (
             <Typography color="$error">Server error</Typography>
           )}
         </Status>
