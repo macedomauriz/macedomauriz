@@ -5,7 +5,17 @@ import { useTheme } from "@nextui-org/react"
 interface TypographyProps
   extends Pick<
     TextProps,
-    "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote" | "color" | "as"
+    | "h1"
+    | "h2"
+    | "h3"
+    | "h4"
+    | "h5"
+    | "h6"
+    | "blockquote"
+    | "color"
+    | "as"
+    | "css"
+    | "small"
   > {
   paragraph?: boolean
   children: React.ReactNode
@@ -22,9 +32,9 @@ export function Typography({
   return (
     <Text
       {...props}
-      size={!isHeading ? "$lg" : undefined}
+      size={!isHeading && !props.small ? "$lg" : undefined}
       weight={isDark && !isHeading ? "light" : undefined}
-      css={paragraph ? { margin: "0 0 0.8em 0" } : undefined}
+      css={paragraph ? { margin: "0 0 0.8em 0", ...props.css } : props.css}
     >
       {children}
     </Text>

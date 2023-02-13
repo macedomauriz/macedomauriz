@@ -4,17 +4,11 @@ import {
   faBriefcase,
 } from "@fortawesome/free-solid-svg-icons"
 import { useState } from "react"
-import {
-  Modal,
-  Text,
-  Input,
-  Button,
-  Textarea,
-  Loading,
-} from "@nextui-org/react"
+import { Modal, Input, Button, Textarea, Loading } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useForm } from "react-hook-form"
 import { styled } from "@nextui-org/react"
+import { Typography } from "../../../../components/Typography"
 
 type GetInTouchProps = {
   name: string
@@ -78,14 +72,13 @@ export const GetInTouch = () => {
 
   const Error = ({ children }: { children?: string }) => {
     return (
-      <Text
-        color="error"
-        size="$xs"
-        as="span"
-        css={{ minHeight: 17, marginBottom: 10 }}
+      <Typography
+        small
+        color="$error"
+        css={{ minHeight: 12, marginBottom: 10 }}
       >
         {children}
-      </Text>
+      </Typography>
     )
   }
 
@@ -101,7 +94,7 @@ export const GetInTouch = () => {
         onClose={closeHandler}
       >
         <Modal.Header>
-          <Text h1>Get in touch</Text>
+          <Typography h1>Get in touch</Typography>
         </Modal.Header>
         <Modal.Body>
           <Input
@@ -161,21 +154,13 @@ export const GetInTouch = () => {
           {isLoading ? (
             <Loading type="points-opacity" />
           ) : response?.message ? (
-            <Text
-              css={{
-                color: response.statusCode === 200 ? "$green700" : "$red700",
-              }}
+            <Typography
+              color={response.statusCode === 200 ? "$success" : "$error"}
             >
               {response.message}
-            </Text>
+            </Typography>
           ) : (
-            <Text
-              css={{
-                color: "$red700",
-              }}
-            >
-              Server error
-            </Text>
+            <Typography color="$error">Server error</Typography>
           )}
         </Status>
         <Modal.Footer>
