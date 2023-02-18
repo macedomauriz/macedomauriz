@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { useRouter } from "next/router"
 import { Navbar, Link, styled } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
@@ -12,7 +11,7 @@ import { Typography } from "../../Typography"
 const socialMedia = [
   {
     icon: faGithubAlt,
-    href: "https://github.com/rodrigo1987macedo",
+    href: "https://github.com/rodrigo1987macedo/me",
   },
   {
     icon: faLinkedinIn,
