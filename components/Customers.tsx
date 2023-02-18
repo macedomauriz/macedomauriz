@@ -1,8 +1,9 @@
-import { Spacer, styled } from "@nextui-org/react"
+import { Modal, Spacer, styled } from "@nextui-org/react"
 import { useTheme } from "@nextui-org/react"
-import Link from "next/link"
+import CustomLink from "./CustomLink"
 import Image from "next/image"
 import { Typography } from "./Typography"
+import { useState } from "react"
 
 interface CustomersProps {
   src: string
@@ -44,6 +45,13 @@ const customers: CustomersProps[] = [
     translateY: "-8px",
   },
   {
+    src: "/logos/dragoons.svg",
+    alt: "Dragoons",
+    href: "https://www.ey.com/",
+    width: 190,
+    height: 60,
+  },
+  {
     src: "/logos/ubersuggest.svg",
     alt: "Ubersuggest",
     href: "https://neilpatel.com/ubersuggest/",
@@ -54,6 +62,17 @@ const customers: CustomersProps[] = [
 
 export function Customers(): JSX.Element {
   const { isDark } = useTheme()
+  const [visible, setVisible] = useState(false)
+  const [customerId, setCustomerId] = useState(0)
+
+  const handler = (id: number) => {
+    setCustomerId(id)
+    setVisible(true)
+  }
+
+  const closeHandler = () => {
+    setVisible(false)
+  }
   const CustomersWrapper = styled("div", {
     display: "flex",
     flexDirection: "column",
@@ -65,15 +84,20 @@ export function Customers(): JSX.Element {
     justifyContent: "center",
     alignItems: "center",
     flexWrap: "wrap",
-    columnGap: 80,
+    columnGap: 40,
     rowGap: 30,
     "@media (max-width: 600px)": {
       flexDirection: "column",
     },
-    img: {
-      filter: `invert(${isDark ? "0.45" : "0.6"})`,
+    button: {
       cursor: "pointer",
+      backgroundColor: "transparent",
+      border: "none",
+      padding: 0,
     },
+  })
+  const LogoImage = styled(Image, {
+    filter: `invert(${isDark ? "0.45" : "0.6"})`,
   })
   return (
     <CustomersWrapper>
@@ -82,24 +106,45 @@ export function Customers(): JSX.Element {
       </Typography>
       <Spacer y={2} />
       <Logos>
-        {customers.map(item => (
-          <div
+        {customers.map((item, index) => (
+          <button
             key={item.alt}
+            onClick={() => handler(index)}
             style={{
               transform: item.translateY && `translateY(${item.translateY})`,
             }}
           >
-            <Link href={item.href} target="_blank">
-              <Image
-                src={item.src}
-                alt={item.alt}
-                width={item.width}
-                height={item.height}
-              />
-            </Link>
-          </div>
+            <LogoImage
+              src={item.src}
+              alt={item.alt}
+              width={item.width}
+              height={item.height}
+            />
+          </button>
         ))}
       </Logos>
+      <Modal
+        closeButton
+        aria-labelledby="modal-title"
+        open={visible}
+        onClose={closeHandler}
+      >
+        <Modal.Header>
+          <LogoImage
+            src={customers[customerId].src}
+            alt={customers[customerId].alt}
+            width={customers[customerId].width}
+            height={customers[customerId].height}
+          />
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            <CustomLink href={customers[customerId].href}>
+              Visit site
+            </CustomLink>
+          </div>
+        </Modal.Body>
+      </Modal>
     </CustomersWrapper>
   )
 }

@@ -1,5 +1,5 @@
 import { Grid, Spacer } from "@nextui-org/react"
-import Link from "next/link"
+import CustomLink from "./CustomLink"
 import { AnimationHero } from "../components/AnimationHero"
 import { Typography } from "../components/Typography"
 
@@ -11,7 +11,7 @@ export function Hero(): JSX.Element {
         <Typography h1>Rodrigo Macedo</Typography>
         <Typography h3 color="$gray800">
           Freelance developer at{" "}
-          <Link href="https://tryolabs.com/">Tryolabs</Link>
+          <CustomLink href="https://tryolabs.com/">Tryolabs</CustomLink>
         </Typography>
         <Spacer y={1} />
         <Typography paragraph>
