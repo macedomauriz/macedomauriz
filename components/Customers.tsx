@@ -4,6 +4,11 @@ import CustomLink from "./CustomLink"
 import Image from "next/image"
 import { Typography } from "./Typography"
 import { useState } from "react"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import {
+  faCircleArrowRight,
+  faCircleArrowLeft,
+} from "@fortawesome/free-solid-svg-icons"
 
 interface CustomersProps {
   src: string
@@ -11,6 +16,7 @@ interface CustomersProps {
   href: string
   width: number
   height: number
+  description: string
   translateY?: string
 }
 
@@ -21,6 +27,8 @@ const customers: CustomersProps[] = [
     href: "https://www.tcs.com/",
     width: 110,
     height: 30,
+    description:
+      "Tata Consultancy Services (TCS) is a multinational information technology (IT) services, consulting, and business solutions company headquartered in Mumbai, India. TCS offers a wide range of services to clients in various industries, including banking and financial services, healthcare, retail, energy, and IT.",
   },
   {
     src: "/logos/tryolabs.svg",
@@ -28,6 +36,8 @@ const customers: CustomersProps[] = [
     href: "https://tryolabs.com/",
     width: 170,
     height: 55,
+    description:
+      "Tryolabs is a software development and consulting company that specializes in artificial intelligence, machine learning, and data science. They offer a range of services, including custom software development, data analysis and modeling, natural language processing, computer vision, and more.",
   },
   {
     src: "/logos/mucam.svg",
@@ -35,6 +45,8 @@ const customers: CustomersProps[] = [
     href: "https://www.medicauruguaya.com.uy/ahome.aspx",
     width: 140,
     height: 40,
+    description:
+      "Medica Uruguaya is a private healthcare organization based in Uruguay. It provides a range of medical services to patients, including consultations with general practitioners and specialists, diagnostic tests, laboratory services, hospitalization, and emergency care. Medica Uruguaya has grown to become one of the largest private healthcare providers in Uruguay.",
   },
   {
     src: "/logos/ey.svg",
@@ -42,6 +54,8 @@ const customers: CustomersProps[] = [
     href: "https://www.ey.com/",
     width: 50,
     height: 50,
+    description:
+      'Ernst & Young (EY) is one of the largest multinational professional services firms in the world, providing a range of services in audit, tax, transaction advisory, and consulting. The company was founded in the United Kingdom in 1849 and has grown to become a global organization with operations in over 150 countries. EY is one of the "Big Four" professional accounting services firms.',
     translateY: "-8px",
   },
   {
@@ -50,6 +64,8 @@ const customers: CustomersProps[] = [
     href: "https://www.ey.com/",
     width: 190,
     height: 60,
+    description:
+      "Dragoons was a betting platform start up project for electronic sports betting using cryptocurrencies. It arised from the absence of a platform to bet on esports in a decentralized environment instead of operating in the classic format, in transparent and reliable way, incorporating blockchain technology.",
   },
   {
     src: "/logos/ubersuggest.svg",
@@ -57,6 +73,8 @@ const customers: CustomersProps[] = [
     href: "https://neilpatel.com/ubersuggest/",
     width: 190,
     height: 50,
+    description:
+      "Ubersuggest is a web-based search engine optimization (SEO) tool that helps website owners and digital marketers improve their search engine rankings and drive more traffic to their websites. Ubersuggest provides a range of features to help users optimize their websites for search engines.",
   },
 ]
 
@@ -73,6 +91,15 @@ export function Customers(): JSX.Element {
   const closeHandler = () => {
     setVisible(false)
   }
+  const prevNextHandler = () => {
+    let newCustomerId = customerId + 1
+    if (newCustomerId === customers.length) {
+      setCustomerId(0)
+    } else {
+      setCustomerId(newCustomerId)
+    }
+  }
+
   const CustomersWrapper = styled("div", {
     display: "flex",
     flexDirection: "column",
@@ -90,14 +117,23 @@ export function Customers(): JSX.Element {
       flexDirection: "column",
     },
     button: {
-      cursor: "pointer",
       backgroundColor: "transparent",
       border: "none",
       padding: 0,
+      cursor: "pointer",
     },
   })
   const LogoImage = styled(Image, {
     filter: `invert(${isDark ? "0.45" : "0.6"})`,
+  })
+  const PrevNextButton = styled("button", {
+    display: "flex",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: "transparent",
+    border: "none",
+    padding: 0,
+    cursor: "pointer",
   })
   return (
     <CustomersWrapper>
@@ -128,6 +164,7 @@ export function Customers(): JSX.Element {
         aria-labelledby="modal-title"
         open={visible}
         onClose={closeHandler}
+        css={{ padding: 0 }}
       >
         <Modal.Header>
           <LogoImage
@@ -139,11 +176,25 @@ export function Customers(): JSX.Element {
         </Modal.Header>
         <Modal.Body>
           <div>
+            <Typography>{customers[customerId].description}</Typography>
+          </div>
+          <div>
             <CustomLink href={customers[customerId].href}>
               Visit site
             </CustomLink>
+            <CustomLink href={customers[customerId].href}>Use case</CustomLink>
           </div>
         </Modal.Body>
+        <Modal.Footer css={{ justifyContent: "space-around" }}>
+          <PrevNextButton onClick={() => prevNextHandler()}>
+            <FontAwesomeIcon icon={faCircleArrowLeft} size="xl" />
+            <span>Prev</span>
+          </PrevNextButton>
+          <PrevNextButton onClick={() => prevNextHandler()}>
+            <span>Next</span>
+            <FontAwesomeIcon icon={faCircleArrowRight} size="xl" />
+          </PrevNextButton>
+        </Modal.Footer>
       </Modal>
     </CustomersWrapper>
   )
