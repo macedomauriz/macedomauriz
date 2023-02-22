@@ -19,7 +19,9 @@
     "next-themes": "^0.2.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.41.5"
+    "react-hook-form": "^7.41.5",
+    "react-vertical-timeline-component": "^3.6.0",
+    "react-wrap-balancer": "^0.4.0"
   },
   "devDependencies": {
     "@types/node": "^18.0.3",

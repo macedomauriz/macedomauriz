@@ -92,7 +92,7 @@ export function Customers(): JSX.Element {
     setVisible(false)
   }
   const prevNextHandler = () => {
-    let newCustomerId = customerId + 1
+    const newCustomerId = customerId + 1
     if (newCustomerId === customers.length) {
       setCustomerId(0)
     } else {
@@ -138,7 +138,7 @@ export function Customers(): JSX.Element {
   return (
     <CustomersWrapper>
       <Typography h6 overline color="$gray800">
-        Worked with amazing companies
+        Who I've helped
       </Typography>
       <Spacer y={2} />
       <Logos>
