@@ -1,5 +1,5 @@
 import { createTheme, NextUIProvider } from "@nextui-org/react"
-import { Ubuntu_Mono, Roboto, Roboto_Slab } from "@next/font/google"
+import { Ubuntu_Mono, Inter, Roboto_Slab } from "next/font/google"
 import React from "react"
 import { fontReset } from "../styles/reset"
 import { useRouter } from "next/router"
@@ -10,9 +10,9 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { AppProps } from "next/app"
 config.autoAddCss = false
 
-const roboto = Roboto({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: ["400", "500", "700"],
 })
 
 const ubuntuMono = Ubuntu_Mono({
@@ -53,7 +53,7 @@ type ThemeProviderProps = {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const globalFontReset = fontReset(robotoSlab, roboto, ubuntuMono)
+  const globalFontReset = fontReset(robotoSlab, inter, ubuntuMono)
   return (
     <>
       <style jsx global>
