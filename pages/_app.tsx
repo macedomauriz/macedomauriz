@@ -10,10 +10,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { AppProps } from "next/app"
 config.autoAddCss = false
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-})
+const inter = Inter({ subsets: ["latin"] })
 
 const ubuntuMono = Ubuntu_Mono({
   subsets: ["latin"],
@@ -53,7 +50,11 @@ type ThemeProviderProps = {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
-  const globalFontReset = fontReset(robotoSlab, inter, ubuntuMono)
+  const globalFontReset = fontReset({
+    body: robotoSlab,
+    impact: inter,
+    mono: ubuntuMono,
+  })
   return (
     <>
       <style jsx global>

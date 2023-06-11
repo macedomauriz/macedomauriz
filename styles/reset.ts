@@ -1,13 +1,10 @@
 // @ts-nocheck
-export const fontReset = (body, button, mono) => `
+export const fontReset = ({ body, impact, mono }) => `
   *,
   p,
   h1,
   h2,
   h3,
-  h4,
-  h5,
-  h6,
   strong,
   em,
   i,
@@ -38,13 +35,19 @@ export const fontReset = (body, button, mono) => `
     font-family: ${body.style.fontFamily};
     letter-spacing: normal;
   }
+  h4,
+  h5,
+  h6 {
+    font-family: ${impact.style.fontFamily};
+    font-weight: 800;
+  }
   code,
   pre {
     font-family: ${mono.style.fontFamily};
   }
   button,
   input[type=submit] {
-    font-family: ${button.style.fontFamily};
+    font-family: ${impact.style.fontFamily};
     text-transform: uppercase;
     letter-spacing: 1px;
   }

@@ -32,7 +32,6 @@ export function Typography({
   const isHeading =
     props.h1 || props.h2 || props.h3 || props.h4 || props.h5 || props.h6
   const overlineCSS = overline && {
-    fontFamily: "Roboto",
     textTransform: "uppercase",
   }
   const paragraphCSS = paragraph && { margin: "0 0 0.8em 0" }
