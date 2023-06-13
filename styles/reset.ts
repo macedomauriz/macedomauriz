@@ -50,6 +50,7 @@ export const fontReset = ({ body, impact, mono }) => `
     font-family: ${impact.style.fontFamily};
     text-transform: uppercase;
     letter-spacing: 1px;
+    font-weight: 700 !important; 
   }
   span {
     font-family: inherit;
