@@ -40,15 +40,6 @@ const customers: CustomersProps[] = [
       "Tryolabs is a software development and consulting company that specializes in artificial intelligence, machine learning, and data science. They offer a range of services, including custom software development, data analysis and modeling, natural language processing, computer vision, and more.",
   },
   {
-    src: "/logos/mucam.svg",
-    alt: "Médica Uruguaya",
-    href: "https://www.medicauruguaya.com.uy/ahome.aspx",
-    width: 140,
-    height: 40,
-    description:
-      "Medica Uruguaya is a private healthcare organization based in Uruguay. It provides a range of medical services to patients, including consultations with general practitioners and specialists, diagnostic tests, laboratory services, hospitalization, and emergency care. Medica Uruguaya has grown to become one of the largest private healthcare providers in Uruguay.",
-  },
-  {
     src: "/logos/ey.svg",
     alt: "EY",
     href: "https://www.ey.com/",
@@ -57,6 +48,15 @@ const customers: CustomersProps[] = [
     description:
       'Ernst & Young (EY) is one of the largest multinational professional services firms in the world, providing a range of services in audit, tax, transaction advisory, and consulting. The company was founded in the United Kingdom in 1849 and has grown to become a global organization with operations in over 150 countries. EY is one of the "Big Four" professional accounting services firms.',
     translateY: "-8px",
+  },
+  {
+    src: "/logos/mucam.svg",
+    alt: "Médica Uruguaya",
+    href: "https://www.medicauruguaya.com.uy/ahome.aspx",
+    width: 140,
+    height: 40,
+    description:
+      "Medica Uruguaya is a private healthcare organization based in Uruguay. It provides a range of medical services to patients, including consultations with general practitioners and specialists, diagnostic tests, laboratory services, hospitalization, and emergency care. Medica Uruguaya has grown to become one of the largest private healthcare providers in Uruguay.",
   },
   {
     src: "/logos/dragoons.svg",
@@ -109,18 +109,23 @@ export function Customers(): JSX.Element {
   const Logos = styled("div", {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center",
-    flexWrap: "wrap",
-    columnGap: 40,
-    rowGap: 30,
-    "@media (max-width: 600px)": {
-      flexDirection: "column",
-    },
-    button: {
-      backgroundColor: "transparent",
-      border: "none",
-      padding: 0,
-      cursor: "pointer",
+    "> div": {
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      flexWrap: "wrap",
+      columnGap: 40,
+      rowGap: 30,
+      maxWidth: 600,
+      "@media (max-width: 600px)": {
+        flexDirection: "column",
+      },
+      button: {
+        backgroundColor: "transparent",
+        border: "none",
+        padding: 0,
+        cursor: "pointer",
+      },
     },
   })
   const LogoImage = styled(Image, {
@@ -142,22 +147,24 @@ export function Customers(): JSX.Element {
       </Typography>
       <Spacer y={2} />
       <Logos>
-        {customers.map((item, index) => (
-          <button
-            key={item.alt}
-            onClick={() => handler(index)}
-            style={{
-              transform: item.translateY && `translateY(${item.translateY})`,
-            }}
-          >
-            <LogoImage
-              src={item.src}
-              alt={item.alt}
-              width={item.width}
-              height={item.height}
-            />
-          </button>
-        ))}
+        <div>
+          {customers.map((item, index) => (
+            <button
+              key={item.alt}
+              onClick={() => handler(index)}
+              style={{
+                transform: item.translateY && `translateY(${item.translateY})`,
+              }}
+            >
+              <LogoImage
+                src={item.src}
+                alt={item.alt}
+                width={item.width}
+                height={item.height}
+              />
+            </button>
+          ))}
+        </div>
       </Logos>
       <Modal
         closeButton
