@@ -95,13 +95,13 @@ export function Animation() {
           <Wilson />
         </>
       )}
-      {isRendered && !isDark && <Glasses />}
       {isRendered && (
         <>
           <RodrigoFloor />
           <Rodrigo />
         </>
       )}
+      {isRendered && !isDark && <Glasses />}
     </AnimationHeroWrapper>
   )
 }
