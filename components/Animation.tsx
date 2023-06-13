@@ -1,8 +1,15 @@
+import { useState, useEffect } from "react"
 import { styled, keyframes } from "@nextui-org/react"
 import { useTheme } from "@nextui-org/react"
 
-export function AnimationHero() {
+export function Animation() {
+  const [isRendered, setIsRendered] = useState(false)
   const { isDark } = useTheme()
+
+  useEffect(() => {
+    setIsRendered(true)
+  }, [])
+
   const sprite = (px: number) =>
     keyframes({
       "0%": { backgroundPosition: "0px" },
@@ -82,15 +89,19 @@ export function AnimationHero() {
   })
   return (
     <AnimationHeroWrapper>
-      {isDark && (
+      {isRendered && isDark && (
         <>
           <WilsonFloor />
           <Wilson />
         </>
       )}
-      <RodrigoFloor />
-      <Rodrigo />
-      {!isDark && <Glasses />}
+      {isRendered && !isDark && <Glasses />}
+      {isRendered && (
+        <>
+          <RodrigoFloor />
+          <Rodrigo />
+        </>
+      )}
     </AnimationHeroWrapper>
   )
 }

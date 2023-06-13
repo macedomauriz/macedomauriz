@@ -1,6 +1,6 @@
 import { Grid, Spacer } from "@nextui-org/react"
 import CustomLink from "./CustomLink"
-import { AnimationHero } from "../components/AnimationHero"
+import { Animation } from "../components/Animation"
 import { Typography } from "../components/Typography"
 
 export function Hero(): JSX.Element {
@@ -51,7 +51,7 @@ export function Hero(): JSX.Element {
             "linear-gradient(to bottom, transparent 66%, $background 66%), radial-gradient($heroShadow1 18%, $heroShadow2 45%, transparent 70%), transparent",
         }}
       >
-        <AnimationHero />
+        <Animation />
       </Grid>
     </Grid.Container>
   )
