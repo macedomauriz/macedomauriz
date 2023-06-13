@@ -11,11 +11,11 @@ import { Typography } from "../../Typography"
 const socialMedia = [
   {
     icon: faGithubAlt,
-    href: "https://github.com/rodrigo1987macedo/me",
+    href: "https://github.com/macedomauriz",
   },
   {
     icon: faLinkedinIn,
-    href: "https://www.linkedin.com/in/rodrigo-macedo-28944091/",
+    href: "https://www.linkedin.com/in/macedomauriz/",
   },
 ]
 
