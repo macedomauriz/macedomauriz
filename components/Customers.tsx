@@ -79,7 +79,7 @@ const customers: CustomersProps[] = [
 ]
 
 export function Customers(): JSX.Element {
-  const { isDark } = useTheme()
+  const { isDark, theme } = useTheme()
   const [visible, setVisible] = useState(false)
   const [customerId, setCustomerId] = useState(0)
 
@@ -128,6 +128,28 @@ export function Customers(): JSX.Element {
       },
     },
   })
+  const Header = styled(Modal.Header, {
+    height: 70,
+  })
+  const Body = styled(Modal.Body, {
+    position: "relative",
+    height: "200px",
+  })
+  const Action = styled("div", {
+    position: "relative",
+    display: "flex",
+    justifyContent: "space-evenly",
+    paddingTop: 10,
+    "&::before": {
+      content: "",
+      position: "absolute",
+      top: "-18px",
+      left: 0,
+      width: "100%",
+      height: 18,
+      background: `linear-gradient(transparent, ${theme?.colors.backgroundContrast.value} 50%)`,
+    },
+  })
   const LogoImage = styled(Image, {
     filter: `invert(${isDark ? "0.45" : "0.6"})`,
   })
@@ -140,6 +162,7 @@ export function Customers(): JSX.Element {
     padding: 0,
     cursor: "pointer",
   })
+  console.log("theme: ", theme)
   return (
     <CustomersWrapper>
       <Typography h6 overline color="$gray800">
@@ -173,25 +196,23 @@ export function Customers(): JSX.Element {
         onClose={closeHandler}
         css={{ padding: 0 }}
       >
-        <Modal.Header>
+        <Header>
           <LogoImage
             src={customers[customerId].src}
             alt={customers[customerId].alt}
             width={customers[customerId].width}
             height={customers[customerId].height}
           />
-        </Modal.Header>
-        <Modal.Body>
+        </Header>
+        <Body>
           <div>
             <Typography>{customers[customerId].description}</Typography>
           </div>
-          <div>
-            <CustomLink href={customers[customerId].href}>
-              Visit site
-            </CustomLink>
-            <CustomLink href={customers[customerId].href}>Use case</CustomLink>
-          </div>
-        </Modal.Body>
+        </Body>
+        <Action>
+          <CustomLink href={customers[customerId].href}>Visit site</CustomLink>
+          <CustomLink href={customers[customerId].href}>Use case</CustomLink>
+        </Action>
         <Modal.Footer css={{ justifyContent: "space-around" }}>
           <PrevNextButton onClick={() => prevNextHandler()}>
             <FontAwesomeIcon icon={faCircleArrowLeft} size="xl" />
