@@ -2,7 +2,7 @@ import { styled } from "@nextui-org/react"
 import Balancer from "react-wrap-balancer"
 import { Typography } from "./Typography"
 
-export function Quote(): JSX.Element {
+export function Quote() {
   const QuoteWrapper = styled("div", {
     textAlign: "center",
     "> h3:first-child": {

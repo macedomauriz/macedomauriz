@@ -78,7 +78,7 @@ const customers: CustomersProps[] = [
   },
 ]
 
-export function Customers(): JSX.Element {
+export function Customers() {
   const { isDark, theme } = useTheme()
   const [visible, setVisible] = useState(false)
   const [customerId, setCustomerId] = useState(0)
@@ -162,7 +162,6 @@ export function Customers(): JSX.Element {
     padding: 0,
     cursor: "pointer",
   })
-  console.log("theme: ", theme)
   return (
     <CustomersWrapper>
       <Typography h6 overline color="$gray800">

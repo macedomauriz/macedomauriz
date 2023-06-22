@@ -11,9 +11,9 @@ export const fontReset = ({ body, impact, mono }) => `
   b,
   u,
   mark,
-  small,
   del,
   ins,
+  small,
   sub,
   sup,
   abbr,
@@ -26,7 +26,6 @@ export const fontReset = ({ body, impact, mono }) => `
   kbd,
   var,
   s,
-  time,
   bdo,
   ruby,
   rt,
@@ -46,10 +45,10 @@ export const fontReset = ({ body, impact, mono }) => `
     font-family: ${mono.style.fontFamily};
   }
   button,
+  time,
   input[type=submit] {
     font-family: ${impact.style.fontFamily};
     text-transform: uppercase;
-    letter-spacing: 1px;
     font-weight: 700 !important; 
   }
   span {

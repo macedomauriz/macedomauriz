@@ -4,9 +4,8 @@ import { Customers } from "../components/Customers"
 import { Hero } from "../components/Hero"
 import { LatestBlogPosts } from "../components/LatestBlogPosts"
 import { Quote } from "../components/Quote"
-import { UseCases } from "../components/UseCases"
 
-export default function Home(): JSX.Element {
+export default function Home() {
   return (
     <>
       <Head>
@@ -19,15 +18,15 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Spacer y={2} />
       <Hero />
       <Spacer y={5} />
       <Quote />
       <Spacer y={5} />
       <LatestBlogPosts />
-      <Spacer y={3} />
+      <Spacer y={5} />
       <Customers />
-      <Spacer y={3} />
-      <UseCases />
+      <Spacer y={5} />
     </>
   )
 }

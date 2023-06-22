@@ -3,12 +3,14 @@ import CustomLink from "./CustomLink"
 import { Animation } from "../components/Animation"
 import { Typography } from "../components/Typography"
 
-export function Hero(): JSX.Element {
+export function Hero() {
   return (
     <Grid.Container justify="center" direction="row">
       <Grid xs={12} md={6} direction="column">
         <Spacer y={1} />
-        <Typography h1>Rodrigo Macedo</Typography>
+        <Typography h1 noGutter>
+          Rodrigo Macedo
+        </Typography>
         <Typography h3 color="$gray800">
           Freelance developer at{" "}
           <CustomLink href="https://tryolabs.com/">Tryolabs</CustomLink>

@@ -6,7 +6,7 @@ interface LayoutProps {
   children: React.ReactNode
 }
 
-export function Layout({ children }: LayoutProps): JSX.Element {
+export function Layout({ children }: LayoutProps) {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div style={{ maxWidth: 1200 }}>

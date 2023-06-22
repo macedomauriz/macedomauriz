@@ -20,14 +20,16 @@ interface TypographyProps
   paragraph?: boolean
   overline?: boolean
   children: React.ReactNode
+  noGutter?: boolean
 }
 
 export function Typography({
   children,
   paragraph,
   overline,
+  noGutter,
   ...props
-}: TypographyProps): JSX.Element {
+}: TypographyProps) {
   const { isDark } = useTheme()
   const isHeading =
     props.h1 || props.h2 || props.h3 || props.h4 || props.h5 || props.h6
@@ -35,12 +37,16 @@ export function Typography({
     textTransform: "uppercase",
   }
   const paragraphCSS = paragraph && { margin: "0 0 0.8em 0" }
+
+  const noGutterCSS = noGutter && { lineHeight: 1 }
   return (
     <Text
       {...props}
-      size={!isHeading && !props.small ? "$lg" : undefined}
+      size={
+        !isHeading && !props.small ? "$lg" : props.small ? "$xs" : undefined
+      }
       weight={isDark && !isHeading ? "light" : undefined}
-      css={{ ...paragraphCSS, ...overlineCSS, ...props.css }}
+      css={{ ...paragraphCSS, ...overlineCSS, ...noGutterCSS, ...props.css }}
     >
       {children}
     </Text>
