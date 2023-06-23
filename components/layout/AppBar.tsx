@@ -1,5 +1,6 @@
 import { useTheme, Navbar } from "@nextui-org/react"
 import { styled } from "@nextui-org/react"
+import CustomLink from "../CustomLink"
 import { DesktopContent, MobileContent } from "./appbar/Content"
 
 export const AppBar = () => {
@@ -15,7 +16,9 @@ export const AppBar = () => {
   return (
     <AppBarWrapper variant="sticky" disableShadow isBordered>
       <Navbar.Brand>
-        <BrandImage src="/logo.svg" alt="logo" width={45} height={45} />
+        <CustomLink href="/">
+          <BrandImage src="/logo.svg" alt="logo" width={45} height={45} />
+        </CustomLink>
       </Navbar.Brand>
       <Navbar.Toggle showIn="xs" />
       <DesktopContent />
