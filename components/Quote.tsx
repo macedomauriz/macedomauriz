@@ -5,14 +5,14 @@ import { Typography } from "./Typography"
 export function Quote() {
   const QuoteWrapper = styled("div", {
     textAlign: "center",
-    "> h3:first-child": {
+    "> h2:first-child": {
       fontStyle: "italic",
     },
   })
 
   return (
     <QuoteWrapper>
-      <Typography h3 paragraph color="$gray800">
+      <Typography h2 paragraph color="$gray800">
         <Balancer>
           "When things are simple, fewer mistakes are made. The most expensive
           part of a building is the mistakes."
