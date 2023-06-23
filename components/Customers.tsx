@@ -117,6 +117,9 @@ export function Customers() {
       columnGap: 40,
       rowGap: 30,
       maxWidth: 600,
+      ":hover": {
+        transform: "scale(1.01)",
+      },
       "@media (max-width: 600px)": {
         flexDirection: "column",
       },

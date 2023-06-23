@@ -1,4 +1,4 @@
-import { styled, Theme } from "@nextui-org/react"
+import { styled } from "@nextui-org/react"
 import { Typography } from "./Typography"
 import { useTheme } from "@nextui-org/react"
 
