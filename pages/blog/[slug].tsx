@@ -1,12 +1,13 @@
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import React from "react"
-import { Hello } from "../../components/Hello"
+import Example from "components/Example"
 import { getAllPosts, getSinglePost } from "../../utils/mdx"
 import Head from "next/head"
 
 interface PostProps {
   code: string
+  slug: string
   frontmatter: {
     title: string
     description: string
@@ -23,7 +24,7 @@ const Post = ({ code, frontmatter }: PostProps) => {
       </Head>
       <Component
         components={{
-          Hello,
+          Example,
         }}
       />
     </>
