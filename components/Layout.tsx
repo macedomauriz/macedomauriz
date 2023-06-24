@@ -9,12 +9,13 @@ interface LayoutProps {
 export function Layout({ children }: LayoutProps) {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
-      <div style={{ maxWidth: 1200 }}>
+      <div style={{ width: "100%", maxWidth: 1200 }}>
         <AppBar />
+        <Spacer y={2} />
         <Container as="main" gap={2}>
           {children}
         </Container>
-        <Spacer y={1} />
+        <Spacer y={3} />
         <Footer />
       </div>
     </div>

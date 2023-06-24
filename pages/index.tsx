@@ -18,7 +18,6 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Spacer y={2} />
       <Hero />
       <Spacer y={5} />
       <Quote />
@@ -26,7 +25,6 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
       <LatestBlogPosts />
       <Spacer y={5} />
       <Customers />
-      <Spacer y={5} />
     </>
   )
 }
