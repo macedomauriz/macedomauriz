@@ -23,6 +23,7 @@ const getCompiledMDX = async (source: string) => {
       "esbuild"
     )
   }
+
   // Add your remark and rehype plugins here
   const remarkPlugins: any[] = [remarkMdxImages]
   const rehypePlugins: any[] = []
@@ -30,7 +31,12 @@ const getCompiledMDX = async (source: string) => {
   try {
     return await bundleMDX({
       source,
-      cwd: path.join(process.cwd(), "content", "posts"),
+      cwd: path.join(
+        process.cwd(),
+        "content",
+        "posts",
+        matter(source).data.slug
+      ),
       mdxOptions(options) {
         options.remarkPlugins = [
           ...(options.remarkPlugins ?? []),
