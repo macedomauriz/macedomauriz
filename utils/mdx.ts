@@ -4,11 +4,6 @@ import { bundleMDX } from "mdx-bundler"
 import path from "path"
 
 export const ROOT = process.cwd()
-export const POSTS_PATH = path.join(process.cwd(), "content/posts")
-
-export const getFileContent = (filename: string) => {
-  return fs.readFileSync(path.join(POSTS_PATH, filename), "utf8")
-}
 
 const getCompiledMDX = async (source: string) => {
   if (process.platform === "win32") {
@@ -52,28 +47,43 @@ const getCompiledMDX = async (source: string) => {
   }
 }
 
-export const getSinglePost = async (slug: string) => {
-  const source = getFileContent(`${slug}.mdx`)
-  const { code, frontmatter } = await getCompiledMDX(source)
+const getAllPostsFolders = () => {
+  const folders = fs
+    .readdirSync(POSTS_PATH, { withFileTypes: true })
+    .filter(dirent => dirent.isDirectory())
+    .map(dirent => dirent.name)
+  return folders
+}
 
-  return {
-    frontmatter,
-    code,
+export const POSTS_PATH = path.join(process.cwd(), "content/posts")
+
+export const getFileContent = (filename: string) => {
+  return fs.readFileSync(path.join(POSTS_PATH, filename, "index.mdx"), "utf8")
+}
+
+export const getSinglePost = async (slug: string) => {
+  let source = ""
+  const fileContent = getFileContent(slug)
+  if (fileContent) {
+    source = fileContent
+    const { code, frontmatter } = await getCompiledMDX(source)
+
+    return {
+      frontmatter,
+      code,
+    }
   }
 }
 
 export const getAllPosts = () => {
-  return fs
-    .readdirSync(POSTS_PATH)
-    .filter(path => /\.mdx?$/.test(path))
-    .map(fileName => {
-      const source = getFileContent(fileName)
-      const slug = fileName.replace(/\.mdx?$/, "")
-      const { data } = matter(source)
+  return getAllPostsFolders().map(folder => {
+    const source = getFileContent(folder)
+    const slug = folder
+    const { data } = matter(source)
 
-      return {
-        frontmatter: data,
-        slug: slug,
-      }
-    })
+    return {
+      frontmatter: data,
+      slug: slug,
+    }
+  })
 }
