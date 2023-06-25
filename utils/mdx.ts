@@ -2,6 +2,7 @@ import fs from "fs"
 import matter from "gray-matter"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
+import remarkMdxImages from "remark-mdx-images"
 
 export const ROOT = process.cwd()
 
@@ -23,12 +24,13 @@ const getCompiledMDX = async (source: string) => {
     )
   }
   // Add your remark and rehype plugins here
-  const remarkPlugins: any[] = []
+  const remarkPlugins: any[] = [remarkMdxImages]
   const rehypePlugins: any[] = []
 
   try {
     return await bundleMDX({
       source,
+      cwd: path.join(process.cwd(), "content", "posts"),
       mdxOptions(options) {
         options.remarkPlugins = [
           ...(options.remarkPlugins ?? []),
@@ -38,6 +40,23 @@ const getCompiledMDX = async (source: string) => {
           ...(options.rehypePlugins ?? []),
           ...rehypePlugins,
         ]
+
+        return options
+      },
+
+      esbuildOptions: options => {
+        // Set the `outdir` to a public location for this bundle.
+        options.outdir = path.join(process.cwd(), "public", "posts-images")
+        options.loader = {
+          ...options.loader,
+          // Tell esbuild to use the `file` loader for pngs
+          ".png": "file",
+        }
+        // Set the public path to /img/about
+        options.publicPath = "/posts-images/"
+
+        // Set write to true so that esbuild will output the files.
+        options.write = true
 
         return options
       },

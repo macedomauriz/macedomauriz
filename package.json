@@ -23,6 +23,7 @@
     "react-hook-form": "^7.41.5",
     "react-vertical-timeline-component": "^3.6.0",
     "react-wrap-balancer": "^0.4.0",
+    "remark-mdx-images": "^2.0.0",
     "use-sound": "^4.0.1"
   },
   "devDependencies": {
