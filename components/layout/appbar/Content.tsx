@@ -1,4 +1,4 @@
-import { useRouter } from "next/router"
+// import { useRouter } from "next/router"
 import { Navbar, Link, styled } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
@@ -19,21 +19,21 @@ const socialMedia = [
   },
 ]
 
-const navigation = [
-  {
-    text: "Home",
-    href: "/",
-  },
-  {
-    text: "Blog",
-    href: "/blog",
-  },
-]
+// const navigation = [
+//   {
+//     text: "Home",
+//     href: "/",
+//   },
+//   {
+//     text: "Blog",
+//     href: "/blog",
+//   },
+// ]
 
-function matchURL(r: any, text: string) {
-  const url = r.replace(/\//g, "")
-  return (url === "" && text === "Home") ?? url === text.toLowerCase()
-}
+// function matchURL(r: any, text: string) {
+//   const url = r.replace(/\//g, "")
+//   return (url === "" && text === "Home") ?? url === text.toLowerCase()
+// }
 
 export const DesktopContent = () => {
   return (
@@ -55,7 +55,7 @@ export const DesktopContent = () => {
 }
 
 export const MobileContent = () => {
-  const router = useRouter()
+  // const router = useRouter()
   const CollapseItem = styled(Navbar.CollapseItem, {
     justifyContent: "center",
     height: 50,
@@ -69,13 +69,15 @@ export const MobileContent = () => {
         },
       }}
     >
-      {navigation.map(i => {
-        return (
-          <CollapseItem key={i.text} isActive={matchURL(router.asPath, i.text)}>
-            {i.text}
-          </CollapseItem>
-        )
-      })}
+      {
+        //   navigation.map(i => {
+        //   return (
+        //     <CollapseItem key={i.text} isActive={matchURL(router.asPath, i.text)}>
+        //       {i.text}
+        //     </CollapseItem>
+        //   )
+        // })
+      }
       {socialMedia.map(i => {
         return (
           <CollapseItem key={i.href}>

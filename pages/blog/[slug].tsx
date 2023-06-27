@@ -1,23 +1,48 @@
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
-import React from "react"
+import { useMemo } from "react"
 import Example from "components/Example"
 import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import Head from "next/head"
+import { Typography } from "components/Typography"
+// import { useReadingTime } from "react-hook-reading-time"
 
-const Post = ({ code, frontmatter }: PostProps) => {
-  const Component = React.useMemo(() => getMDXComponent(code), [code])
+type CustomLayoutProps = {
+  frontmatter: PostProps["frontmatter"]
+  time: PostProps["time"]
+  children: React.ReactNode
+}
+
+const PostLayout: React.FC<CustomLayoutProps> = ({
+  frontmatter,
+  time,
+  children,
+}) => {
+  return (
+    <div>
+      <Typography h1>{frontmatter.title}</Typography>
+      <div>{time}</div>
+      <main>{children}</main>
+    </div>
+  )
+}
+
+const Post = ({ code, frontmatter, time }: PostProps) => {
+  const Component = useMemo(() => getMDXComponent(code), [code])
+
   return (
     <>
       <Head>
         <title>{frontmatter.title}</title>
         <meta name="description" content={frontmatter.description} />
       </Head>
-      <Component
-        components={{
-          Example,
-        }}
-      />
+      <PostLayout frontmatter={frontmatter} time={time}>
+        <Component
+          components={{
+            Example,
+          }}
+        />
+      </PostLayout>
     </>
   )
 }

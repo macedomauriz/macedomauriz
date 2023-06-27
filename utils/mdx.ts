@@ -4,10 +4,15 @@ import matter from "gray-matter"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
 import remarkMdxImages from "remark-mdx-images"
+import { remark } from "remark"
+import remarkHtml from "remark-html"
+import striptags from "striptags"
+import readingTime from "reading-time"
 
 export interface PostProps {
   code: string
   slug: string
+  time: string
   frontmatter: {
     title: string
     description: string
@@ -100,14 +105,30 @@ export const getFileContent = (filename: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, filename, "index.mdx"), "utf8")
 }
 
+function cleanMDXContent(content: string) {
+  const processor = remark().use(remarkHtml)
+
+  const cleanedContent = processor
+    .processSync(matter(content).content)
+    .toString()
+
+  return cleanedContent
+}
+
 export const getSinglePost = async (slug: string) => {
   const fileContent = getFileContent(slug)
+
+  const cleanedContent = cleanMDXContent(fileContent)
+
+  const time = readingTime(striptags(cleanedContent)).text
+
   if (fileContent) {
     const { code, frontmatter } = await getCompiledMDX(fileContent)
 
     return {
       frontmatter,
       code,
+      time,
     }
   }
 }
