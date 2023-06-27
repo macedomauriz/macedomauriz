@@ -15,7 +15,7 @@ export function Layout({ children }: LayoutProps) {
         <Container as="main" gap={2}>
           {children}
         </Container>
-        <Spacer y={3} />
+        <Spacer y={5} />
         <Footer />
       </div>
     </div>

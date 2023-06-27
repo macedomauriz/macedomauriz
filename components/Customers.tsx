@@ -9,6 +9,7 @@ import {
   faCircleArrowRight,
   faCircleArrowLeft,
 } from "@fortawesome/free-solid-svg-icons"
+import { SectionTitle } from "./SectionTitle"
 
 interface CustomersProps {
   src: string
@@ -115,15 +116,16 @@ export function Customers() {
       alignItems: "center",
       flexWrap: "wrap",
       columnGap: 40,
-      rowGap: 30,
+      rowGap: 60,
       maxWidth: 600,
       ":hover": {
         transform: "scale(1.01)",
       },
-      "@media (max-width: 600px)": {
-        flexDirection: "column",
-      },
       button: {
+        display: "flex",
+        alignItems: "center",
+        maxWidth: 160,
+        maxHeight: 14,
         backgroundColor: "transparent",
         border: "none",
         padding: 0,
@@ -167,9 +169,8 @@ export function Customers() {
   })
   return (
     <CustomersWrapper>
-      <Typography h6 overline color="$gray800">
-        Who I've helped
-      </Typography>
+      <SectionTitle>Who I've helped</SectionTitle>
+      <div />
       <Spacer y={2} />
       <Logos>
         <div>

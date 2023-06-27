@@ -24,6 +24,9 @@ export function PostCard({ title, date, image, href, chip }: PostCardProps) {
     background: `${theme?.colors.background.value}80`,
     padding: "6%",
     backdropFilter: "blur(5px)",
+    h4: {
+      textAlign: "left",
+    },
     "> div:nth-of-type(1)": {
       margin: "0 0 10px 0",
     },

@@ -1,6 +1,6 @@
-import { Spacer, styled, Grid } from "@nextui-org/react"
+import { Spacer, styled } from "@nextui-org/react"
 import { PostCard } from "./PostCard"
-import { Typography } from "./Typography"
+import { SectionTitle } from "./SectionTitle"
 
 export function LatestBlogPosts() {
   const CustomersWrapper = styled("div", {
@@ -10,34 +10,40 @@ export function LatestBlogPosts() {
     textAlign: "center",
   })
 
+  const Grid = styled("div", {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap",
+    gap: 20,
+    "> div": {
+      flex: "0.05 1 240px",
+    },
+  })
+
   return (
     <CustomersWrapper>
-      <Typography h6 overline color="$gray800">
-        Latest Blog Posts
-      </Typography>
+      <SectionTitle>Latest Blog Posts</SectionTitle>
       <Spacer y={2} />
-      <div>
-        <Grid.Container gap={2} justify="center">
-          <Grid xs={12} sm={4} md={3}>
-            <PostCard
-              title="Steam the active event"
-              date="24 may 2023"
-              image="https://nextui.org/images/card-example-3.jpeg"
-              href="/"
-              chip="use case"
-            />
-          </Grid>
-          <Grid xs={12} sm={4} md={3}>
-            <PostCard
-              title="Steam the active event"
-              date="24 may 2023"
-              image="https://nextui.org/images/card-example-6.jpeg"
-              href="/"
-              chip="development"
-            />
-          </Grid>
-        </Grid.Container>
-      </div>
+      <Grid>
+        <div>
+          <PostCard
+            title="Steam the active event"
+            date="24 may 2023"
+            image="https://nextui.org/images/card-example-3.jpeg"
+            href="/"
+            chip="use case"
+          />
+        </div>
+        <div>
+          <PostCard
+            title="Steam the active event"
+            date="24 may 2023"
+            image="https://nextui.org/images/card-example-6.jpeg"
+            href="/"
+            chip="development"
+          />
+        </div>
+      </Grid>
     </CustomersWrapper>
   )
 }
