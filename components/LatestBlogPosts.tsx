@@ -31,24 +31,19 @@ export function LatestBlogPosts({ posts }: LatestBlogPostsProps) {
       <SectionTitle>Latest Blog Posts</SectionTitle>
       <Spacer y={2} />
       <Grid>
-        <div>
-          <PostCard
-            title="Steam the active event"
-            date="24 may 2023"
-            image="https://nextui.org/images/card-example-3.jpeg"
-            href="/"
-            chip="use case"
-          />
-        </div>
-        <div>
-          <PostCard
-            title="Steam the active event"
-            date="24 may 2023"
-            image="https://nextui.org/images/card-example-6.jpeg"
-            href="/"
-            chip="development"
-          />
-        </div>
+        {posts.map(p => {
+          return (
+            <div key={p.slug}>
+              <PostCard
+                title={p.frontmatter.title}
+                date={p.frontmatter.date}
+                image={p.frontmatter.image}
+                href={`/blog/${p.slug}`}
+                chip={p.frontmatter.category}
+              />
+            </div>
+          )
+        })}
       </Grid>
     </CustomersWrapper>
   )

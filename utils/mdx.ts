@@ -1,3 +1,4 @@
+import { ChipProps } from "components/Chip"
 import fs from "fs"
 import matter from "gray-matter"
 import { bundleMDX } from "mdx-bundler"
@@ -10,6 +11,10 @@ export interface PostProps {
   frontmatter: {
     title: string
     description: string
+    date: string
+    image: string
+    category: ChipProps["text"]
+    slug: string
   }
 }
 
