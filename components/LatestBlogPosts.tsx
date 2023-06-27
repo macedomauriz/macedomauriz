@@ -1,8 +1,14 @@
 import { Spacer, styled } from "@nextui-org/react"
+import { PostProps } from "utils/mdx"
 import { PostCard } from "./PostCard"
 import { SectionTitle } from "./SectionTitle"
 
-export function LatestBlogPosts() {
+interface LatestBlogPostsProps {
+  posts: PostProps[]
+}
+
+export function LatestBlogPosts({ posts }: LatestBlogPostsProps) {
+  console.log("LatestBlogPosts: ", posts)
   const CustomersWrapper = styled("div", {
     display: "flex",
     flexDirection: "column",

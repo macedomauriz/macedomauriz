@@ -4,6 +4,15 @@ import { bundleMDX } from "mdx-bundler"
 import path from "path"
 import remarkMdxImages from "remark-mdx-images"
 
+export interface PostProps {
+  code: string
+  slug: string
+  frontmatter: {
+    title: string
+    description: string
+  }
+}
+
 export const ROOT = process.cwd()
 
 const getCompiledMDX = async (source: string) => {
@@ -87,11 +96,9 @@ export const getFileContent = (filename: string) => {
 }
 
 export const getSinglePost = async (slug: string) => {
-  let source = ""
   const fileContent = getFileContent(slug)
   if (fileContent) {
-    source = fileContent
-    const { code, frontmatter } = await getCompiledMDX(source)
+    const { code, frontmatter } = await getCompiledMDX(fileContent)
 
     return {
       frontmatter,

@@ -2,17 +2,8 @@ import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import React from "react"
 import Example from "components/Example"
-import { getAllPosts, getSinglePost } from "../../utils/mdx"
+import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import Head from "next/head"
-
-interface PostProps {
-  code: string
-  slug: string
-  frontmatter: {
-    title: string
-    description: string
-  }
-}
 
 const Post = ({ code, frontmatter }: PostProps) => {
   const Component = React.useMemo(() => getMDXComponent(code), [code])

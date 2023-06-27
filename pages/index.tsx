@@ -1,11 +1,17 @@
 import { Spacer } from "@nextui-org/react"
+import { GetStaticProps } from "next"
 import Head from "next/head"
+import { getAllPosts, PostProps } from "utils/mdx"
 import { Customers } from "../components/Customers"
 import { Hero } from "../components/Hero"
 import { LatestBlogPosts } from "../components/LatestBlogPosts"
 import { Quote } from "../components/Quote"
 
-export default function Home() {
+interface HomeProps {
+  posts: PostProps[]
+}
+
+export default function Home({ posts }: HomeProps) {
   return (
     <>
       <Head>
@@ -22,9 +28,13 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
       <Spacer y={5} />
       <Quote />
       <Spacer y={5} />
-      <LatestBlogPosts />
+      <LatestBlogPosts posts={posts} />
       <Spacer y={5} />
       <Customers />
     </>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  return { props: { posts: getAllPosts() } }
 }
