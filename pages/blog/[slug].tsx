@@ -20,7 +20,9 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
 }) => {
   return (
     <div>
-      <Typography h1>{frontmatter.title}</Typography>
+      <Typography h1 noGutter>
+        {frontmatter.title}
+      </Typography>
       <div>{time}</div>
       <main>{children}</main>
     </div>
