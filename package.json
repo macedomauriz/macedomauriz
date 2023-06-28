@@ -23,10 +23,12 @@
     "react-hook-form": "^7.41.5",
     "react-wrap-balancer": "^0.4.0",
     "reading-time": "^1.5.0",
-    "remark": "^14.0.3",
+    "rehype-autolink-headings": "^6.1.1",
     "remark-html": "^15.0.2",
     "remark-mdx-images": "^2.0.0",
+    "remark-parse": "^10.0.2",
     "striptags": "^3.2.0",
+    "unified": "^10.1.2",
     "use-sound": "^4.0.1"
   },
   "devDependencies": {

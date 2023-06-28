@@ -4,7 +4,8 @@ import matter from "gray-matter"
 import { bundleMDX } from "mdx-bundler"
 import path from "path"
 import remarkMdxImages from "remark-mdx-images"
-import { remark } from "remark"
+import { unified } from "unified"
+import remarkParse from "remark-parse"
 import remarkHtml from "remark-html"
 import striptags from "striptags"
 import readingTime from "reading-time"
@@ -106,7 +107,7 @@ export const getFileContent = (filename: string) => {
 }
 
 function cleanMDXContent(content: string) {
-  const processor = remark().use(remarkHtml)
+  const processor = unified().use(remarkParse).use(remarkHtml)
 
   const cleanedContent = processor
     .processSync(matter(content).content)
