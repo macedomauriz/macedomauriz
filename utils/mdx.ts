@@ -6,14 +6,23 @@ import path from "path"
 import remarkMdxImages from "remark-mdx-images"
 import { unified } from "unified"
 import remarkParse from "remark-parse"
+import rehypePrism from "rehype-prism-plus"
+import rehypeCodeTitles from "rehype-code-titles"
+import rehypeSlug from "rehype-slug"
+import remarkExternalLinks from "remark-external-links"
 import remarkHtml from "remark-html"
+import remarkGfm from "remark-gfm"
 import striptags from "striptags"
 import readingTime from "reading-time"
+import { parse } from "parse5"
+import remarkMath from "remark-math"
+import rehypeKatex from "rehype-katex"
 
 export interface PostProps {
   code: string
   slug: string
   time: string
+  headings: string[]
   frontmatter: {
     title: string
     description: string
@@ -21,6 +30,7 @@ export interface PostProps {
     image: string
     category: ChipProps["text"]
     slug: string
+    updated?: string
   }
 }
 
@@ -45,8 +55,18 @@ const getCompiledMDX = async (source: string) => {
   }
 
   // Add your remark and rehype plugins here
-  const remarkPlugins: any[] = [remarkMdxImages]
-  const rehypePlugins: any[] = []
+  const remarkPlugins: any[] = [
+    remarkMath,
+    remarkMdxImages,
+    remarkGfm,
+    remarkExternalLinks,
+  ]
+  const rehypePlugins: any[] = [
+    rehypeKatex,
+    rehypeSlug,
+    rehypeCodeTitles,
+    rehypePrism,
+  ]
 
   try {
     return await bundleMDX({
@@ -106,7 +126,29 @@ export const getFileContent = (filename: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, filename, "index.mdx"), "utf8")
 }
 
-function cleanMDXContent(content: string) {
+const getH2Headings = (htmlContent: string): string[] => {
+  const document = parse(htmlContent)
+  const h2Headings: string[] = []
+
+  const traverseNodes = (node: any) => {
+    if (node.nodeName === "h2") {
+      const headingValue = node.childNodes[0]?.value
+      if (headingValue) {
+        h2Headings.push(headingValue)
+      }
+    }
+
+    if ("childNodes" in node) {
+      node.childNodes.forEach(traverseNodes)
+    }
+  }
+
+  traverseNodes(document)
+
+  return h2Headings
+}
+
+function getHTMLContent(content: string) {
   const processor = unified().use(remarkParse).use(remarkHtml)
 
   const cleanedContent = processor
@@ -119,9 +161,9 @@ function cleanMDXContent(content: string) {
 export const getSinglePost = async (slug: string) => {
   const fileContent = getFileContent(slug)
 
-  const cleanedContent = cleanMDXContent(fileContent)
-
-  const time = readingTime(striptags(cleanedContent)).text
+  const htmlContent = getHTMLContent(fileContent)
+  const time = readingTime(striptags(htmlContent)).text
+  const headings = getH2Headings(htmlContent)
 
   if (fileContent) {
     const { code, frontmatter } = await getCompiledMDX(fileContent)
@@ -130,6 +172,7 @@ export const getSinglePost = async (slug: string) => {
       frontmatter,
       code,
       time,
+      headings,
     }
   }
 }
@@ -138,11 +181,11 @@ export const getAllPosts = () => {
   return getAllPostsFolders().map(folder => {
     const source = getFileContent(folder)
     const slug = folder
-    const { data } = matter(source)
+    const frontmatter = matter(source).data
 
     return {
-      frontmatter: data,
-      slug: slug,
+      frontmatter,
+      slug,
     }
   })
 }

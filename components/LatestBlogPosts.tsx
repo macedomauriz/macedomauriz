@@ -8,7 +8,6 @@ interface LatestBlogPostsProps {
 }
 
 export function LatestBlogPosts({ posts }: LatestBlogPostsProps) {
-  console.log("LatestBlogPosts: ", posts)
   const CustomersWrapper = styled("div", {
     display: "flex",
     flexDirection: "column",
