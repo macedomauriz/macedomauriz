@@ -1,4 +1,5 @@
 import { styled } from "@nextui-org/react"
+import { useTheme } from "@nextui-org/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
@@ -21,13 +22,42 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   children,
   headings,
 }) => {
+  const { theme } = useTheme()
+
   const PostLayoutWrapper = styled("div", {
+    position: "relative",
     h2: {
       scrollMarginTop: 100,
     },
   })
+  const ProgressionBar = styled("div", {
+    position: "fixed",
+    display: "flex",
+    justifyContent: "center",
+    width: "100%",
+    left: 0,
+    top: 76,
+    div: {
+      maxWidth: 1200,
+      width: "100%",
+      div: {
+        width: "100%",
+        height: 1,
+        background: theme?.colors.primary.value,
+        opacity: 0.6,
+      },
+    },
+  })
+
+  // console.log("space: ", theme)
+
   return (
     <PostLayoutWrapper>
+      <ProgressionBar>
+        <div>
+          <div />
+        </div>
+      </ProgressionBar>
       <Typography h1 noGutter>
         {frontmatter.title}
       </Typography>
