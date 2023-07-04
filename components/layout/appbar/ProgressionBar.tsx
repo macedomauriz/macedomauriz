@@ -13,12 +13,11 @@ export default function ProgressionBar() {
     left: 0,
     bottom: "-1px",
     div: {
+      width: "100%",
+      background: `linear-gradient(to right, ${theme?.colors.primary.value} ${scrollY}%, transparent 0%)`,
       height: 1,
-      background: theme?.colors.primary.value,
     },
   })
-
-  console.log(scrollY)
 
   return (
     <ProgressionBarWrapper>
