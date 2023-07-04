@@ -8,6 +8,8 @@ import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import Head from "next/head"
 import { Typography } from "components/Typography"
 import CustomLink from "components/CustomLink"
+import useBodyScroll from "hooks/useBodyScroll"
+import { useIsSsr } from "hooks/isSSR"
 
 type CustomLayoutProps = {
   frontmatter: PostProps["frontmatter"]
@@ -16,21 +18,11 @@ type CustomLayoutProps = {
   children: React.ReactNode
 }
 
-const PostLayout: React.FC<CustomLayoutProps> = ({
-  frontmatter,
-  time,
-  children,
-  headings,
-}) => {
+export function ProgressionBar() {
   const { theme } = useTheme()
+  const scrollY = useBodyScroll()
 
-  const PostLayoutWrapper = styled("div", {
-    position: "relative",
-    h2: {
-      scrollMarginTop: 100,
-    },
-  })
-  const ProgressionBar = styled("div", {
+  const ProgressionBarWrapper = styled("div", {
     position: "fixed",
     display: "flex",
     justifyContent: "center",
@@ -41,23 +33,39 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
       maxWidth: 1200,
       width: "100%",
       div: {
-        width: "100%",
+        width: `${scrollY}%`,
         height: 1,
         background: theme?.colors.primary.value,
-        opacity: 0.6,
       },
     },
   })
 
-  // console.log("space: ", theme)
+  return (
+    <ProgressionBarWrapper>
+      <div>
+        <div />
+      </div>
+    </ProgressionBarWrapper>
+  )
+}
+
+const PostLayout: React.FC<CustomLayoutProps> = ({
+  frontmatter,
+  time,
+  children,
+  headings,
+}) => {
+  const isSsr = useIsSsr()
+  const PostLayoutWrapper = styled("div", {
+    position: "relative",
+    h2: {
+      scrollMarginTop: 100,
+    },
+  })
 
   return (
     <PostLayoutWrapper>
-      <ProgressionBar>
-        <div>
-          <div />
-        </div>
-      </ProgressionBar>
+      {isSsr && <ProgressionBar />}
       <Typography h1 noGutter>
         {frontmatter.title}
       </Typography>

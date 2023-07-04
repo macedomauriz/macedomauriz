@@ -10,9 +10,11 @@ export const AppBar = () => {
       padding: "0 20px",
     },
   })
+
   const BrandImage = styled("img", {
     filter: `invert(${isDark ? 0.08 : 0.97})`,
   })
+
   return (
     <AppBarWrapper variant="sticky" disableShadow isBordered>
       <Navbar.Brand>
