@@ -32,6 +32,7 @@ export function ProgressionBar() {
     div: {
       maxWidth: 1200,
       width: "100%",
+      zIndex: 10,
       div: {
         width: `${scrollY}%`,
         transition: "width 1s",
