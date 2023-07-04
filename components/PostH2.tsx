@@ -30,7 +30,7 @@ export default function PostH2({ children, id }: PostH2Props) {
   })
 
   const toast = createToast({
-    duration: 200000,
+    duration: 2000,
     position: "bottom-center",
     maxVisibleToasts: 3,
     render: message => (
@@ -52,7 +52,7 @@ export default function PostH2({ children, id }: PostH2Props) {
 
   return (
     <>
-      <Typography h2 id={id}>
+      <Typography h2 id={id} noGutter>
         {children}{" "}
         <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>
           <FontAwesomeIcon icon={faLink} size="xs" color="gray" />
