@@ -8,37 +8,37 @@ export default function useBodyScroll() {
   )
 
   useEffect(() => {
-    const handleScroll = () => {
-      const maxScroll = fullHeight - windowHeight
-      const scrollY = window.pageYOffset
-      const percentage = (scrollY / maxScroll) * 100
+    const calculateScrollValues = () => {
+      setWindowHeight(window.innerHeight)
+      setFullHeight(document.documentElement.scrollHeight)
+    }
 
-      setScrollPercentage(percentage)
+    calculateScrollValues() // Initial call to calculate scroll values
+
+    const handleScroll = () => {
+      requestAnimationFrame(() => {
+        const maxScroll = fullHeight - windowHeight
+        const scrollY = window.pageYOffset
+        const percentage = (scrollY / maxScroll) * 100
+
+        setScrollPercentage(percentage)
+      })
+    }
+
+    const handleResize = () => {
+      requestAnimationFrame(() => {
+        calculateScrollValues()
+      })
     }
 
     window.addEventListener("scroll", handleScroll)
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
-  }, [windowHeight, fullHeight])
-
-  useEffect(() => {
-    const handleResize = () => {
-      setWindowHeight(window.innerHeight)
-      setFullHeight(document.documentElement.scrollHeight)
-
-      console.log("Window resized")
-    }
-
-    handleResize() // Initial call to handle resize
-
     window.addEventListener("resize", handleResize)
 
     return () => {
+      window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", handleResize)
     }
-  }, [])
+  }, [fullHeight, windowHeight])
 
   return scrollPercentage
 }

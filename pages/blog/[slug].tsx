@@ -34,6 +34,7 @@ export function ProgressionBar() {
       width: "100%",
       div: {
         width: `${scrollY}%`,
+        transition: "width 1s",
         height: 1,
         background: theme?.colors.primary.value,
       },
