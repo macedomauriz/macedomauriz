@@ -8,15 +8,16 @@ export default function useBodyScroll() {
   )
 
   useEffect(() => {
+    let timer: number // Variable to hold the timer reference
+
     const calculateScrollValues = () => {
       setWindowHeight(window.innerHeight)
       setFullHeight(document.documentElement.scrollHeight)
     }
 
-    calculateScrollValues() // Initial call to calculate scroll values
-
     const handleScroll = () => {
-      requestAnimationFrame(() => {
+      cancelAnimationFrame(timer) // Cancel any previously scheduled execution
+      timer = requestAnimationFrame(() => {
         const maxScroll = fullHeight - windowHeight
         const scrollY = window.pageYOffset
         const percentage = (scrollY / maxScroll) * 100
@@ -26,10 +27,14 @@ export default function useBodyScroll() {
     }
 
     const handleResize = () => {
-      requestAnimationFrame(() => {
+      cancelAnimationFrame(timer) // Cancel any previously scheduled execution
+      timer = requestAnimationFrame(() => {
         calculateScrollValues()
       })
     }
+
+    // Initial call to calculate scroll values after a delay of 500ms
+    timer = window.setTimeout(calculateScrollValues, 500)
 
     window.addEventListener("scroll", handleScroll)
     window.addEventListener("resize", handleResize)
@@ -37,6 +42,7 @@ export default function useBodyScroll() {
     return () => {
       window.removeEventListener("scroll", handleScroll)
       window.removeEventListener("resize", handleResize)
+      window.clearTimeout(timer) // Cancel the timer on unmount
     }
   }, [fullHeight, windowHeight])
 
