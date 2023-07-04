@@ -7,29 +7,21 @@ export default function ProgressionBar() {
   const scrollY = useBodyScroll()
 
   const ProgressionBarWrapper = styled("div", {
-    position: "fixed",
+    position: "absolute",
     display: "flex",
-    justifyContent: "center",
     width: "100%",
     left: 0,
-    top: 76,
+    bottom: "-1px",
     div: {
-      maxWidth: 1200,
-      width: "100%",
-      div: {
-        width: `${scrollY}%`,
-        transition: "width 1s",
-        height: 1,
-        background: theme?.colors.primary.value,
-      },
+      width: `${scrollY}%`,
+      height: 1,
+      background: theme?.colors.primary.value,
     },
   })
 
   return (
     <ProgressionBarWrapper>
-      <div>
-        <div />
-      </div>
+      <div />
     </ProgressionBarWrapper>
   )
 }

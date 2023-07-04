@@ -12,6 +12,7 @@ export const AppBar = () => {
   const isSsr = useIsSsr()
 
   const AppBarWrapper = styled(Navbar, {
+    position: "relative",
     "> div": {
       padding: "0 20px",
     },
