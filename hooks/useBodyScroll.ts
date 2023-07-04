@@ -26,10 +26,10 @@ export default function useBodyScroll() {
 
     const handleResize = throttle(() => {
       calculateScrollValues()
-    }, 1) // Throttle the resize event to execute at most every 200 milliseconds
+    }, 1) // Throttle the resize event to execute at most every 1 millisecond
 
     // Initial call to calculate scroll values after a delay of 500ms
-    timer = window.setTimeout(calculateScrollValues, 500)
+    timer = window.setTimeout(calculateScrollValues, 0)
 
     window.addEventListener("scroll", handleScroll)
     window.addEventListener("resize", handleResize)

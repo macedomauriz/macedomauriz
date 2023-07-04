@@ -2,7 +2,7 @@ import { useTheme, Navbar } from "@nextui-org/react"
 import { styled } from "@nextui-org/react"
 import CustomLink from "../CustomLink"
 import { DesktopContent, MobileContent } from "./appbar/Content"
-import { useIsSsr } from "hooks/isSSR"
+import { useIsSsr } from "hooks/isSsr"
 import { useRouter } from "next/router"
 import ProgressionBar from "./appbar/ProgressionBar"
 
