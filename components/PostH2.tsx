@@ -21,14 +21,16 @@ export default function PostH2({ children, id }: PostH2Props) {
   const ToastWrapper = styled("div", {
     display: "flex",
     alignItems: "center",
+    justifyItems: "center",
     gap: 5,
     background: theme?.colors.green800.value,
     padding: "6px 24px",
     color: "$gray200",
+    width: 220,
   })
 
   const toast = createToast({
-    duration: 2000,
+    duration: 200000,
     position: "bottom-center",
     maxVisibleToasts: 3,
     render: message => (
