@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { throttle } from "lodash"
 
 export default function useBodyScroll() {
   const [scrollPercentage, setScrollPercentage] = useState(0)
@@ -15,23 +16,17 @@ export default function useBodyScroll() {
       setFullHeight(document.documentElement.scrollHeight)
     }
 
-    const handleScroll = () => {
-      cancelAnimationFrame(timer) // Cancel any previously scheduled execution
-      timer = requestAnimationFrame(() => {
-        const maxScroll = fullHeight - windowHeight
-        const scrollY = window.pageYOffset
-        const percentage = (scrollY / maxScroll) * 100
+    const handleScroll = throttle(() => {
+      const maxScroll = fullHeight - windowHeight
+      const scrollY = window.pageYOffset
+      const percentage = (scrollY / maxScroll) * 100
 
-        setScrollPercentage(percentage)
-      })
-    }
+      setScrollPercentage(percentage)
+    }, 200) // Throttle the scroll event to execute at most every 200 milliseconds
 
-    const handleResize = () => {
-      cancelAnimationFrame(timer) // Cancel any previously scheduled execution
-      timer = requestAnimationFrame(() => {
-        calculateScrollValues()
-      })
-    }
+    const handleResize = throttle(() => {
+      calculateScrollValues()
+    }, 200) // Throttle the resize event to execute at most every 200 milliseconds
 
     // Initial call to calculate scroll values after a delay of 500ms
     timer = window.setTimeout(calculateScrollValues, 500)
