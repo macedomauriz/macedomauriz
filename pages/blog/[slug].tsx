@@ -2,7 +2,6 @@ import { styled } from "@nextui-org/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
-import Example from "components/Example"
 import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import Head from "next/head"
 import { Typography } from "components/Typography"
@@ -81,8 +80,9 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
           components={{
-            Example,
-            h2: props => <PostH2 id={props.id}>{props.children}</PostH2>,
+            h2: props => (
+              <PostH2 id={props.id as string}>{props.children}</PostH2>
+            ),
           }}
         />
       </PostLayout>
