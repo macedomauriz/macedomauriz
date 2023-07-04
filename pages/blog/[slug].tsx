@@ -6,7 +6,8 @@ import Example from "components/Example"
 import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import Head from "next/head"
 import { Typography } from "components/Typography"
-import CustomLink from "components/CustomLink"
+import jump from "jump.js"
+import PostH2 from "components/PostH2"
 
 type CustomLayoutProps = {
   frontmatter: PostProps["frontmatter"]
@@ -28,6 +29,14 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
     },
   })
 
+  const jumpToH2 = (id: string) => {
+    jump(`#${id}`, {
+      duration: 1000,
+      offset: -90,
+      a11y: false,
+    })
+  }
+
   return (
     <PostLayoutWrapper>
       <Typography h1 noGutter>
@@ -40,9 +49,11 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
         {headings.map(h => {
           return (
             <div key={h}>
-              <CustomLink href={`#${h.toLowerCase().replace(/\s/g, "-")}`}>
+              <div
+                onClick={() => jumpToH2(h.toLowerCase().replace(/\s/g, "-"))}
+              >
                 {h}
-              </CustomLink>
+              </div>
             </div>
           )
         })}
@@ -71,6 +82,7 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
         <Component
           components={{
             Example,
+            h2: props => <PostH2 id={props.id}>{props.children}</PostH2>,
           }}
         />
       </PostLayout>

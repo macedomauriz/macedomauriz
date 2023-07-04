@@ -21,6 +21,7 @@ interface TypographyProps
   overline?: boolean
   children: React.ReactNode
   noGutter?: boolean
+  id?: string
 }
 
 export function Typography({
