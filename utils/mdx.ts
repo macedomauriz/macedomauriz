@@ -22,7 +22,7 @@ export interface PostProps {
   code: string
   slug: string
   time: string
-  headings: string[]
+  headings: { [key: string]: string }[]
   frontmatter: {
     title: string
     description: string
@@ -126,15 +126,25 @@ export const getFileContent = (filename: string) => {
   return fs.readFileSync(path.join(POSTS_PATH, filename, "index.mdx"), "utf8")
 }
 
-const getH2Headings = (htmlContent: string): string[] => {
+const getHeadings = (htmlContent: string) => {
   const document = parse(htmlContent)
-  const h2Headings: string[] = []
+  type HeadingType = {
+    [key: string]: string
+  }
+  const headings: HeadingType[] = []
 
   const traverseNodes = (node: any) => {
     if (node.nodeName === "h2") {
       const headingValue = node.childNodes[0]?.value
       if (headingValue) {
-        h2Headings.push(headingValue)
+        headings.push({ h2: headingValue })
+      }
+    }
+
+    if (node.nodeName === "h3") {
+      const headingValue = node.childNodes[0]?.value
+      if (headingValue) {
+        headings.push({ h3: headingValue })
       }
     }
 
@@ -145,7 +155,7 @@ const getH2Headings = (htmlContent: string): string[] => {
 
   traverseNodes(document)
 
-  return h2Headings
+  return headings
 }
 
 function getHTMLContent(content: string) {
@@ -163,7 +173,7 @@ export const getSinglePost = async (slug: string) => {
 
   const htmlContent = getHTMLContent(fileContent)
   const time = readingTime(striptags(htmlContent)).text
-  const headings = getH2Headings(htmlContent)
+  const headings = getHeadings(htmlContent)
 
   if (fileContent) {
     const { code, frontmatter } = await getCompiledMDX(fileContent)

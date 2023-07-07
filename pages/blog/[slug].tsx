@@ -1,4 +1,4 @@
-import { styled } from "@nextui-org/react"
+import { Spacer, styled, useTheme } from "@nextui-org/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
@@ -21,43 +21,82 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   children,
   headings,
 }) => {
+  const { theme } = useTheme()
   const PostLayoutWrapper = styled("div", {
     position: "relative",
+    h2: {
+      scrollMarginTop: 90,
+    },
+  })
+
+  const Content = styled("div", {
+    display: "flex",
+    gap: 34,
+  })
+
+  const TableOfContents = styled("aside", {
+    flex: "0 0 340px",
+    position: "sticky",
+    display: "flex",
+    flexDirection: "column",
+    gap: 24,
+    top: 120,
+    height: 400,
     h2: {
       scrollMarginTop: 100,
     },
   })
 
-  const jumpToH2 = (id: string) => {
+  const Heading = styled(Typography, {
+    listStyleType: "upper-roman",
+    cursor: "pointer",
+    "&:hover": {
+      color: "$white",
+    },
+  })
+
+  const jumpToHeading = (id: string) => {
     jump(`#${id}`, {
       duration: 1000,
       offset: -90,
-      a11y: false,
     })
   }
 
   return (
     <PostLayoutWrapper>
-      <Typography h1 noGutter>
-        {frontmatter.title}
-      </Typography>
-      <div>Created: {frontmatter.date}</div>
-      <div>Last updated: {frontmatter.updated}</div>
-      <div>{time}</div>
-      <div>
-        {headings.map(h => {
-          return (
-            <div key={h}>
-              <div
-                onClick={() => jumpToH2(h.toLowerCase().replace(/\s/g, "-"))}
+      <Content>
+        <div>
+          <Typography h1 noGutter>
+            {frontmatter.title}
+          </Typography>
+          <span>Created: {frontmatter.date}</span>
+          <span>Last updated: {frontmatter.updated}</span>
+          <span>{time}</span>
+          <Spacer y={2} />
+          <main>{children}</main>
+        </div>
+        <TableOfContents>
+          <Typography h3>Table of contents</Typography>
+          {headings.map(heading => {
+            return (
+              <Heading
+                small={heading.h3 ? true : false}
+                css={{ margin: `0 0 0 ${heading.h3 && "14px"}` }}
+                key={heading.h2 || heading.h3}
+                color={theme?.colors.gray800.value}
+                noGutter
+                onClick={() =>
+                  jumpToHeading(
+                    (heading.h2 || heading.h3).toLowerCase().replace(/\s/g, "-")
+                  )
+                }
               >
-                {h}
-              </div>
-            </div>
-          )
-        })}
-      </div>
-      <main>{children}</main>
+                {heading.h2 || heading.h3}
+              </Heading>
+            )
+          })}
+        </TableOfContents>
+      </Content>
     </PostLayoutWrapper>
   )
 }
@@ -80,6 +119,7 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
           components={{
+            p: props => <Typography paragraph>{props.children}</Typography>,
             h2: props => (
               <PostH2 id={props.id as string}>{props.children}</PostH2>
             ),

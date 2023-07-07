@@ -52,7 +52,7 @@ export default function PostH2({ children, id }: PostH2Props) {
 
   return (
     <>
-      <Typography h2 id={id} noGutter>
+      <Typography h2 id={id} noGutter paragraph>
         {children}{" "}
         <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>
           <FontAwesomeIcon icon={faLink} size="xs" color="gray" />

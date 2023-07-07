@@ -22,6 +22,7 @@ interface TypographyProps
   children: React.ReactNode
   noGutter?: boolean
   id?: string
+  onClick?: () => void
 }
 
 export function Typography({
@@ -39,12 +40,12 @@ export function Typography({
   }
   const paragraphCSS = paragraph && { margin: "0 0 0.8em 0" }
 
-  const noGutterCSS = noGutter && { lineHeight: 1 }
+  const noGutterCSS = noGutter && { lineHeight: 1.2 }
   return (
     <Text
       {...props}
       size={
-        !isHeading && !props.small ? "$lg" : props.small ? "$xs" : undefined
+        !isHeading && !props.small ? "$lg" : props.small ? "$sm" : undefined
       }
       weight={isDark && !isHeading ? "light" : undefined}
       css={{ ...paragraphCSS, ...overlineCSS, ...noGutterCSS, ...props.css }}
