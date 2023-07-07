@@ -6,7 +6,29 @@ import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import Head from "next/head"
 import { Typography } from "components/Typography"
 import jump from "jump.js"
-import PostH2 from "components/PostH2"
+import PostHeading from "components/PostHeading"
+
+// // Step 1: Create a context
+// const MyContext = createContext({ currentHeading: "" })
+//
+// interface CurrentHeadingProps {
+//   children: React.ReactNode
+// }
+//
+// // Step 2: Create a provider component
+// const CurrentHeading = ({ children }: CurrentHeadingProps) => {
+//   const [currentHeading, setHeading] = useState("")
+//
+//   const updateHeading = () => {
+//     setHeading("")
+//   }
+//
+//   return (
+//     <MyContext.Provider value={{ currentHeading }}>
+//       {children}
+//     </MyContext.Provider>
+//   )
+// }
 
 type CustomLayoutProps = {
   frontmatter: PostProps["frontmatter"]
@@ -22,11 +44,10 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   headings,
 }) => {
   const { theme } = useTheme()
+  // const { count } = useContext(MyContext)
+
   const PostLayoutWrapper = styled("div", {
     position: "relative",
-    h2: {
-      scrollMarginTop: 90,
-    },
   })
 
   const Content = styled("div", {
@@ -42,9 +63,6 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
     gap: 24,
     top: 120,
     height: 400,
-    h2: {
-      scrollMarginTop: 100,
-    },
   })
 
   const Heading = styled(Typography, {
@@ -121,7 +139,14 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
           components={{
             p: props => <Typography paragraph>{props.children}</Typography>,
             h2: props => (
-              <PostH2 id={props.id as string}>{props.children}</PostH2>
+              <PostHeading h2 id={props.id as string}>
+                {props.children}
+              </PostHeading>
+            ),
+            h3: props => (
+              <PostHeading h3 id={props.id as string}>
+                {props.children}
+              </PostHeading>
             ),
           }}
         />

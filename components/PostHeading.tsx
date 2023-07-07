@@ -7,16 +7,25 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { createToast } from "react-simple-toasts"
 import { useTheme } from "@nextui-org/react"
+import { useInView } from "react-intersection-observer"
 
-interface PostH2Props {
+type PostHeadingProps = {
   children: React.ReactNode
   id: string
-}
+} & ({ h2: boolean } | { h3: boolean })
 
-export default function PostH2({ children, id }: PostH2Props) {
+export default function PostHeading({
+  children,
+  id,
+  ...props
+}: PostHeadingProps) {
   const router = useRouter()
   const { theme } = useTheme()
   const [anchor, setAnchor] = useState("")
+  const { ref, inView } = useInView({
+    threshold: 0,
+    rootMargin: "-40% 0% -60% 0%",
+  })
 
   const ToastWrapper = styled("div", {
     display: "flex",
@@ -50,9 +59,19 @@ export default function PostH2({ children, id }: PostH2Props) {
     setAnchor(window.location.host + router.asPath + "#" + id)
   }, [id, router.asPath])
 
+  const tag = "h2" in props ? "h2" : "h3"
+
   return (
     <>
-      <Typography h2 id={id} noGutter paragraph>
+      <Typography
+        h2={tag === "h2" && true}
+        h3={tag === "h3" && true}
+        id={id}
+        noGutter
+        paragraph
+        ref={ref}
+      >
+        {inView && ">"}
         {children}{" "}
         <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>
           <FontAwesomeIcon icon={faLink} size="xs" color="gray" />
