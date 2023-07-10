@@ -7,7 +7,7 @@ export const Footer = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: 36,
+    padding: "50px 10px",
     borderTop: "1px solid $gray400",
   })
   const currentYear = new Date().getFullYear()

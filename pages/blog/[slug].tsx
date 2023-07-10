@@ -1,34 +1,12 @@
-import { Spacer, styled, useTheme } from "@nextui-org/react"
+import { Spacer, styled } from "@nextui-org/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
 import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import Head from "next/head"
 import { Typography } from "components/Typography"
-import jump from "jump.js"
 import PostHeading from "components/PostHeading"
-
-// // Step 1: Create a context
-// const MyContext = createContext({ currentHeading: "" })
-//
-// interface CurrentHeadingProps {
-//   children: React.ReactNode
-// }
-//
-// // Step 2: Create a provider component
-// const CurrentHeading = ({ children }: CurrentHeadingProps) => {
-//   const [currentHeading, setHeading] = useState("")
-//
-//   const updateHeading = () => {
-//     setHeading("")
-//   }
-//
-//   return (
-//     <MyContext.Provider value={{ currentHeading }}>
-//       {children}
-//     </MyContext.Provider>
-//   )
-// }
+import TableOfContents from "components/TableOfContents"
 
 type CustomLayoutProps = {
   frontmatter: PostProps["frontmatter"]
@@ -43,9 +21,6 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   children,
   headings,
 }) => {
-  const { theme } = useTheme()
-  // const { count } = useContext(MyContext)
-
   const PostLayoutWrapper = styled("div", {
     position: "relative",
   })
@@ -53,32 +28,10 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   const Content = styled("div", {
     display: "flex",
     gap: 34,
-  })
-
-  const TableOfContents = styled("aside", {
-    flex: "0 0 340px",
-    position: "sticky",
-    display: "flex",
-    flexDirection: "column",
-    gap: 24,
-    top: 120,
-    height: 400,
-  })
-
-  const Heading = styled(Typography, {
-    listStyleType: "upper-roman",
-    cursor: "pointer",
-    "&:hover": {
-      color: "$white",
+    div: {
+      flex: 1,
     },
   })
-
-  const jumpToHeading = (id: string) => {
-    jump(`#${id}`, {
-      duration: 1000,
-      offset: -90,
-    })
-  }
 
   return (
     <PostLayoutWrapper>
@@ -93,27 +46,7 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
           <Spacer y={2} />
           <main>{children}</main>
         </div>
-        <TableOfContents>
-          <Typography h3>Table of contents</Typography>
-          {headings.map(heading => {
-            return (
-              <Heading
-                small={heading.h3 ? true : false}
-                css={{ margin: `0 0 0 ${heading.h3 && "14px"}` }}
-                key={heading.h2 || heading.h3}
-                color={theme?.colors.gray800.value}
-                noGutter
-                onClick={() =>
-                  jumpToHeading(
-                    (heading.h2 || heading.h3).toLowerCase().replace(/\s/g, "-")
-                  )
-                }
-              >
-                {heading.h2 || heading.h3}
-              </Heading>
-            )
-          })}
-        </TableOfContents>
+        <TableOfContents headings={headings} />
       </Content>
     </PostLayoutWrapper>
   )
@@ -139,12 +72,20 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
           components={{
             p: props => <Typography paragraph>{props.children}</Typography>,
             h2: props => (
-              <PostHeading h2 id={props.id as string}>
+              <PostHeading
+                h2
+                id={props.id as string}
+                headings={headings.map(i => i.h2 ?? i.h3)}
+              >
                 {props.children}
               </PostHeading>
             ),
             h3: props => (
-              <PostHeading h3 id={props.id as string}>
+              <PostHeading
+                h3
+                id={props.id as string}
+                headings={headings.map(i => i.h2 ?? i.h3)}
+              >
                 {props.children}
               </PostHeading>
             ),

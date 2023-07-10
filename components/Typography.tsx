@@ -41,6 +41,7 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
     const paragraphCSS = paragraph && { margin: "0 0 0.8em 0" }
 
     const noGutterCSS = noGutter && { lineHeight: 1.2 }
+
     return (
       <Text
         {...props}

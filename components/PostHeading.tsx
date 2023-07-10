@@ -3,22 +3,25 @@ import { styled } from "@nextui-org/react"
 import { faLink } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import copy from "copy-to-clipboard"
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { createToast } from "react-simple-toasts"
 import { useTheme } from "@nextui-org/react"
 import { useInView } from "react-intersection-observer"
+import {
+  CurrentHeadingContext,
+  CurrentHeadingProvider,
+} from "contexts/CurrentHeading"
+// import { PostProps } from "utils/mdx"
 
 type PostHeadingProps = {
   children: React.ReactNode
   id: string
+  // headings: PostProps["headings"]
+  headings: string[]
 } & ({ h2: boolean } | { h3: boolean })
 
-export default function PostHeading({
-  children,
-  id,
-  ...props
-}: PostHeadingProps) {
+function Heading({ children, id, headings, ...props }: PostHeadingProps) {
   const router = useRouter()
   const { theme } = useTheme()
   const [anchor, setAnchor] = useState("")
@@ -26,6 +29,7 @@ export default function PostHeading({
     threshold: 0,
     rootMargin: "-40% 0% -60% 0%",
   })
+  const { currentHeading } = useContext(CurrentHeadingContext)
 
   const ToastWrapper = styled("div", {
     display: "flex",
@@ -50,6 +54,8 @@ export default function PostHeading({
     ),
   })
 
+  console.log("PostHeading")
+
   const copyToClipboard = () => {
     copy(anchor)
     toast("Copied to clipboard!")
@@ -61,22 +67,30 @@ export default function PostHeading({
 
   const tag = "h2" in props ? "h2" : "h3"
 
+  console.log(inView)
+
   return (
-    <>
-      <Typography
-        h2={tag === "h2" && true}
-        h3={tag === "h3" && true}
-        id={id}
-        noGutter
-        paragraph
-        ref={ref}
-      >
-        {inView && ">"}
-        {children}{" "}
-        <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>
-          <FontAwesomeIcon icon={faLink} size="xs" color="gray" />
-        </span>
-      </Typography>
-    </>
+    <Typography
+      h2={tag === "h2" && true}
+      h3={tag === "h3" && true}
+      id={id}
+      noGutter
+      paragraph
+      ref={ref}
+    >
+      {children}
+      {currentHeading}
+      <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>
+        <FontAwesomeIcon icon={faLink} size="xs" color="gray" />
+      </span>
+    </Typography>
+  )
+}
+
+export default function PostHeding(props: PostHeadingProps) {
+  return (
+    <CurrentHeadingProvider>
+      <Heading {...props} />
+    </CurrentHeadingProvider>
   )
 }
