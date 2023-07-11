@@ -24,6 +24,12 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
 }) => {
   const PostLayoutWrapper = styled("div", {
     position: "relative",
+    h2: {
+      scrollMarginTop: 90,
+    },
+    h3: {
+      scrollMarginTop: 90,
+    },
   })
 
   const Content = styled("div", {

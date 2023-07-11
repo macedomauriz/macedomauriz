@@ -27,7 +27,7 @@ export default function PostHeading({
   const [anchor, setAnchor] = useState("")
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: "-20% 0% -80% 0%",
+    rootMargin: "-40% 0% -60% 0%",
   })
   const { updateHeading } = useContext(CurrentHeadingContext)
   const [headingArray, setHeadingArray] = useState<any[]>([])
@@ -65,16 +65,19 @@ export default function PostHeading({
     let indexOfHeading = children && headings.indexOf(children?.toString())
     let previousHeading =
       indexOfHeading === 0
-        ? "Introduction"
+        ? "introduction"
         : headings[(indexOfHeading as number) - 1]
     headingArray.push(previousHeading)
     headingArray.push(children?.toString())
     setHeadingArray(headingArray)
+
+    const hashtag = router.asPath.split("#")[1]
+    hashtag === children?.toString() && updateHeading(headingArray as string[])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    setAnchor(window.location.host + router.asPath + "#" + id)
+    setAnchor(window.location.host + router.asPath.split("#")[0] + "#" + id)
   }, [id, router.asPath])
 
   useEffect(() => {
@@ -92,7 +95,7 @@ export default function PostHeading({
       paragraph
       ref={ref}
     >
-      {children}
+      {children}{" "}
       <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>
         <FontAwesomeIcon icon={faLink} size="xs" color="gray" />
       </span>

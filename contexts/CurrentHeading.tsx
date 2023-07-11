@@ -12,12 +12,12 @@ interface CurrentHeadingProps {
 }
 
 export function CurrentHeadingProvider({ children }: CurrentHeadingProps) {
-  const [currentHeading, setCurrentHeading] = useState("Introduction")
+  const [currentHeading, setCurrentHeading] = useState("introduction")
   const scrollDir = useScrollDirection()
 
   const updateHeading = (h: string[]): any => {
     const index = scrollDir === "up" ? 0 : 1
-    setCurrentHeading(h[index])
+    setCurrentHeading(h[index].toLowerCase())
   }
 
   const contextValue = {

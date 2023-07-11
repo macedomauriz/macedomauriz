@@ -11,7 +11,7 @@ interface TableOfContentsProps {
 
 export default function TableOfContents({ headings }: TableOfContentsProps) {
   const { theme } = useTheme()
-  const { currentHeading } = useContext(CurrentHeadingContext)
+  const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
 
   const TableOfContentsWrapper = styled("aside", {
     flex: "0 0 340px",
@@ -32,9 +32,12 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
   })
 
   const jumpToHeading = (id: string) => {
+    const headingTitle = id.replace(/-/g, " ")
     jump(`#${id}`, {
       duration: 1000,
       offset: -90,
+      callback: () =>
+        id !== "top" && updateHeading([headingTitle, headingTitle]),
     })
   }
 
@@ -43,7 +46,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
       <Typography h3>Table of contents</Typography>
       <Heading
         color={
-          currentHeading === "Introduction"
+          currentHeading === "introduction"
             ? theme?.colors.white.value
             : theme?.colors.gray800.value
         }
@@ -59,7 +62,8 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
             css={{ margin: `0 0 0 ${heading.h3 && "14px"}` }}
             key={heading.h2 || heading.h3}
             color={
-              currentHeading === (heading.h2 || heading.h3)
+              currentHeading ===
+              (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
                 ? theme?.colors.white.value
                 : theme?.colors.gray800.value
             }
