@@ -1,8 +1,5 @@
 import { styled, useTheme } from "@nextui-org/react"
-import {
-  CurrentHeadingContext,
-  CurrentHeadingProvider,
-} from "contexts/CurrentHeading"
+import { CurrentHeadingContext } from "contexts/CurrentHeading"
 import { useContext } from "react"
 import { PostProps } from "utils/mdx"
 import { Typography } from "./Typography"
@@ -12,7 +9,7 @@ interface TableOfContentsProps {
   headings: PostProps["headings"]
 }
 
-function Table({ headings }: TableOfContentsProps) {
+export default function TableOfContents({ headings }: TableOfContentsProps) {
   const { theme } = useTheme()
   const { currentHeading } = useContext(CurrentHeadingContext)
 
@@ -44,6 +41,17 @@ function Table({ headings }: TableOfContentsProps) {
   return (
     <TableOfContentsWrapper>
       <Typography h3>Table of contents</Typography>
+      <Heading
+        color={
+          currentHeading === "Introduction"
+            ? theme?.colors.white.value
+            : theme?.colors.gray800.value
+        }
+        noGutter
+        onClick={() => jumpToHeading("top")}
+      >
+        Introduction
+      </Heading>
       {headings.map(heading => {
         return (
           <Heading
@@ -67,13 +75,5 @@ function Table({ headings }: TableOfContentsProps) {
         )
       })}
     </TableOfContentsWrapper>
-  )
-}
-
-export default function TableOfContents(props: TableOfContentsProps) {
-  return (
-    <CurrentHeadingProvider>
-      <Table {...props} />
-    </CurrentHeadingProvider>
   )
 }

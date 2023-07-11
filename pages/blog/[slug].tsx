@@ -7,6 +7,7 @@ import Head from "next/head"
 import { Typography } from "components/Typography"
 import PostHeading from "components/PostHeading"
 import TableOfContents from "components/TableOfContents"
+import { CurrentHeadingProvider } from "contexts/CurrentHeading"
 
 type CustomLayoutProps = {
   frontmatter: PostProps["frontmatter"]
@@ -34,21 +35,23 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   })
 
   return (
-    <PostLayoutWrapper>
-      <Content>
-        <div>
-          <Typography h1 noGutter>
-            {frontmatter.title}
-          </Typography>
-          <span>Created: {frontmatter.date}</span>
-          <span>Last updated: {frontmatter.updated}</span>
-          <span>{time}</span>
-          <Spacer y={2} />
-          <main>{children}</main>
-        </div>
-        <TableOfContents headings={headings} />
-      </Content>
-    </PostLayoutWrapper>
+    <CurrentHeadingProvider>
+      <PostLayoutWrapper>
+        <Content>
+          <div id="top">
+            <Typography h1 noGutter>
+              {frontmatter.title}
+            </Typography>
+            <span>Created: {frontmatter.date}</span>
+            <span>Last updated: {frontmatter.updated}</span>
+            <span>{time}</span>
+            <Spacer y={2} />
+            <main>{children}</main>
+          </div>
+          <TableOfContents headings={headings} />
+        </Content>
+      </PostLayoutWrapper>
+    </CurrentHeadingProvider>
   )
 }
 

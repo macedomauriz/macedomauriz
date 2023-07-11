@@ -10,7 +10,6 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { AppProps } from "next/app"
 config.autoAddCss = false
 import "prism-themes/themes/prism-nord.css"
-// https://github.com/PrismJS/prism-themes
 
 const inter = Inter({ subsets: ["latin"] })
 

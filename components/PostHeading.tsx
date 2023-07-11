@@ -8,28 +8,29 @@ import { useRouter } from "next/router"
 import { createToast } from "react-simple-toasts"
 import { useTheme } from "@nextui-org/react"
 import { useInView } from "react-intersection-observer"
-import {
-  CurrentHeadingContext,
-  CurrentHeadingProvider,
-} from "contexts/CurrentHeading"
-// import { PostProps } from "utils/mdx"
+import { CurrentHeadingContext } from "contexts/CurrentHeading"
 
 type PostHeadingProps = {
   children: React.ReactNode
   id: string
-  // headings: PostProps["headings"]
   headings: string[]
 } & ({ h2: boolean } | { h3: boolean })
 
-function Heading({ children, id, headings, ...props }: PostHeadingProps) {
+export default function PostHeading({
+  children,
+  id,
+  headings,
+  ...props
+}: PostHeadingProps) {
   const router = useRouter()
   const { theme } = useTheme()
   const [anchor, setAnchor] = useState("")
   const { ref, inView } = useInView({
     threshold: 0,
-    rootMargin: "-40% 0% -60% 0%",
+    rootMargin: "-20% 0% -80% 0%",
   })
-  const { currentHeading } = useContext(CurrentHeadingContext)
+  const { updateHeading } = useContext(CurrentHeadingContext)
+  const [headingArray, setHeadingArray] = useState<any[]>([])
 
   const ToastWrapper = styled("div", {
     display: "flex",
@@ -54,20 +55,33 @@ function Heading({ children, id, headings, ...props }: PostHeadingProps) {
     ),
   })
 
-  console.log("PostHeading")
-
   const copyToClipboard = () => {
     copy(anchor)
     toast("Copied to clipboard!")
   }
 
   useEffect(() => {
+    let headingArray = []
+    let indexOfHeading = children && headings.indexOf(children?.toString())
+    let previousHeading =
+      indexOfHeading === 0
+        ? "Introduction"
+        : headings[(indexOfHeading as number) - 1]
+    headingArray.push(previousHeading)
+    headingArray.push(children?.toString())
+    setHeadingArray(headingArray)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  useEffect(() => {
     setAnchor(window.location.host + router.asPath + "#" + id)
   }, [id, router.asPath])
 
-  const tag = "h2" in props ? "h2" : "h3"
+  useEffect(() => {
+    children && inView && headingArray && updateHeading(headingArray)
+  }, [children, inView, updateHeading, headingArray])
 
-  console.log(inView)
+  const tag = "h2" in props ? "h2" : "h3"
 
   return (
     <Typography
@@ -79,18 +93,9 @@ function Heading({ children, id, headings, ...props }: PostHeadingProps) {
       ref={ref}
     >
       {children}
-      {currentHeading}
       <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>
         <FontAwesomeIcon icon={faLink} size="xs" color="gray" />
       </span>
     </Typography>
-  )
-}
-
-export default function PostHeding(props: PostHeadingProps) {
-  return (
-    <CurrentHeadingProvider>
-      <Heading {...props} />
-    </CurrentHeadingProvider>
   )
 }
