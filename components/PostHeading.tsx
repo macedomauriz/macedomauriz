@@ -72,7 +72,8 @@ export default function PostHeading({
     setHeadingArray(headingArray)
 
     const hashtag = router.asPath.split("#")[1]
-    hashtag === children?.toString() && updateHeading(headingArray as string[])
+    hashtag === children?.toString().toLowerCase().replace(/ /g, "-") &&
+      updateHeading(headingArray as string[])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
