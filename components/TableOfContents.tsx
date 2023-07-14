@@ -48,7 +48,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
         color={
           currentHeading === "introduction"
             ? theme?.colors.white.value
-            : theme?.colors.gray800.value
+            : theme?.colors.gray700.value
         }
         noGutter
         onClick={() => jumpToHeading("top")}
@@ -65,7 +65,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
               currentHeading ===
               (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
                 ? theme?.colors.white.value
-                : theme?.colors.gray800.value
+                : theme?.colors.gray700.value
             }
             noGutter
             onClick={() =>

@@ -32,7 +32,6 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
     ref
   ) {
     const { isDark } = useTheme()
-
     const isHeading =
       props.h1 || props.h2 || props.h3 || props.h4 || props.h5 || props.h6
     const overlineCSS = overline && {
@@ -42,6 +41,8 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
 
     const noGutterCSS = noGutter && { lineHeight: 1.2 }
 
+    const fontWeightCSS = !isHeading && { fontWeight: 300 }
+
     return (
       <Text
         {...props}
@@ -50,7 +51,13 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
           !isHeading && !props.small ? "$lg" : props.small ? "$sm" : undefined
         }
         weight={isDark && !isHeading ? "light" : undefined}
-        css={{ ...paragraphCSS, ...overlineCSS, ...noGutterCSS, ...props.css }}
+        css={{
+          ...paragraphCSS,
+          ...overlineCSS,
+          ...noGutterCSS,
+          ...fontWeightCSS,
+          ...props.css,
+        }}
       >
         {children}
       </Text>

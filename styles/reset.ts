@@ -33,6 +33,7 @@ export const fontReset = ({ body, impact, mono }) => `
   wbr {
     font-family: ${body.style.fontFamily};
     letter-spacing: normal;
+    font-display: block;
   }
   h4,
   h5,
