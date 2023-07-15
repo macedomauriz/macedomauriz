@@ -9,6 +9,7 @@ import { createToast } from "react-simple-toasts"
 import { useTheme } from "@nextui-org/react"
 import { useInView } from "react-intersection-observer"
 import { CurrentHeadingContext } from "contexts/CurrentHeading"
+import useBodyScroll from "hooks/useBodyScroll"
 
 type PostHeadingProps = {
   children: React.ReactNode
@@ -24,6 +25,7 @@ export default function PostHeading({
 }: PostHeadingProps) {
   const router = useRouter()
   const { theme } = useTheme()
+  const { isBottom, isTop } = useBodyScroll()
   const [anchor, setAnchor] = useState("")
   const { ref, inView } = useInView({
     threshold: 0,
@@ -84,6 +86,21 @@ export default function PostHeading({
   useEffect(() => {
     children && inView && headingArray && updateHeading(headingArray)
   }, [children, inView, updateHeading, headingArray])
+
+  // for extremely quick scrolls, get when bottom is reached and updateHeading
+  useEffect(() => {
+    const secondHeading = headings[0]
+    console.log("Top")
+    isTop && updateHeading(["Introduction", secondHeading])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isTop])
+
+  useEffect(() => {
+    const lastHeading = headings[headings.length - 1]
+    const secondToLastHeading = headings[headings.length - 2]
+    isBottom && updateHeading([secondToLastHeading, lastHeading])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isBottom])
 
   const tag = "h2" in props ? "h2" : "h3"
 

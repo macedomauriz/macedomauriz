@@ -4,7 +4,7 @@ import { styled } from "@nextui-org/react"
 
 export default function ProgressionBar() {
   const { theme } = useTheme()
-  const scrollY = useBodyScroll()
+  const { scrollY } = useBodyScroll()
 
   const ProgressionBarWrapper = styled("div", {
     position: "absolute",
