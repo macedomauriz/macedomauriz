@@ -1,6 +1,6 @@
 import { styled, useTheme } from "@nextui-org/react"
 import { CurrentHeadingContext } from "contexts/CurrentHeading"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import { PostProps } from "utils/mdx"
 import { Typography } from "./Typography"
 import jump from "jump.js"
@@ -10,17 +10,16 @@ interface TableOfContentsProps {
 }
 
 export default function TableOfContents({ headings }: TableOfContentsProps) {
-  const { theme } = useTheme()
+  const { theme, isDark } = useTheme()
   const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
 
   const TableOfContentsWrapper = styled("aside", {
-    flex: "0 0 340px",
     position: "sticky",
     display: "flex",
     flexDirection: "column",
     gap: 24,
     top: 120,
-    height: 400,
+    maxHeight: "calc(100vh - 60px)",
   })
 
   const Heading = styled(Typography, {
@@ -41,13 +40,17 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     })
   }
 
+  const selectedHeading = isDark
+    ? theme?.colors.white.value
+    : theme?.colors.black.value
+
   return (
     <TableOfContentsWrapper>
       <Typography h3>Table of contents</Typography>
       <Heading
         color={
           currentHeading === "introduction"
-            ? theme?.colors.white.value
+            ? selectedHeading
             : theme?.colors.gray700.value
         }
         noGutter
@@ -64,7 +67,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
             color={
               currentHeading ===
               (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
-                ? theme?.colors.white.value
+                ? selectedHeading
                 : theme?.colors.gray700.value
             }
             noGutter

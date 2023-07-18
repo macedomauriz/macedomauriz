@@ -34,9 +34,16 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
 
   const Content = styled("div", {
     display: "flex",
+    flexDirection: "column",
     gap: 34,
-    div: {
-      flex: 1,
+    "@media (min-width: 1000px)": {
+      flexDirection: "row-reverse",
+      "> div:nth-of-type(2)": {
+        width: "70%",
+      },
+      "> div:nth-of-type(1)": {
+        width: "30%",
+      },
     },
   })
 
@@ -44,6 +51,9 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
     <CurrentHeadingProvider>
       <PostLayoutWrapper>
         <Content>
+          <div>
+            <TableOfContents headings={headings} />
+          </div>
           <div id="top">
             <Typography h1 noGutter>
               {frontmatter.title}
@@ -54,7 +64,6 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
             <Spacer y={2} />
             <main>{children}</main>
           </div>
-          <TableOfContents headings={headings} />
         </Content>
       </PostLayoutWrapper>
     </CurrentHeadingProvider>

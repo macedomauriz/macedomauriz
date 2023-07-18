@@ -63,6 +63,7 @@ export default function PostHeading({
   }
 
   useEffect(() => {
+    history.scrollRestoration = "manual"
     let headingArray = []
     let indexOfHeading = children && headings.indexOf(children?.toString())
     let previousHeading =
