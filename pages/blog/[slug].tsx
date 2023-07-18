@@ -1,4 +1,4 @@
-import { Spacer, styled } from "@nextui-org/react"
+import { styled } from "@nextui-org/react"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
@@ -33,16 +33,24 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   })
 
   const Content = styled("div", {
-    display: "flex",
-    flexDirection: "column",
-    gap: 34,
+    display: "grid",
+    gridRowGap: "40px",
+    gridTemplateColumns: "100%",
     "@media (min-width: 1000px)": {
-      flexDirection: "row-reverse",
-      "> div:nth-of-type(2)": {
-        width: "70%",
+      gridTemplateColumns: "70% 30%",
+      gridTemplateRows: "auto auto",
+      gridColumnGap: "34px",
+      ".post-heading": {
+        gridColumn: 1,
+        gridRow: "1 / span 2",
       },
-      "> div:nth-of-type(1)": {
-        width: "30%",
+      ".table-of-contents": {
+        gridColumn: 2,
+        gridRow: "1 / span 3",
+      },
+      ".post-body": {
+        gridColumn: 1,
+        gridRow: 3,
       },
     },
   })
@@ -50,20 +58,19 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   return (
     <CurrentHeadingProvider>
       <PostLayoutWrapper>
-        <Content>
-          <div>
-            <TableOfContents headings={headings} />
-          </div>
-          <div id="top">
+        <Content id="top">
+          <div className="post-heading">
             <Typography h1 noGutter>
               {frontmatter.title}
             </Typography>
             <span>Created: {frontmatter.date}</span>
             <span>Last updated: {frontmatter.updated}</span>
             <span>{time}</span>
-            <Spacer y={2} />
-            <main>{children}</main>
           </div>
+          <div className="table-of-contents">
+            <TableOfContents headings={headings} />
+          </div>
+          <main className="post-body">{children}</main>
         </Content>
       </PostLayoutWrapper>
     </CurrentHeadingProvider>

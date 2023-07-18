@@ -1,6 +1,6 @@
 import { styled, useTheme } from "@nextui-org/react"
 import { CurrentHeadingContext } from "contexts/CurrentHeading"
-import { useContext, useState } from "react"
+import { useContext } from "react"
 import { PostProps } from "utils/mdx"
 import { Typography } from "./Typography"
 import jump from "jump.js"
