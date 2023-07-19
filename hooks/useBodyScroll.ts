@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react"
 import { throttle } from "lodash"
+import { useMediaQuery } from "react-responsive"
 
 export default function useBodyScroll() {
   const [scrollY, setScrollPercentage] = useState(0)
@@ -7,6 +8,9 @@ export default function useBodyScroll() {
   const [isTop, setIsTop] = useState(false)
   const [windowHeight, setWindowHeight] = useState(0)
   const [fullHeight, setFullHeight] = useState(0)
+  const isDesktopOrLaptop = useMediaQuery({
+    query: "(min-width: 1224px)",
+  })
 
   useEffect(() => {
     const calculateScrollValues = () => {
@@ -14,15 +18,19 @@ export default function useBodyScroll() {
       setFullHeight(document.documentElement.scrollHeight)
     }
 
-    const handleScroll = throttle(() => {
+    const valuesHandler = () => {
       const maxScroll = fullHeight - windowHeight
       const scrollY = window.pageYOffset
       const percentage = (scrollY / maxScroll) * 100
 
       setScrollPercentage(percentage)
-      setIsBottom(percentage === 100)
-      setIsTop(percentage === 0)
-    }, 200) // Throttle the scroll event to execute at most every 200 milliseconds
+      setIsBottom(percentage >= 99)
+      setIsTop(percentage <= 1)
+    }
+
+    const handleScroll = isDesktopOrLaptop
+      ? valuesHandler
+      : throttle(valuesHandler, 10)
 
     const handleResize = throttle(() => {
       calculateScrollValues()

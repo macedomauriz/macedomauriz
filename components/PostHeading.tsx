@@ -85,13 +85,13 @@ export default function PostHeading({
   }, [id, router.asPath])
 
   useEffect(() => {
-    children && inView && headingArray && updateHeading(headingArray)
-  }, [children, inView, updateHeading, headingArray])
+    inView && updateHeading(headingArray)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inView])
 
   // for extremely quick scrolls, get when bottom is reached and updateHeading
   useEffect(() => {
     const secondHeading = headings[0]
-    console.log("Top")
     isTop && updateHeading(["Introduction", secondHeading])
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isTop])

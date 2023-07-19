@@ -40,17 +40,18 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     })
   }
 
-  const selectedHeading = isDark
-    ? theme?.colors.white.value
-    : theme?.colors.black.value
+  const selectedHeading =
+    isDark && (theme?.colors.white.value ?? theme?.colors.black.value)
 
   return (
     <TableOfContentsWrapper>
       <Typography h3>Table of contents</Typography>
       <Heading
         color={
-          currentHeading === "introduction"
-            ? selectedHeading
+          selectedHeading
+            ? currentHeading === "introduction"
+              ? selectedHeading
+              : theme?.colors.gray700.value
             : theme?.colors.gray700.value
         }
         noGutter
@@ -65,9 +66,11 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
             css={{ margin: `0 0 0 ${heading.h3 && "14px"}` }}
             key={heading.h2 || heading.h3}
             color={
-              currentHeading ===
-              (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
-                ? selectedHeading
+              selectedHeading
+                ? currentHeading ===
+                  (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
+                  ? selectedHeading
+                  : theme?.colors.gray700.value
                 : theme?.colors.gray700.value
             }
             noGutter
