@@ -1,4 +1,5 @@
 import { styled, useTheme } from "@nextui-org/react"
+import { useTheme as useNextTheme } from "next-themes"
 import { CurrentHeadingContext } from "contexts/CurrentHeading"
 import { useContext } from "react"
 import { PostProps } from "utils/mdx"
@@ -10,10 +11,20 @@ interface TableOfContentsProps {
 }
 
 export default function TableOfContents({ headings }: TableOfContentsProps) {
-  const { theme, isDark } = useTheme()
+  const { theme } = useTheme()
+  const { resolvedTheme } = useNextTheme()
   const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
 
-  const selectedHeading = isDark && theme?.colors.white.value
+  let selectedHeading: string | undefined
+
+  switch (resolvedTheme) {
+    case "light":
+      selectedHeading = theme?.colors.black.value
+      break
+    case "dark":
+      selectedHeading = theme?.colors.white.value
+      break
+  }
 
   const TableOfContentsWrapper = styled("aside", {
     position: "sticky",
@@ -53,7 +64,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
       <Headings>
         <Heading
           color={
-            currentHeading === "introduction" && selectedHeading
+            currentHeading === "introduction"
               ? selectedHeading
               : theme?.colors.gray700.value
           }
@@ -70,8 +81,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
               key={heading.h2 || heading.h3}
               color={
                 currentHeading ===
-                  (heading.h2?.toLowerCase() || heading.h3?.toLowerCase()) &&
-                selectedHeading
+                (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
                   ? selectedHeading
                   : theme?.colors.gray700.value
               }

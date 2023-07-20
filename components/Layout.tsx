@@ -1,4 +1,4 @@
-import { Container, Spacer } from "@nextui-org/react"
+import { Spacer } from "@nextui-org/react"
 import { AppBar } from "./layout/AppBar"
 import { Footer } from "./layout/Footer"
 
@@ -12,9 +12,7 @@ export function Layout({ children }: LayoutProps) {
       <div style={{ width: "100%", maxWidth: 1200 }}>
         <AppBar />
         <Spacer y={2} />
-        <Container as="main" gap={2}>
-          {children}
-        </Container>
+        <div style={{ padding: "0 20px" }}>{children}</div>
         <Spacer y={5} />
         <Footer />
       </div>
