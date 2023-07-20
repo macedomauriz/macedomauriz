@@ -8,6 +8,17 @@ export const ThemeSwitch = () => {
   const [play] = useSound("/click.mp3", { volume: 0.2 })
   const { resolvedTheme, setTheme } = useNextTheme()
 
+  let isDark: boolean = true
+
+  switch (resolvedTheme) {
+    case "light":
+      isDark = false
+      break
+    case "dark":
+      isDark = true
+      break
+  }
+
   const handleClick = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
@@ -22,7 +33,7 @@ export const ThemeSwitch = () => {
         onPress={() => handleClick()}
         onClick={e => play()}
       >
-        {resolvedTheme === "dark" ? (
+        {isDark ? (
           <FontAwesomeIcon icon={faMoon} size="xl" />
         ) : (
           <FontAwesomeIcon icon={faSun} size="xl" />

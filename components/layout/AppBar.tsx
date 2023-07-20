@@ -1,4 +1,5 @@
-import { useTheme, Navbar } from "@nextui-org/react"
+import { Navbar } from "@nextui-org/react"
+import { useTheme as useNextTheme } from "next-themes"
 import { styled } from "@nextui-org/react"
 import CustomLink from "../CustomLink"
 import { DesktopContent, MobileContent } from "./appbar/Content"
@@ -6,9 +7,19 @@ import { useRouter } from "next/router"
 import ProgressionBar from "./appbar/ProgressionBar"
 
 export const AppBar = () => {
-  const { isDark } = useTheme()
+  const { resolvedTheme } = useNextTheme()
   const router = useRouter()
 
+  let isDark: boolean = true
+
+  switch (resolvedTheme) {
+    case "light":
+      isDark = false
+      break
+    case "dark":
+      isDark = true
+      break
+  }
   const AppBarWrapper = styled(Navbar, {
     position: "relative",
     "> div": {
