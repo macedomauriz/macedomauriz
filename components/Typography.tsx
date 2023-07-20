@@ -1,5 +1,12 @@
 import React, { forwardRef } from "react"
+import { styled } from "@nextui-org/react"
 import { Text, TextProps } from "@nextui-org/react"
+
+const TextWrapper = styled(Text, {
+  [`.dark-theme &`]: {
+    fontWeight: 300,
+  },
+})
 
 // TODO: exclude headings when paragraph prop is present
 interface TypographyProps
@@ -39,10 +46,10 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
 
     const noGutterCSS = noGutter && { lineHeight: 1.2 }
 
-    const fontWeightCSS = !isHeading && { fontWeight: 400 }
+    const fontWeightCSS = isHeading && { fontWeight: "600 !important" }
 
     return (
-      <Text
+      <TextWrapper
         {...props}
         ref={ref}
         size={
@@ -51,13 +58,13 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
         css={{
           ...paragraphCSS,
           ...overlineCSS,
-          ...noGutterCSS,
           ...fontWeightCSS,
+          ...noGutterCSS,
           ...props.css,
         }}
       >
         {children}
-      </Text>
+      </TextWrapper>
     )
   }
 )

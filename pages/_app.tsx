@@ -57,7 +57,6 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
     mono: ubuntuMono,
   })
 
-  console.log("lightTheme: ", lightTheme)
   return (
     <>
       <style jsx global>
