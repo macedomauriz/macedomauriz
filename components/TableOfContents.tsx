@@ -13,12 +13,14 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
   const { theme, isDark } = useTheme()
   const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
 
+  const selectedHeading = isDark && theme?.colors.white.value
+
   const TableOfContentsWrapper = styled("aside", {
     position: "sticky",
     display: "flex",
     flexDirection: "column",
-    gap: 24,
     top: 120,
+    gap: 18,
     maxHeight: "calc(100vh - 60px)",
   })
 
@@ -26,8 +28,13 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     listStyleType: "upper-roman",
     cursor: "pointer",
     "&:hover": {
-      color: "$white",
+      color: selectedHeading,
     },
+  })
+
+  const Headings = styled("div", {
+    display: "grid",
+    gap: 22,
   })
 
   const jumpToHeading = (id: string) => {
@@ -40,50 +47,46 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     })
   }
 
-  const selectedHeading =
-    isDark && (theme?.colors.white.value ?? theme?.colors.black.value)
-
   return (
     <TableOfContentsWrapper>
       <Typography h3>Table of contents</Typography>
-      <Heading
-        color={
-          selectedHeading
-            ? currentHeading === "introduction"
+      <Headings>
+        <Heading
+          color={
+            currentHeading === "introduction" && selectedHeading
               ? selectedHeading
               : theme?.colors.gray700.value
-            : theme?.colors.gray700.value
-        }
-        noGutter
-        onClick={() => jumpToHeading("top")}
-      >
-        Introduction
-      </Heading>
-      {headings.map(heading => {
-        return (
-          <Heading
-            small={heading.h3 ? true : false}
-            css={{ margin: `0 0 0 ${heading.h3 && "14px"}` }}
-            key={heading.h2 || heading.h3}
-            color={
-              selectedHeading
-                ? currentHeading ===
-                  (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
+          }
+          noGutter
+          onClick={() => jumpToHeading("top")}
+        >
+          Introduction
+        </Heading>
+        {headings.map(heading => {
+          return (
+            <Heading
+              small={heading.h3 ? true : false}
+              css={{ margin: `0 0 0 ${heading.h3 && "14px"}` }}
+              key={heading.h2 || heading.h3}
+              color={
+                currentHeading ===
+                  (heading.h2?.toLowerCase() || heading.h3?.toLowerCase()) &&
+                selectedHeading
                   ? selectedHeading
                   : theme?.colors.gray700.value
-                : theme?.colors.gray700.value
-            }
-            noGutter
-            onClick={() =>
-              jumpToHeading(
-                (heading.h2 || heading.h3).toLowerCase().replace(/\s/g, "-")
-              )
-            }
-          >
-            {heading.h2 || heading.h3}
-          </Heading>
-        )
-      })}
+              }
+              noGutter
+              onClick={() =>
+                jumpToHeading(
+                  (heading.h2 || heading.h3).toLowerCase().replace(/\s/g, "-")
+                )
+              }
+            >
+              {heading.h2 || heading.h3}
+            </Heading>
+          )
+        })}
+      </Headings>
     </TableOfContentsWrapper>
   )
 }

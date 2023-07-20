@@ -50,7 +50,7 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
         size={
           !isHeading && !props.small ? "$lg" : props.small ? "$sm" : undefined
         }
-        weight={isDark && !isHeading ? "light" : undefined}
+        weight={isDark && !isHeading ? "light" : "normal"}
         css={{
           ...paragraphCSS,
           ...overlineCSS,
