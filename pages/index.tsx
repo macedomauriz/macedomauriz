@@ -6,6 +6,7 @@ import { Customers } from "../components/Customers"
 import { Hero } from "../components/Hero"
 import { LatestBlogPosts } from "../components/LatestBlogPosts"
 import { Quote } from "../components/Quote"
+import Image from "next/image"
 
 interface HomeProps {
   posts: PostProps[]
@@ -24,10 +25,29 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Hero />
       <Spacer y={5} />
       <Quote />
       <Spacer y={5} />
+      <div
+        style={{
+          position: "relative",
+          width: "100%",
+          height: "30vw",
+          background: "red",
+        }}
+      >
+        <Image
+          src="/mario.png"
+          alt="example"
+          fill
+          style={{
+            objectFit: "contain",
+            maxWidth: 100,
+            background: "blue",
+          }}
+        />
+      </div>
+      <Hero />
       <LatestBlogPosts posts={posts} />
       <Spacer y={5} />
       <Customers />

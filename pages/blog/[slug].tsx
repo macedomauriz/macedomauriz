@@ -1,4 +1,5 @@
 import { styled } from "@nextui-org/react"
+import Image from "next/image"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
@@ -89,6 +90,38 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
           components={{
+            img: props => (
+              //   <p style={{ position: "relative", width: 200, height: 200 }}>
+              //     <Image
+              //       src={props.src}
+              //       alt={props.alt}
+              //       fill
+              //       style={{ objectFit: "contain" }}
+              //     />
+              //   </p>
+              <div
+                style={{
+                  position: "relative",
+                  width: "100%",
+                  height: "30vw",
+                  background: "red",
+                }}
+                suppressHydrationWarning
+              >
+                <Image
+                  // @ts-ignore
+                  src={props.src}
+                  alt="example"
+                  fill
+                  style={{
+                    objectFit: "contain",
+                    maxWidth: 100,
+                    background: "blue",
+                  }}
+                  suppressHydrationWarning
+                />
+              </div>
+            ),
             p: props => <Typography paragraph>{props.children}</Typography>,
             h2: props => (
               <PostHeading
@@ -108,6 +141,7 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
                 {props.children}
               </PostHeading>
             ),
+            // map headings
           }}
         />
       </PostLayout>
