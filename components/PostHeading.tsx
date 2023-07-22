@@ -110,9 +110,8 @@ export default function PostHeading({
       h2={tag === "h2" && true}
       h3={tag === "h3" && true}
       id={id}
-      noGutter
-      paragraph
       ref={ref}
+      paragraph
     >
       {children}{" "}
       <span onClick={() => copyToClipboard()} style={{ cursor: "pointer" }}>

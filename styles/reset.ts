@@ -113,6 +113,7 @@ export const fontReset = ({ body, impact, mono }) => `
     border-collapse: separate;
     border-spacing: 0;
     width: 100%;
+    margin: 0 0 34px 0;
   }
   th,
   td {

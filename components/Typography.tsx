@@ -42,7 +42,7 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
     const overlineCSS = overline && {
       textTransform: "uppercase",
     }
-    const paragraphCSS = paragraph && { margin: "0 0 0.8em 0" }
+    const paragraphCSS = paragraph && { margin: "0.6em 0 0.4em 0" }
 
     const noGutterCSS = noGutter && { lineHeight: 1.2 }
 
@@ -52,9 +52,7 @@ export const Typography = forwardRef<HTMLDivElement, TypographyProps>(
       <TextWrapper
         {...props}
         ref={ref}
-        size={
-          !isHeading && !props.small ? "$lg" : props.small ? "$sm" : undefined
-        }
+        size={!isHeading && !props.small ? "$lg" : props.small && "$sm"}
         css={{
           ...paragraphCSS,
           ...overlineCSS,
