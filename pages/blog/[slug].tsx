@@ -8,6 +8,7 @@ import { Typography } from "components/Typography"
 import PostHeading from "components/PostHeading"
 import TableOfContents from "components/TableOfContents"
 import { CurrentHeadingProvider } from "contexts/CurrentHeading"
+import { PostImage } from "components/PostImage"
 
 type CustomLayoutProps = {
   frontmatter: PostProps["frontmatter"]
@@ -90,7 +91,7 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
         <Component
           components={{
             img: props => (
-              <img src={props.src} alt="example" width={200} height={200} />
+              <PostImage src={props.src as string} alt={props.alt as string} />
             ),
             p: props => <Typography paragraph>{props.children}</Typography>,
             h2: props => (
