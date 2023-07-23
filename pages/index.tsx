@@ -25,9 +25,9 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Hero />
       <Spacer y={5} />
       <Quote />
-      <Spacer y={5} />
       <div
         style={{
           position: "relative",
@@ -47,7 +47,6 @@ Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested
           }}
         />
       </div>
-      <Hero />
       <LatestBlogPosts posts={posts} />
       <Spacer y={5} />
       <Customers />

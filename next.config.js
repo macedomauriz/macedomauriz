@@ -1,6 +1,11 @@
 /** @type {import('next').NextConfig} */
+const withOptimizedImages = require("next-optimized-images")
 
 const nextConfig = {
+  // svg throwing errors with
+  // its optimization package:
+  // imagemin-svgo
+  handleImages: ["png", "jpeg", "svg"],
   output: "export",
   trailingSlash: true,
   reactStrictMode: false,
@@ -9,4 +14,4 @@ const nextConfig = {
   },
 }
 
-module.exports = nextConfig
+module.exports = withOptimizedImages(nextConfig)

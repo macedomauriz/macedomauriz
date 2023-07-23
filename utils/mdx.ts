@@ -10,6 +10,7 @@ import rehypePrism from "rehype-prism-plus"
 import rehypeCodeTitles from "rehype-code-titles"
 import rehypeSlug from "rehype-slug"
 import remarkExternalLinks from "remark-external-links"
+import remarkUnwrapImages from "remark-unwrap-images"
 import remarkHtml from "remark-html"
 import remarkGfm from "remark-gfm"
 import striptags from "striptags"
@@ -56,6 +57,7 @@ const getCompiledMDX = async (source: string) => {
 
   // Add your remark and rehype plugins here
   const remarkPlugins: any[] = [
+    remarkUnwrapImages,
     remarkMath,
     remarkMdxImages,
     remarkGfm,
