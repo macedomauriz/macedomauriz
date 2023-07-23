@@ -35,17 +35,18 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     maxHeight: "calc(100vh - 60px)",
   })
 
+  const Headings = styled("div", {
+    display: "grid",
+    gap: 22,
+    gridTemplateColumns: "max-content",
+  })
+
   const Heading = styled(Typography, {
     listStyleType: "upper-roman",
     cursor: "pointer",
     "&:hover": {
       color: selectedHeading,
     },
-  })
-
-  const Headings = styled("div", {
-    display: "grid",
-    gap: 22,
   })
 
   const jumpToHeading = (id: string) => {
