@@ -36,7 +36,6 @@ export default function Chip({ text }: ChipProps) {
       <Typography
         as="time"
         css={{ fontSize: 8 }}
-        small
         overline
         color={`$${getColor(text).color}`}
       >
