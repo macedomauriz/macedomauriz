@@ -185,6 +185,7 @@ export const getSinglePost = async (slug: string) => {
       code,
       time,
       headings,
+      slug,
     }
   }
 }

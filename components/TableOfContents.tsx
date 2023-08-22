@@ -5,15 +5,32 @@ import { useContext } from "react"
 import { PostProps } from "utils/mdx"
 import { Typography } from "./Typography"
 import jump from "jump.js"
+import {
+  LinkedinIcon,
+  LinkedinShareButton,
+  RedditIcon,
+  RedditShareButton,
+  TelegramIcon,
+  TelegramShareButton,
+  TwitterIcon,
+  TwitterShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share"
 
 interface TableOfContentsProps {
   headings: PostProps["headings"]
+  slug: string
 }
 
-export default function TableOfContents({ headings }: TableOfContentsProps) {
+export default function TableOfContents({
+  headings,
+  slug,
+}: TableOfContentsProps) {
   const { theme } = useTheme()
   const { resolvedTheme } = useNextTheme()
   const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
+  const shareUrl = `https://macedomauriz.com/blog/${slug}`
 
   let selectedHeading: string | undefined
 
@@ -31,7 +48,7 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
     display: "flex",
     flexDirection: "column",
     top: 120,
-    gap: 18,
+    gap: 20,
     maxHeight: "calc(100vh - 60px)",
   })
 
@@ -58,6 +75,18 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
         id !== "top" && updateHeading([headingTitle, headingTitle]),
     })
   }
+
+  const Share = styled("div", {
+    display: "grid",
+    gap: 14,
+    gridTemplateColumns: "max-content",
+    padding: "20px 0 0 0",
+    borderTop: `1px solid ${theme?.colors.gray500.value}`,
+    "> div": {
+      display: "flex",
+      gap: "14px",
+    },
+  })
 
   return (
     <TableOfContentsWrapper>
@@ -98,6 +127,26 @@ export default function TableOfContents({ headings }: TableOfContentsProps) {
           )
         })}
       </Headings>
+      <Share>
+        <Typography h3>Share</Typography>
+        <div>
+          <TwitterShareButton url={shareUrl}>
+            <TwitterIcon size={30} round={true} />
+          </TwitterShareButton>
+          <LinkedinShareButton url={shareUrl}>
+            <LinkedinIcon size={30} round={true} />
+          </LinkedinShareButton>
+          <RedditShareButton url={shareUrl}>
+            <RedditIcon size={30} round={true} />
+          </RedditShareButton>
+          <WhatsappShareButton url={shareUrl}>
+            <WhatsappIcon size={30} round={true} />
+          </WhatsappShareButton>
+          <TelegramShareButton url={shareUrl}>
+            <TelegramIcon size={30} round={true} />
+          </TelegramShareButton>
+        </div>
+      </Share>
     </TableOfContentsWrapper>
   )
 }

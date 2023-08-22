@@ -1,6 +1,8 @@
+import React from "react"
 import { createTheme, NextUIProvider } from "@nextui-org/react"
 import { Ubuntu_Mono, Inter, Roboto_Slab } from "next/font/google"
-import React from "react"
+import { DefaultSeo } from "next-seo"
+import { seo } from "../next-seo.config"
 import { fontReset } from "../styles/reset"
 import { useRouter } from "next/router"
 import { ThemeProvider as NextThemesProvider } from "next-themes"
@@ -10,6 +12,8 @@ import "@fortawesome/fontawesome-svg-core/styles.css"
 import type { AppProps } from "next/app"
 config.autoAddCss = false
 import "prism-themes/themes/prism-nord.css"
+// @ts-ignore
+import socialPlaceholder from "../public/open-graph.jpg"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -79,6 +83,8 @@ const ThemeProvider: React.FC<ThemeProviderProps> = ({ children }) => {
 export default function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter()
 
+  const openGraph = "https://macedomauriz.com" + socialPlaceholder
+
   if (router.pathname === "/404")
     return (
       <ThemeProvider>
@@ -90,6 +96,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <ThemeProvider>
         <Layout>
+          <DefaultSeo {...seo(openGraph)} />
           <Component {...pageProps} />
         </Layout>
       </ThemeProvider>

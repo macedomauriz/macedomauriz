@@ -3,7 +3,6 @@ import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
 import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
-import Head from "next/head"
 import { Typography } from "components/Typography"
 import PostHeading from "components/PostHeading"
 import TableOfContents from "components/TableOfContents"
@@ -64,12 +63,12 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
             <Typography h1 noGutter>
               {frontmatter.title}
             </Typography>
-            <span>Created: {frontmatter.date}</span>
-            <span>Last updated: {frontmatter.updated}</span>
-            <span>{time}</span>
+            <Typography>Created: {frontmatter.date}</Typography>
+            <Typography>Last updated: {frontmatter.updated}</Typography>
+            <Typography>{time}</Typography>
           </div>
           <div className="table-of-contents">
-            <TableOfContents headings={headings} />
+            <TableOfContents headings={headings} slug={frontmatter.slug} />
           </div>
           <main className="post-body">{children}</main>
         </Content>
@@ -83,10 +82,6 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
 
   return (
     <>
-      <Head>
-        <title>{frontmatter.title}</title>
-        <meta name="description" content={frontmatter.description} />
-      </Head>
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
           components={{

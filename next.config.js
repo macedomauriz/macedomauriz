@@ -5,12 +5,13 @@ const nextConfig = {
   // svg throwing errors with
   // its optimization package:
   // imagemin-svgo
-  handleImages: ["png", "jpeg", "svg"],
+  handleImages: ["png", "jpeg", "svg", "jpg"],
   output: "export",
   trailingSlash: true,
   reactStrictMode: false,
   images: {
     unoptimized: true,
+    disableStaticImages: true,
   },
 }
 
