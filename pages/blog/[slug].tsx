@@ -8,6 +8,7 @@ import PostHeading from "components/PostHeading"
 import TableOfContents from "components/TableOfContents"
 import { CurrentHeadingProvider } from "contexts/CurrentHeading"
 import { PostImage } from "components/PostImage"
+import Metadata from "components/layout/Metadata"
 
 type CustomLayoutProps = {
   frontmatter: PostProps["frontmatter"]
@@ -82,6 +83,7 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
 
   return (
     <>
+      <Metadata frontmatter={frontmatter} />
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
           components={{

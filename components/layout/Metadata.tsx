@@ -5,7 +5,7 @@ interface seoProps {
   frontmatter: PostProps["frontmatter"]
 }
 
-const seo = ({ frontmatter }: seoProps) => {
+const Metadata = ({ frontmatter }: seoProps) => {
   return (
     frontmatter && (
       <>
@@ -17,21 +17,6 @@ const seo = ({ frontmatter }: seoProps) => {
             url: `https://macedomauriz.com/blog/${frontmatter.slug}`,
             title: frontmatter.title,
             description: frontmatter.description,
-            images: [
-              {
-                url: "/open-graph.jpg",
-                width: 1200,
-                height: 630,
-                alt: frontmatter.title,
-              },
-              {
-                url: "/twitter-card.jpg",
-                width: 800,
-                height: 418,
-                alt: frontmatter.title,
-              },
-            ],
-            site_name: "macedomauriz.com",
           }}
         />
         <ArticleJsonLd
@@ -57,4 +42,4 @@ const seo = ({ frontmatter }: seoProps) => {
   )
 }
 
-export default seo
+export default Metadata
