@@ -1,5 +1,4 @@
 import { Grid, Spacer } from "@nextui-org/react"
-import CustomLink from "./CustomLink"
 import { Animation } from "../components/Animation"
 import { Typography } from "../components/Typography"
 
@@ -11,35 +10,35 @@ export function Hero() {
         <Typography h1 noGutter>
           Rodrigo Macedo
         </Typography>
-        <Typography h3 color="$gray800">
-          Freelance developer at{" "}
-          <CustomLink href="https://tryolabs.com/">Tryolabs</CustomLink>
-        </Typography>
         <Spacer y={1} />
         <Typography paragraph>
           I am a <b>full-stack developer</b> with over 6 years of professional
-          experience.
+          experience, specializing in building and leading web projects.
         </Typography>
         <Typography paragraph>
-          I specialize in creating responsive and user-friendly applications
-          using <b>React</b> with <b>Next JS</b>, <b>Typescript</b> and modern{" "}
-          <b>CSS</b> among other technologies.
+          Throughout my career, I have collaborated closely with designers and
+          marketers in <b>product design</b> and the creation of{" "}
+          <b>UX/UI systems</b>, as well as handling <b>technical SEO</b>.
+          Alongside many other talented colleagues, I've developed system
+          applications spanning from the <b>backend</b> and{" "}
+          <b>infrastructure</b> to the <b>frontend</b>.
         </Typography>
         <Typography paragraph>
-          I have worked closely with designers and marketers in{" "}
-          <b>product redesign</b>, technical <b>SEO</b>, and the construction of{" "}
-          <b>UI/UX systems</b>.
+          Currently, I'm actively involved in two dynamic projects, leveraging
+          my expertise in technologies like <b>React</b> with <b>Next.js</b>,{" "}
+          <b>Typescript</b>, and <b>modern CSS</b>, among others. I also have
+          substantial experience in backend development with <b>Python</b> and{" "}
+          <b>Node.js</b>, having worked with frameworks such as <b>Django</b>,{" "}
+          <b>Flask</b>, <b>Strapi</b>, and <b>Express</b>.
         </Typography>
         <Typography paragraph>
-          I have experience in backend development with <b>Python</b> and{" "}
-          <b>Node</b> in frameworks such as <b>Django</b>, <b>Flask</b>,{" "}
-          <b>Strapi</b>, <b>Express</b>, and faced <b>CD/CI</b> challenges with{" "}
-          <b>AWS</b> services, <b>Docker</b> and <b>Github Actions</b>.
+          My journey has led me to overcome <b>CI/CD</b> challenges using a
+          suite of <b>AWS services</b>, orchestrating containerization with{" "}
+          <b>Docker</b>, and streamlining workflows with <b>Github Actions</b>.
         </Typography>
         <Typography>
-          I am engaged in writing <b>clean</b> and{" "}
-          <b>documented high-quality code</b>, while having the flexibility for
-          fast paced progress when agility is key.
+          I take pride in writing <b>clean</b> and{" "}
+          <b>well-documented high-quality code</b>.{" "}
         </Typography>
       </Grid>
       <Grid

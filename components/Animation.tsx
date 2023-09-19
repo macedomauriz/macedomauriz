@@ -65,6 +65,7 @@ export function Animation() {
     width: 110,
     height: 110,
     background: "url('/sprites/wilson.png')",
+    filter: `brightness(${isDark ? "0.9" : "1.2"})`,
     animationName: `${sprite(440)}`,
     animationDuration: "0.25s",
     animationTimingFunction: "steps(4)",
@@ -74,7 +75,7 @@ export function Animation() {
   })
   const WilsonFloor = styled("div", {
     position: "absolute",
-    bottom: "16px",
+    bottom: "17px",
     left: "-60px",
     width: 110,
     height: 6,
@@ -89,14 +90,10 @@ export function Animation() {
   })
   return (
     <AnimationHeroWrapper>
-      {isRendered && isDark && (
+      {isRendered && (
         <>
           <WilsonFloor />
           <Wilson />
-        </>
-      )}
-      {isRendered && (
-        <>
           <RodrigoFloor />
           <Rodrigo />
         </>
