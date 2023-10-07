@@ -56,6 +56,9 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
     },
   })
 
+  const created = new Date(frontmatter.date)
+  const updated = frontmatter.updated && new Date(frontmatter.updated)
+
   return (
     <CurrentHeadingProvider>
       <PostLayoutWrapper>
@@ -64,8 +67,10 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
             <Typography h1 noGutter>
               {frontmatter.title}
             </Typography>
-            <Typography>Created: {frontmatter.date}</Typography>
-            <Typography>Last updated: {frontmatter.updated}</Typography>
+            <Typography>Created: {created.toDateString()}</Typography>
+            {updated && (
+              <Typography>Last updated: {updated.toDateString()}</Typography>
+            )}
             <Typography>{time}</Typography>
           </div>
           <div className="table-of-contents">

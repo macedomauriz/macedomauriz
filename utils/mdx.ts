@@ -28,10 +28,10 @@ export interface PostProps {
     title: string
     description: string
     date: string
+    updated?: string
     image: string
     category: ChipProps["text"]
     slug: string
-    updated?: string
   }
 }
 

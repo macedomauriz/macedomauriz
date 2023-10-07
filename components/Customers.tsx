@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faCircleArrowRight,
   faCircleArrowLeft,
+  faArrowUpRightFromSquare,
 } from "@fortawesome/free-solid-svg-icons"
 import { SectionTitle } from "./SectionTitle"
 
@@ -152,8 +153,8 @@ export function Customers() {
   const Action = styled("div", {
     position: "relative",
     display: "flex",
-    justifyContent: "space-evenly",
-    paddingTop: 10,
+    justifyContent: "center",
+    gap: 8,
     "&::before": {
       content: "",
       position: "absolute",
@@ -222,8 +223,10 @@ export function Customers() {
           </div>
         </Body>
         <Action>
-          <CustomLink href={customers[customerId].href}>Visit site</CustomLink>
-          <CustomLink href={customers[customerId].href}>Use case</CustomLink>
+          <CustomLink href={customers[customerId].href}>
+            Visit site{" "}
+            <FontAwesomeIcon icon={faArrowUpRightFromSquare} size="sm" />
+          </CustomLink>
         </Action>
         <Modal.Footer css={{ justifyContent: "space-around" }}>
           <PrevNextButton onClick={() => prevNextHandler()}>
