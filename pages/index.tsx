@@ -1,17 +1,17 @@
 import { Spacer } from "@nextui-org/react"
-// import { GetStaticProps } from "next"
-// import { getAllPosts, PostProps } from "utils/mdx"
-// import { Customers } from "../components/Customers"
+import { GetStaticProps } from "next"
+import { getAllPosts, PostProps } from "utils/mdx"
+import { Customers } from "../components/Customers"
 import { Hero } from "../components/Hero"
-// import { LatestBlogPosts } from "../components/LatestBlogPosts"
+import { LatestBlogPosts } from "../components/LatestBlogPosts"
 import { Quote } from "../components/Quote"
 // import Image from "next/image"
 
-// interface HomeProps {
-// posts: PostProps[]
-// }
+interface HomeProps {
+  posts: PostProps[]
+}
 
-export default function Home() {
+export default function Home({ posts }: HomeProps) {
   return (
     <>
       <Hero />
@@ -19,10 +19,14 @@ export default function Home() {
       <Quote />
       <Spacer y={5} />
       <div style={{ textAlign: "center" }}>IN CONSTRUCTION...</div>
+      <Spacer y={5} />
+      <LatestBlogPosts posts={posts} />
+      <Spacer y={5} />
+      <Customers />
     </>
   )
 }
 
-// const getStaticProps: GetStaticProps = async () => {
-//   return { props: { posts: getAllPosts() } }
-// }
+export const getStaticProps: GetStaticProps = async () => {
+  return { props: { posts: getAllPosts() } }
+}

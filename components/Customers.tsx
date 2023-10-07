@@ -77,6 +77,15 @@ const customers: CustomersProps[] = [
     description:
       "Ubersuggest is a web-based search engine optimization (SEO) tool that helps website owners and digital marketers improve their search engine rankings and drive more traffic to their websites. Ubersuggest provides a range of features to help users optimize their websites for search engines.",
   },
+  {
+    src: "/logos/brainlogic.svg",
+    alt: "BrainLogic",
+    href: "https://brainlogic.ai",
+    width: 190,
+    height: 60,
+    description:
+      "High-tech Startup created between Silicon Valley and Uruguay with the mission of building cutting-edge Artificial Intelligence products designed to create positive impact in people's lives",
+  },
 ]
 
 export function Customers() {
