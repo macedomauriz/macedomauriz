@@ -9,7 +9,7 @@ import remarkParse from "remark-parse"
 import rehypePrism from "rehype-prism-plus"
 import rehypeCodeTitles from "rehype-code-titles"
 import rehypeSlug from "rehype-slug"
-import remarkExternalLinks from "remark-external-links"
+import rehypeExternalLinks from "rehype-external-links"
 import remarkUnwrapImages from "remark-unwrap-images"
 import remarkHtml from "remark-html"
 import remarkGfm from "remark-gfm"
@@ -57,17 +57,26 @@ const getCompiledMDX = async (source: string) => {
 
   // Add your remark and rehype plugins here
   const remarkPlugins: any[] = [
+    //remark plugin to remove the wrapping paragraph for images:
     remarkUnwrapImages,
+    // remark plugin to support math:
     remarkMath,
+    // A remark plugin for changing image sources to JavaScript imports using MDX:
     remarkMdxImages,
+    // remark plugin to support GFM (autolink literals, footnotes, strikethrough, tables, tasklists):
     remarkGfm,
-    remarkExternalLinks,
   ]
   const rehypePlugins: any[] = [
+    // rehype plugin to render elements with a language-math class with KaTeX:
     rehypeKatex,
+    // This package is a unified (rehype) plugin to add ids to headings:
     rehypeSlug,
+    // Rehype plugin for parsing code blocks and adding titles to code blocks:
     rehypeCodeTitles,
+    // the unified plugin used to highlight code block in html with Prism:
     rehypePrism,
+    // rehype plugin to add rel (and target) to external links:
+    rehypeExternalLinks,
   ]
 
   try {

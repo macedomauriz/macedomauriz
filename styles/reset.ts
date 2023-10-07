@@ -42,6 +42,9 @@ export const fontReset = ({ body, impact, mono }) => `
     font-weight: 800;
   }
   code,
+  ul > li:not(.task-list-item) {
+    list-style-type: disc;
+  },
   .rehype-code-title,
   pre {
     font-family: ${mono.style.fontFamily};
