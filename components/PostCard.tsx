@@ -32,6 +32,8 @@ export function PostCard({ title, date, image, href, chip }: PostCardProps) {
     },
   })
 
+  const formattedDate = new Date(date)
+
   return (
     <CustomLink href={href}>
       <Card css={{ height: 340 }} isPressable>
@@ -41,7 +43,7 @@ export function PostCard({ title, date, image, href, chip }: PostCardProps) {
             {title}
           </Typography>
           <Typography small noGutter>
-            {date}
+            {formattedDate.toDateString()}
           </Typography>
         </Header>
         <Card.Image
