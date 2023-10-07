@@ -20,7 +20,10 @@ export function PostImage({ src, alt }: PostImageProps) {
 
   return (
     <PostImageWrapper>
-      <img src={src} alt={alt} />
+      {
+        // eslint-disable-next-line
+        <img src={src} alt={alt} />
+      }
     </PostImageWrapper>
   )
 }

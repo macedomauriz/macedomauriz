@@ -5,7 +5,6 @@ import { Customers } from "../components/Customers"
 import { Hero } from "../components/Hero"
 import { LatestBlogPosts } from "../components/LatestBlogPosts"
 import { Quote } from "../components/Quote"
-// import Image from "next/image"
 
 interface HomeProps {
   posts: PostProps[]
@@ -17,8 +16,6 @@ export default function Home({ posts }: HomeProps) {
       <Hero />
       <Spacer y={5} />
       <Quote />
-      <Spacer y={5} />
-      <div style={{ textAlign: "center" }}>IN CONSTRUCTION...</div>
       <Spacer y={5} />
       <LatestBlogPosts posts={posts} />
       <Spacer y={5} />
