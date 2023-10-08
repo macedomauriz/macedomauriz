@@ -43,12 +43,14 @@ export const GetInTouch = () => {
       },
       body: JSON.stringify({
         body: `
+          <p>Request opened</p>
           <p>Name: ${data.name}</p>
           <p>Company: ${data.company}</p>
           <p>Email: ${data.email}</p>
           <p>Message: ${data.body}</p>
         `,
         subject: `${data.name} from ${data.company} at macedomauriz.com`,
+        email: data.email,
       }),
     })
       .then(response => response.json())
