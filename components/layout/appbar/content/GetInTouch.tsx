@@ -141,7 +141,7 @@ export const GetInTouch = () => {
           <Error>{errors.email ? errors.email.message : " "}</Error>
           <Textarea
             bordered
-            placeholder="Enter your amazing ideas*"
+            placeholder="Put something..."
             size="lg"
             aria-labelledby="Body"
             animated={false}

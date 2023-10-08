@@ -125,9 +125,9 @@ export function Customers() {
       justifyContent: "center",
       alignItems: "center",
       flexWrap: "wrap",
-      columnGap: 40,
+      columnGap: 80,
       rowGap: 60,
-      maxWidth: 600,
+      maxWidth: 800,
       ":hover": {
         transform: "scale(1.01)",
       },

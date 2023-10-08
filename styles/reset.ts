@@ -124,7 +124,7 @@ export const fontReset = ({ body, impact, mono }) => `
   }
   th {
     text-align: left;
-    background: #1c1c1c
+    border-bottom: 1px solid #686868;
   }
   tr:first-child th:first-child {
   }
@@ -148,10 +148,10 @@ export const fontReset = ({ body, impact, mono }) => `
       padding: 12px 0;
     }
     tr:nth-child(odd) {
-      background: #1c1c1c
+      border-bottom: 1px solid #686868;
     }
     tr:nth-child(even) {
-      background: #3a3a3a
+      border-bottom: 1px solid #686868;
     }
     td {
       position: relative;

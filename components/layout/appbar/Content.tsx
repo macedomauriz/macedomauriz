@@ -2,15 +2,14 @@
 import { Navbar, Link, styled } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
-import { faGithubAlt, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
+import { faGithub, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
 import { ThemeSwitch } from "./content/ThemeSwitch"
 import { GetInTouch } from "./content/GetInTouch"
-import { Typography } from "../../Typography"
 
 // check if a media-query hook is worth it for duplication of content
 const socialMedia = [
   {
-    icon: faGithubAlt,
+    icon: faGithub,
     href: "https://github.com/macedomauriz",
   },
   {
@@ -42,7 +41,12 @@ export const DesktopContent = () => {
       <Navbar.Content hideIn="xs">
         {socialMedia.map(i => {
           return (
-            <Navbar.Link key={i.href} href={i.href} target="_blank">
+            <Navbar.Link
+              key={i.href}
+              href={i.href}
+              target="_blank"
+              style={{ color: "white" }}
+            >
               <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
             </Navbar.Link>
           )
@@ -59,6 +63,9 @@ export const MobileContent = () => {
   const CollapseItem = styled(Navbar.CollapseItem, {
     justifyContent: "center",
     height: 50,
+    span: {
+      color: "white",
+    },
   })
   return (
     <Navbar.Collapse
@@ -82,9 +89,9 @@ export const MobileContent = () => {
         return (
           <CollapseItem key={i.href}>
             <Link href={i.href} target="_blank">
-              <Typography as="span" color="$foreground">
+              <span>
                 <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
-              </Typography>
+              </span>
             </Link>
           </CollapseItem>
         )
