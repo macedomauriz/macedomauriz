@@ -166,7 +166,11 @@ export const GetInTouch = () => {
           )}
         </Status>
         <Modal.Footer>
-          <Button auto onClick={handleSubmit(data => fetchData(data))}>
+          <Button
+            auto
+            onClick={handleSubmit(data => fetchData(data))}
+            disabled={response?.message || isLoading ? true : false}
+          >
             Send
           </Button>
         </Modal.Footer>
