@@ -21,11 +21,16 @@ export function PostCard({ title, date, image, href, chip }: PostCardProps) {
     alignItems: "flex-start",
     zIndex: 1,
     bottom: 0,
-    background: `${theme?.colors.background.value}80`,
+    background: `${theme?.colors.black.value}80`,
+    color: `${theme?.colors.white.value}`,
     padding: "6%",
     backdropFilter: "blur(5px)",
     h4: {
       textAlign: "left",
+      color: `${theme?.colors.white.value}`,
+    },
+    small: {
+      color: `${theme?.colors.white.value}`,
     },
     "> div:nth-of-type(1)": {
       margin: "0 0 10px 0",

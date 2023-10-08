@@ -12,7 +12,7 @@ export function Hero() {
         </Typography>
         <Spacer y={1} />
         <Typography paragraph>
-          I am a <b>full-stack developer</b> with over 6 years of professional
+          I am a full-stack developer with over 6 years of professional
           experience, specializing in building and leading web projects.
         </Typography>
         <Typography paragraph>
@@ -24,10 +24,10 @@ export function Hero() {
           <b>infrastructure</b> to the <b>frontend</b>.
         </Typography>
         <Typography paragraph>
-          Currently, I'm actively involved in two dynamic projects, leveraging
-          my expertise in technologies like <b>React</b> with <b>Next.js</b>,{" "}
-          <b>Typescript</b>, and <b>modern CSS</b>, among others. I also have
-          substantial experience in backend development with <b>Python</b> and{" "}
+          I've been involved in dynamic projects, leveraging my expertise in
+          technologies like <b>React</b> with <b>Next.js</b>, <b>Typescript</b>,
+          and <b>modern CSS</b>, among others. I also have substantial
+          experience in backend development with <b>Python</b> and{" "}
           <b>Node.js</b>, having worked with frameworks such as <b>Django</b>,{" "}
           <b>Flask</b>, <b>Strapi</b>, and <b>Express</b>.
         </Typography>

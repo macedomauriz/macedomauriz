@@ -14,10 +14,10 @@ export default function Chip({ text }: ChipProps) {
     background: string
   } {
     const color =
-      text === "tutorial" ? "pink50" : text === "development" && "green50"
+      text === "tutorial" ? "pink200" : text === "development" && "green50"
 
     const background =
-      text === "tutorial" ? "pink800" : text === "development" && "green800"
+      text === "tutorial" ? "pink600" : text === "development" && "green800"
 
     return { color: color as string, background: background as string }
   }
