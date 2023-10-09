@@ -14,6 +14,7 @@ config.autoAddCss = false
 import "prism-themes/themes/prism-nord.css"
 // @ts-ignore
 import socialPlaceholder from "../public/open-graph.jpg"
+import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -94,6 +95,16 @@ export default function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
+      <Script src="https://www.googletagmanager.com/gtag/js?id=G-Y7MWV057HE" />
+      <Script id="google-analytics">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+ 
+          gtag('config', 'G-Y7MWV057HE');
+        `}
+      </Script>
       <ThemeProvider>
         <Layout>
           <DefaultSeo {...seo(openGraph)} />

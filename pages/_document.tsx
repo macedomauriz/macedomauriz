@@ -6,9 +6,7 @@ import Document, {
   DocumentContext,
   DocumentInitialProps,
 } from "next/document"
-
 import { CssBaseline } from "@nextui-org/react"
-
 import { Children } from "react"
 
 export default class MyDocument extends Document {

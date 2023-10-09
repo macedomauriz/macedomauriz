@@ -1,11 +1,11 @@
-const AWS = require("aws-sdk");
+const AWS = require("aws-sdk")
 
-const ses = new AWS.SES({ region: "us-east-1" });
+const ses = new AWS.SES({ region: "us-east-1" })
 
-exports.handler = async (event) => {
+exports.handler = async event => {
   const params = {
     Destination: {
-      ToAddresses: ["rodrigo@macedomauriz.com", event.email],
+      ToAddresses: ["rodrigo@macedomauriz.com"],
     },
     Message: {
       Body: {
@@ -20,20 +20,20 @@ exports.handler = async (event) => {
       },
     },
     Source: "rodrigo@macedomauriz.com",
-  };
+  }
 
   try {
-    const data = await ses.sendEmail(params).promise();
-    console.log(data);
+    const data = await ses.sendEmail(params).promise()
+    console.log(data)
     return {
       statusCode: 200,
       message: "Thanks for submitting your request!",
-    };
+    }
   } catch (error) {
-    console.log(error);
+    console.log(error)
     return {
       statusCode: 500,
       message: "Server error",
-    };
+    }
   }
-};
+}
