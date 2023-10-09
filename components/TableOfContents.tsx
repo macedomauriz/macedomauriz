@@ -6,17 +6,20 @@ import { PostProps } from "utils/mdx"
 import { Typography } from "./Typography"
 import jump from "jump.js"
 import {
-  LinkedinIcon,
   LinkedinShareButton,
-  RedditIcon,
   RedditShareButton,
-  TelegramIcon,
   TelegramShareButton,
-  TwitterIcon,
   TwitterShareButton,
-  WhatsappIcon,
   WhatsappShareButton,
 } from "react-share"
+import {
+  faLinkedin,
+  faRedditAlien,
+  faTelegram,
+  faWhatsapp,
+  faXTwitter,
+} from "@fortawesome/free-brands-svg-icons"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 interface TableOfContentsProps {
   headings: PostProps["headings"]
@@ -84,7 +87,7 @@ export default function TableOfContents({
     borderTop: `1px solid ${theme?.colors.gray500.value}`,
     "> div": {
       display: "flex",
-      gap: "14px",
+      gap: "24px",
     },
   })
 
@@ -131,19 +134,19 @@ export default function TableOfContents({
         <Typography h3>Share</Typography>
         <div>
           <TwitterShareButton url={shareUrl}>
-            <TwitterIcon size={30} round={true} />
+            <FontAwesomeIcon icon={faXTwitter} size="lg" />
           </TwitterShareButton>
           <LinkedinShareButton url={shareUrl}>
-            <LinkedinIcon size={30} round={true} />
+            <FontAwesomeIcon icon={faLinkedin} size="xl" />
           </LinkedinShareButton>
           <RedditShareButton url={shareUrl}>
-            <RedditIcon size={30} round={true} />
+            <FontAwesomeIcon icon={faRedditAlien} size="xl" />
           </RedditShareButton>
           <WhatsappShareButton url={shareUrl}>
-            <WhatsappIcon size={30} round={true} />
+            <FontAwesomeIcon icon={faWhatsapp} size="xl" />
           </WhatsappShareButton>
           <TelegramShareButton url={shareUrl}>
-            <TelegramIcon size={30} round={true} />
+            <FontAwesomeIcon icon={faTelegram} size="xl" />
           </TelegramShareButton>
         </div>
       </Share>
