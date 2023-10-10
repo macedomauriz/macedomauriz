@@ -1,5 +1,5 @@
 // import { useRouter } from "next/router"
-import { Navbar, Link, styled } from "@nextui-org/react"
+import { Navbar, Link, styled, useTheme } from "@nextui-org/react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { IconProp } from "@fortawesome/fontawesome-svg-core"
 import { faGithub, faLinkedinIn } from "@fortawesome/free-brands-svg-icons"
@@ -41,12 +41,7 @@ export const DesktopContent = () => {
       <Navbar.Content hideIn="xs">
         {socialMedia.map(i => {
           return (
-            <Navbar.Link
-              key={i.href}
-              href={i.href}
-              target="_blank"
-              style={{ color: "white" }}
-            >
+            <Navbar.Link key={i.href} href={i.href} target="_blank">
               <FontAwesomeIcon icon={i.icon as IconProp} size="xl" />
             </Navbar.Link>
           )
@@ -60,11 +55,12 @@ export const DesktopContent = () => {
 
 export const MobileContent = () => {
   // const router = useRouter()
+  const { theme } = useTheme()
   const CollapseItem = styled(Navbar.CollapseItem, {
     justifyContent: "center",
     height: 50,
     span: {
-      color: "white",
+      color: theme?.colors.text.value,
     },
   })
   return (

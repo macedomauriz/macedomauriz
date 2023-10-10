@@ -64,8 +64,13 @@ export default function TableOfContents({
   const Heading = styled(Typography, {
     listStyleType: "upper-roman",
     cursor: "pointer",
-    "&:hover": {
-      color: selectedHeading,
+    "@media (min-width: 1000px)": {
+      "&:hover": {
+        color: selectedHeading,
+      },
+    },
+    "@media (max-width: 1000px)": {
+      color: `${theme?.colors.gray700.value} !important`,
     },
   })
 

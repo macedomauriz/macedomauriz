@@ -122,14 +122,20 @@ export function Customers() {
     justifyContent: "center",
     "> div": {
       display: "flex",
-      justifyContent: "center",
+      flexDirection: "column",
       alignItems: "center",
-      flexWrap: "wrap",
-      columnGap: 80,
       rowGap: 60,
       maxWidth: 800,
       ":hover": {
         transform: "scale(1.01)",
+      },
+      "@media (min-width: 600px)": {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        flexWrap: "wrap",
+        columnGap: 80,
+        rowGap: 60,
       },
       button: {
         display: "flex",
