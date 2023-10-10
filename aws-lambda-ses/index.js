@@ -5,7 +5,7 @@ const ses = new AWS.SES({ region: "us-east-1" })
 exports.handler = async event => {
   const params = {
     Destination: {
-      ToAddresses: ["rodrigo@macedomauriz.com"],
+      ToAddresses: ["rodrigo@macedomauriz.com", event.email],
     },
     Message: {
       Body: {

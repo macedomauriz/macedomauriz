@@ -50,6 +50,7 @@ export const GetInTouch = () => {
           <p>Message: ${data.body}</p>
         `,
         subject: `${data.name} from ${data.company} at macedomauriz.com`,
+        email: data.email,
       }),
     })
       .then(response => response.json())
