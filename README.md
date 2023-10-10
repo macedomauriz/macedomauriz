@@ -1,23 +1,63 @@
-# NextUI Example
+# macedomauriz.com
 
-This example shows how to use Next.js along with [NextUI](https://nextui.org/) of React. This is intended to show the integration of this UI toolkit with the Framework.
+## Development
 
-## Deploy your own
+- **Languages**: Typescript, CSS
+- **Frontend library**: Next JS (React)
+- **Style library**: NextUI
+- **MDX (blog)**: mdx-bundler
+- **Linting**: ESlint
+- **Formatting**: Prettier
 
-Deploy the example using [Vercel](https://vercel.com?utm_source=github&utm_medium=readme&utm_campaign=next-example):
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-next-ui)
-
-## How to use
-
-Execute [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app) with [npm](https://docs.npmjs.com/cli/init), [Yarn](https://yarnpkg.com/lang/en/docs/cli/create/), or [pnpm](https://pnpm.io) to bootstrap the example:
+#### Install dependencies
 
 ```bash
-npx create-next-app --example with-next-ui with-next-ui-app
-# or
-yarn create next-app --example with-next-ui with-next-ui-app
-# or
-pnpm create next-app --example with-next-ui with-next-ui-app
+npm i
 ```
 
-Deploy it to the cloud with [Vercel](https://vercel.com/new?utm_source=github&utm_medium=readme&utm_campaign=next-example) ([Documentation](https://nextjs.org/docs/deployment)).
+#### Run the development server
+
+```bash
+npm run dev
+```
+
+#### Build production
+
+```bash
+npm run build
+```
+
+## Deploy
+
+Github Actions makes the deploy in AWS S3 when pushing to `master` branch
+
+```bash
+  git push origin master
+```
+
+## Roadmap
+
+- Customized OpenGraph image
+- Lambda function update from GitHub Actions
+  - https://awstip.com/tutorial-updating-an-aws-lambda-function-using-github-actions-af832b493a0d
+  - https://blog.jakoblind.no/aws-lambda-github-actions/
+- Use isDark hook in every mode condition
+- Remove unused Lint hooks
+- Evaluate Speed Insights warnings
+- Videos in MDX
+- Better hero image load handling
+- JSON-LD
+- Migrate out of NextUI beta to stable version (Switches to Tailwind) https://github.com/nextui-org/nextui/discussions/1035
+- Body content separation
+- Blog landing page
+- Non-MDX-table test
+- Breadcrumbs
+- Upgrade hero image
+- Code-title styles
+- Throttle to Debounce
+- Multiple of X separation (CSS)
+- Merchandise
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
