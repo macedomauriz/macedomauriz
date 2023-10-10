@@ -43,7 +43,7 @@ export const GetInTouch = () => {
       },
       body: JSON.stringify({
         body: `
-          <h1>A request has been submitted to macedomauriz.com</h1>
+          <h2>A request has been submitted to macedomauriz.com</h2>
           <p>Name: ${data.name}</p>
           <p>Company: ${data.company}</p>
           <p>Email: ${data.email}</p>
