@@ -1,6 +1,16 @@
-![image](https://github.com/macedomauriz/me/assets/21261211/e75cce92-35c4-4b24-b00c-a6ace2760939)
+# 🔥 Hi! I'm Rodrigo
+
+Welcome to my repository! I'm a Full-Stack Developer with a passion for Python, TypeScript, Node.js, Go, and DevOps. I specialize in frontend and backend development, design, and SEO. I'm also a Linux enthusiast and a NeoVim user.
+
+<br />
+
+<p align="center">
+  <img src="https://github.com/macedomauriz/me/assets/21261211/61836259-d8c1-4531-949f-04c015120400" />
+</p>
 
 # macedomauriz.com
+
+Have a look at the documentation to know about the technologies used and how to run in development and production.
 
 ## Development
 
