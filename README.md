@@ -1,3 +1,5 @@
+![image](https://github.com/macedomauriz/me/assets/21261211/e75cce92-35c4-4b24-b00c-a6ace2760939)
+
 # macedomauriz.com
 
 ## Development
