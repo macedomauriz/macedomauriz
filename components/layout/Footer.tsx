@@ -24,7 +24,7 @@ export const Footer = () => {
       />
       <br />
       <Typography small>
-        Copywright © {currentYear} Rodrigo Macedo. All rights reserved.
+        Copywright © {currentYear} Rodrigo Macedo Mauriz. All rights reserved.
       </Typography>
     </FooterWrapper>
   )

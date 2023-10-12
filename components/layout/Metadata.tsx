@@ -28,11 +28,11 @@ const Metadata = ({ frontmatter }: seoProps) => {
           dateModified={frontmatter.updated ?? frontmatter.date}
           authorName={[
             {
-              name: "Rodrigo Macedo",
+              name: "Rodrigo Macedo Mauriz",
               url: "https://macedomauriz.com",
             },
           ]}
-          publisherName="Rodrigo Macedo"
+          publisherName="Rodrigo Macedo Mauriz"
           publisherLogo="/logo.svg"
           description={frontmatter.description}
           isAccessibleForFree={true}

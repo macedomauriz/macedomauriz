@@ -5,7 +5,7 @@ export default function Custom404() {
   return (
     <>
       <Head>
-        <title>404 | Rodrigo Macedo</title>
+        <title>404 | Rodrigo Macedo Mauriz</title>
         <link rel="canonical" />
         <meta name="description" content="Page not found" />
         <link rel="icon" href="/favicon.ico" />

@@ -1,6 +1,7 @@
 export const seo = og => {
   return {
-    defaultTitle: "Rodrigo Macedo | Software developer | macedomauriz.com",
+    defaultTitle:
+      "Rodrigo Macedo Mauriz | Software developer | macedomauriz.com",
     titleTemplate: "%s | macedomauriz.com",
     description:
       "Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested in Python, Typescript, Node, Go, DevOps culture, SEO, Linux and NeoVim.",
@@ -8,7 +9,7 @@ export const seo = og => {
       type: "website",
       url: "https://macedomauriz.com/",
       siteName: "macedomauriz.com",
-      title: "Rodrigo Macedo | Software developer | macedomauriz.com",
+      title: "Rodrigo Macedo Mauriz | Software developer | macedomauriz.com",
       description:
         "Hi, I'm Rodrigo, I work in frontend, design, and backend development. Interested in Python, Typescript, Node, Go, DevOps culture, SEO, Linux and NeoVim.",
       images: [

@@ -8,7 +8,7 @@ export function Hero() {
       <Grid xs={12} md={6} direction="column">
         <Spacer y={1} />
         <Typography h1 noGutter>
-          Rodrigo Macedo
+          Rodrigo Macedo Mauriz
         </Typography>
         <Spacer y={1} />
         <Typography paragraph>
