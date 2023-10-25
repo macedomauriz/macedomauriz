@@ -36,7 +36,7 @@ export const GetInTouch = () => {
 
   const fetchData = (data: GetInTouchProps) => {
     setIsLoading(true)
-    fetch("https://xbwmbypk8i.execute-api.us-east-1.amazonaws.com/prod/send", {
+    fetch("https://d924jm9bvf.execute-api.us-east-1.amazonaws.com", {
       method: "POST",
       headers: {
         "Content-Type": "text/html",
