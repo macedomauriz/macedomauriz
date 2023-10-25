@@ -36,10 +36,10 @@ export const GetInTouch = () => {
 
   const fetchData = (data: GetInTouchProps) => {
     setIsLoading(true)
-    fetch("https://d924jm9bvf.execute-api.us-east-1.amazonaws.com", {
+    fetch("https://5ttmi82w73.execute-api.us-east-1.amazonaws.com/send", {
       method: "POST",
       headers: {
-        "Content-Type": "text/html",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         body: `
@@ -69,7 +69,7 @@ export const GetInTouch = () => {
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
-    minHeight: 30,
+    minHeight: 32,
   })
 
   const Error = ({ children }: { children?: string }) => {
@@ -154,22 +154,20 @@ export const GetInTouch = () => {
         </Modal.Body>
         <Status>
           {isLoading && <Loading type="points-opacity" />}
-          {response?.message && (
-            <Typography
-              color={response.statusCode === 200 ? "$success" : "$error"}
-            >
-              {response.message}
+          {response && response.MessageId && (
+            <Typography color="$success">
+              Your request has been submitted
             </Typography>
           )}
-          {response && !response?.message && (
-            <Typography color="$error">Server error</Typography>
+          {response && response.message && (
+            <Typography color="$error">{response.message}</Typography>
           )}
         </Status>
         <Modal.Footer>
           <Button
             auto
             onClick={handleSubmit(data => fetchData(data))}
-            disabled={response?.message || isLoading ? true : false}
+            disabled={response || isLoading ? true : false}
           >
             Send
           </Button>
