@@ -1,3 +1,4 @@
+name: Deploy static site to S3
 on:
   push:
     branches: [master]
@@ -16,7 +17,7 @@ permissions:
   contents: read # This is required for actions/checkout
 
 jobs:
-  DeployS3-CloudFrontInvalidation:
+  Deploy-S3-CloudFrontInvalidation:
     runs-on: ubuntu-latest
     steps:
       - name: Git clone the repository
