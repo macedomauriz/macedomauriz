@@ -9,10 +9,8 @@ export function PostImage({ src, alt }: PostImageProps) {
   const PostImageWrapper = styled("div", {
     display: "flex",
     justifyContent: "center",
-    maxWidth: 600,
-    maxHeight: 400,
+    maxHeight: 500,
     minWidth: 100,
-    background: "red",
     margin: "2rem auto",
     img: {
       objectFit: "contain",
