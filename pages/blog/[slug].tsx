@@ -1,4 +1,5 @@
 import { styled } from "@nextui-org/react"
+import { useTheme as useNextTheme } from "next-themes"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { useMemo } from "react"
@@ -85,12 +86,16 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
 
 const Post = ({ code, frontmatter, time, headings }: PostProps) => {
   const Component = useMemo(() => getMDXComponent(code), [code])
+  const { resolvedTheme } = useNextTheme()
+
+  console.log("isDark: ", resolvedTheme)
 
   return (
     <>
       <Metadata frontmatter={frontmatter} />
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
+          theme={resolvedTheme ?? "dark"}
           components={{
             img: props => (
               <PostImage src={props.src as string} alt={props.alt as string} />
@@ -114,7 +119,6 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
                 {props.children}
               </PostHeading>
             ),
-            // map headings
           }}
         />
       </PostLayout>

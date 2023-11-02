@@ -79,15 +79,12 @@ const getCompiledMDX = async (source: string) => {
     rehypeExternalLinks,
   ]
 
+  const slug = matter(source).data.slug
+
   try {
     return await bundleMDX({
       source,
-      cwd: path.join(
-        process.cwd(),
-        "content",
-        "posts",
-        matter(source).data.slug
-      ),
+      cwd: path.join(process.cwd(), "content", "posts", slug),
       mdxOptions(options) {
         options.remarkPlugins = [
           ...(options.remarkPlugins ?? []),
@@ -103,14 +100,18 @@ const getCompiledMDX = async (source: string) => {
 
       esbuildOptions: options => {
         // Set the `outdir` to a public location for this bundle.
-        options.outdir = path.join(process.cwd(), "public", "posts-images")
+        options.outdir = path.join(
+          process.cwd(),
+          "public",
+          "posts-images",
+          slug
+        )
         options.loader = {
           ...options.loader,
           // Tell esbuild to use the `file` loader for pngs
           ".png": "file",
         }
-        // Set the public path to /img/about
-        options.publicPath = "/posts-images/"
+        options.publicPath = `/posts-images/${slug}/`
 
         // Set write to true so that esbuild will output the files.
         options.write = true

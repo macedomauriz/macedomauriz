@@ -11,6 +11,8 @@ export function PostImage({ src, alt }: PostImageProps) {
     justifyContent: "center",
     maxWidth: 600,
     maxHeight: 400,
+    minWidth: 100,
+    background: "red",
     margin: "2rem auto",
     img: {
       objectFit: "contain",
