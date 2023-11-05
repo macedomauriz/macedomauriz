@@ -36,7 +36,6 @@ export function LatestBlogPosts({ posts }: LatestBlogPostsProps) {
               <PostCard
                 title={p.frontmatter.title}
                 date={p.frontmatter.date}
-                image={p.frontmatter.image}
                 href={`/blog/${p.slug}`}
                 chip={p.frontmatter.category}
               />

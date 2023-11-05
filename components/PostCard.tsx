@@ -7,12 +7,11 @@ import Chip, { ChipProps } from "./Chip"
 interface PostCardProps {
   title: string
   date: string
-  image: string
   href: string
   chip: ChipProps["text"]
 }
 
-export function PostCard({ title, date, image, href, chip }: PostCardProps) {
+export function PostCard({ title, date, href, chip }: PostCardProps) {
   const { theme } = useTheme()
 
   const Header = styled(Card.Header, {
@@ -41,7 +40,7 @@ export function PostCard({ title, date, image, href, chip }: PostCardProps) {
 
   return (
     <CustomLink href={href}>
-      <Card css={{ height: 340 }} isPressable>
+      <Card css={{ height: 160 }} variant="bordered">
         <Header>
           <Chip text={chip} />
           <Typography h4 noGutter>
@@ -51,12 +50,6 @@ export function PostCard({ title, date, image, href, chip }: PostCardProps) {
             {formattedDate.toDateString()}
           </Typography>
         </Header>
-        <Card.Image
-          src={image}
-          objectFit="cover"
-          width="100%"
-          alt="Card image background"
-        />
       </Card>
     </CustomLink>
   )

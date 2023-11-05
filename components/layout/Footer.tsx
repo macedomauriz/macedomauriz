@@ -8,6 +8,7 @@ export const Footer = () => {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
+    justifyContent: "center",
     padding: "50px 10px",
     borderTop: "1px solid $gray400",
     background: "none",

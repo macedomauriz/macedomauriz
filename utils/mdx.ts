@@ -85,6 +85,7 @@ const getCompiledMDX = async (source: string) => {
     return await bundleMDX({
       source,
       cwd: path.join(process.cwd(), "content", "posts", slug),
+
       mdxOptions(options) {
         options.remarkPlugins = [
           ...(options.remarkPlugins ?? []),
@@ -201,9 +202,8 @@ export const getSinglePost = async (slug: string) => {
 }
 
 export const getAllPosts = () => {
-  return getAllPostsFolders().map(folder => {
-    const source = getFileContent(folder)
-    const slug = folder
+  return getAllPostsFolders().map(slug => {
+    const source = getFileContent(slug)
     const frontmatter = matter(source).data
 
     return {
