@@ -22,7 +22,7 @@ export function PostImage({ src, alt }: PostImageProps) {
     <PostImageWrapper>
       {
         // eslint-disable-next-line
-        <img src={src} alt={alt} />
+        <img src={src} alt={alt} loading="lazy" />
       }
     </PostImageWrapper>
   )
