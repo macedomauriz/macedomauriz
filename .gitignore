@@ -15,6 +15,9 @@
 # production
 /build
 
+# mdx-markdown generated posts-images
+/public/posts-images/*
+
 # misc
 **/.DS_Store
 *.pem
