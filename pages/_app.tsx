@@ -13,7 +13,7 @@ import type { AppProps } from "next/app"
 config.autoAddCss = false
 import "prism-themes/themes/prism-nord.css"
 // @ts-ignore
-import socialPlaceholder from "../public/open-graph.jpg"
+import socialPlaceholder from "../public/thumbnail.jpg"
 import Script from "next/script"
 
 const inter = Inter({ subsets: ["latin"] })

@@ -88,8 +88,6 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
   const Component = useMemo(() => getMDXComponent(code), [code])
   const { resolvedTheme } = useNextTheme()
 
-  console.log("isDark: ", resolvedTheme)
-
   return (
     <>
       <Metadata frontmatter={frontmatter} />

@@ -3,7 +3,7 @@ import { Typography } from "./Typography"
 import { useTheme } from "@nextui-org/react"
 
 export interface ChipProps {
-  text: "tutorial" | "development"
+  text: "aws" | "development"
 }
 
 export default function Chip({ text }: ChipProps) {
@@ -14,10 +14,10 @@ export default function Chip({ text }: ChipProps) {
     background: string
   } {
     const color =
-      text === "tutorial" ? "pink200" : text === "development" && "green50"
+      text === "aws" ? "pink200" : text === "development" && "green50"
 
     const background =
-      text === "tutorial" ? "pink600" : text === "development" && "green800"
+      text === "aws" ? "pink600" : text === "development" && "green800"
 
     return { color: color as string, background: background as string }
   }

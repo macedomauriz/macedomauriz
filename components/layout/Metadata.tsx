@@ -6,6 +6,15 @@ interface seoProps {
 }
 
 const Metadata = ({ frontmatter }: seoProps) => {
+  let thumbnail
+  try {
+    thumbnail = require(
+      `../../public/posts-thumbnails/${frontmatter.slug}/thumbnail.jpg`
+    )
+  } catch {
+    thumbnail = require(`../../public/thumbnail.jpg`)
+  }
+
   return (
     frontmatter && (
       <>
@@ -17,13 +26,18 @@ const Metadata = ({ frontmatter }: seoProps) => {
             url: `https://macedomauriz.com/blog/${frontmatter.slug}`,
             title: frontmatter.title,
             description: frontmatter.description,
+            images: [
+              {
+                url: `https://macedomauriz.com${thumbnail}`,
+              },
+            ],
           }}
         />
         <ArticleJsonLd
           useAppDir={false}
           url={`https://macedomauriz.com/blog/${frontmatter.slug}`}
           title={frontmatter.title}
-          images={["/open-graph.jpg"]}
+          images={["/thumbnail.jpg"]}
           datePublished={frontmatter.date}
           dateModified={frontmatter.updated ?? frontmatter.date}
           authorName={[

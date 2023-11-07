@@ -17,6 +17,7 @@
 
 # mdx-markdown generated posts-images
 /public/posts-images/*
+/public/posts-thumbnails/*
 
 # misc
 **/.DS_Store

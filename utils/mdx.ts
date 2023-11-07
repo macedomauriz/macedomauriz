@@ -111,6 +111,8 @@ const getCompiledMDX = async (source: string) => {
           ...options.loader,
           // Tell esbuild to use the `file` loader for pngs
           ".png": "file",
+          ".jpeg": "file",
+          ".jpg": "file",
         }
         options.publicPath = `/posts-images/${slug}/`
 
