@@ -51,13 +51,12 @@ export default function TableOfContents({
     display: "flex",
     flexDirection: "column",
     top: 120,
-    gap: 20,
-    maxHeight: "calc(100vh - 60px)",
+    gap: 10,
   })
 
   const Headings = styled("div", {
     display: "grid",
-    gap: 22,
+    gap: 18,
     gridTemplateColumns: "max-content",
   })
 
@@ -88,6 +87,7 @@ export default function TableOfContents({
     display: "grid",
     gap: 14,
     gridTemplateColumns: "max-content",
+    margin: "20px 0 0 0",
     padding: "20px 0 0 0",
     borderTop: `1px solid ${theme?.colors.gray500.value}`,
     "> div": {
@@ -101,6 +101,7 @@ export default function TableOfContents({
       <Typography h3>Table of contents</Typography>
       <Headings>
         <Heading
+          small
           color={
             currentHeading === "introduction"
               ? selectedHeading
@@ -114,8 +115,8 @@ export default function TableOfContents({
         {headings.map(heading => {
           return (
             <Heading
-              small={heading.h3 ? true : false}
-              css={{ margin: `0 0 0 ${heading.h3 && "14px"}` }}
+              small
+              css={{ margin: `0 0 0 ${heading.h3 && "20px"}` }}
               key={heading.h2 || heading.h3}
               color={
                 currentHeading ===

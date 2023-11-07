@@ -109,7 +109,7 @@ For my site I made one named `www.macedomauriz.com` and another named `macedomau
 
 You can pick which URL will be the main one and which one will redirect the traffic to the other. In this case I picked the non-www to be the preferred one.
 
-### Bucket #1: Preferred version (non-www)
+#### Bucket #1: Preferred version (non-www)
 
 Click the created bucket and go to **Objects** tab, click **Upload**, and to put your site files into the bucket.
 
@@ -160,7 +160,7 @@ Once you saved changes the endpoint serving the site can be found under this sam
 
 💡 **Important**: Keep this URL to use later on in the **CloudFront** section. With it you can already see your site running in the browser.
 
-### Bucket #2: Redirect version (www)
+#### Bucket #2: Redirect version (www)
 
 Go to your second bucket and click the ****Properties**** tab, at the bottom you'll find the ****Static website hosting**** section, click **Edit** and enable **Static website hosting.** 
 
@@ -373,7 +373,7 @@ Let's automate this setup.
 
 ## CI/CD
 
-### Identity provider - OIDC (OpenID Connect)
+#### Identity provider - OIDC (OpenID Connect)
 
 Up until a few years ago, you would need **user secret access keys** to connect programmatically to third party services such as **Github**, this means, configuring the external application to perform actions authenticated as an IAM user.
 
@@ -482,7 +482,7 @@ And one last policy.
 - `"Action": "lambda:*"`: The `"lambda:*"` wildcard allows all Lambda actions, meaning the policy permits all operations on AWS Lambda.
 - `"Resource": "arn:aws:lambda:<AWS-REGION>:<AWS-ACCOUNT-ID>:function:<LAMBDA-NAME>"`: This attribute defines the AWS resource to which the policy applies. It uses an Amazon Resource Name (ARN) to specify the AWS Lambda function to which this policy grants permissions. You should replace `<AWS-REGION>`, `<AWS-ACCOUNT-ID>`, and `<LAMBDA-NAME>` with your specific values.
 
-### Automate deploys to S3 with Github Actions
+#### Automate deploys to S3 with Github Actions
 
 In your code, from the root, make a `.github` folder and inside it a `workflows` folder, then create a `.yaml` file with a name of your choice, let's call it `build-deploy.yaml`.
 
@@ -552,7 +552,7 @@ jobs:
 
 Make a new push and go to `https://github.com/<GITHUB-ACCOUNT>/<GITHUB-REPO>/actions` your should see your action going.
 
-### Update Lambda Function with Github Actions
+#### Update Lambda Function with Github Actions
 
 It would be a good idea to modify our **Lambda Function** from our code editor and update it without having to go to AWS, also it comes with the advantage of using the code formatting and linting you have running locally, plus, I prefer to have a version control of the changes the function had in the same place as the site code itself. So let's go for it.
 

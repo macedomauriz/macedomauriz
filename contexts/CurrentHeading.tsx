@@ -1,6 +1,5 @@
 import useScrollDirection from "hooks/useScrollDirection"
 import { createContext, useState } from "react"
-// import { PostProps } from "utils/mdx"
 
 export const CurrentHeadingContext = createContext({
   currentHeading: "",
