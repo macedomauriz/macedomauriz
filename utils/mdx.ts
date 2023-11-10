@@ -84,6 +84,27 @@ const getCompiledMDX = async (source: string) => {
   try {
     return await bundleMDX({
       source,
+      files: {
+        "./demo.tsx": `
+import * as React from 'react'
+import { useContext } from "react"
+import { CurrentHeadingProvider } from "contexts/CurrentHeading"
+import { CurrentHeadingContext } from "contexts/CurrentHeading"
+
+function Content({children}) {
+  const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
+  return <div onClick={() => updateHeading("hola")}>{children}Neat demo: {currentHeading}</div>
+
+}
+
+function Demo(props) {
+  console.log("props: ", props)
+  return <CurrentHeadingProvider><Content><div onClick={props.alert}>holissss{props.children}</div></Content></CurrentHeadingProvider>
+}
+
+export default Demo
+    `,
+      },
       cwd: path.join(process.cwd(), "content", "posts", slug),
 
       mdxOptions(options) {
@@ -187,6 +208,7 @@ export const getSinglePost = async (slug: string) => {
   const fileContent = getFileContent(slug)
 
   const htmlContent = getHTMLContent(fileContent)
+
   const time = readingTime(striptags(htmlContent)).text
   const headings = getHeadings(htmlContent)
 

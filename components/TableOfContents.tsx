@@ -32,7 +32,7 @@ export default function TableOfContents({
 }: TableOfContentsProps) {
   const { theme } = useTheme()
   const { resolvedTheme } = useNextTheme()
-  const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
+  const { currentHeading } = useContext(CurrentHeadingContext)
   const shareUrl = `https://macedomauriz.com/blog/${slug}`
 
   let selectedHeading: string | undefined
@@ -74,12 +74,9 @@ export default function TableOfContents({
   })
 
   const jumpToHeading = (id: string) => {
-    const headingTitle = id.replace(/-/g, " ")
     jump(`#${id}`, {
       duration: 1000,
       offset: -90,
-      callback: () =>
-        id !== "top" && updateHeading([headingTitle, headingTitle]),
     })
   }
 
@@ -98,6 +95,7 @@ export default function TableOfContents({
 
   return (
     <TableOfContentsWrapper>
+      {currentHeading}
       <Typography h3>Table of contents</Typography>
       <Headings>
         <Heading
@@ -127,7 +125,12 @@ export default function TableOfContents({
               noGutter
               onClick={() =>
                 jumpToHeading(
-                  (heading.h2 || heading.h3).toLowerCase().replace(/\s/g, "-")
+                  (heading.h2 || heading.h3)
+                    .toLowerCase()
+                    // replace: / with nothing
+                    .replace(/\/+/g, "")
+                    // replace: spaces and , with -
+                    .replace(/[\/,\s]+/g, "-")
                 )
               }
             >

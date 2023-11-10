@@ -2,13 +2,15 @@ import { styled } from "@nextui-org/react"
 import { useTheme as useNextTheme } from "next-themes"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
+import { useContext } from "react"
+import { CurrentHeadingProvider } from "contexts/CurrentHeading"
+import { CurrentHeadingContext } from "contexts/CurrentHeading"
 import { useMemo } from "react"
 import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import { Typography } from "components/Typography"
-import PostHeading from "components/PostHeading"
 import TableOfContents from "components/TableOfContents"
-import { CurrentHeadingProvider } from "contexts/CurrentHeading"
 import { PostImage } from "components/PostImage"
+import { PostHeading } from "components/PostHeading"
 import Metadata from "components/layout/Metadata"
 
 type CustomLayoutProps = {
@@ -24,6 +26,8 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   children,
   headings,
 }) => {
+  const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
+
   const PostLayoutWrapper = styled("div", {
     position: "relative",
     h2: {
@@ -61,26 +65,25 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   const updated = frontmatter.updated && new Date(frontmatter.updated)
 
   return (
-    <CurrentHeadingProvider>
-      <PostLayoutWrapper>
-        <Content id="top">
-          <div className="post-heading">
-            <Typography h1 noGutter>
-              {frontmatter.title}
-            </Typography>
-            <Typography>Created: {created.toDateString()}</Typography>
-            {updated && (
-              <Typography>Last updated: {updated.toDateString()}</Typography>
-            )}
-            <Typography>{time}</Typography>
-          </div>
-          <div className="table-of-contents">
-            <TableOfContents headings={headings} slug={frontmatter.slug} />
-          </div>
-          <main className="post-body">{children}</main>
-        </Content>
-      </PostLayoutWrapper>
-    </CurrentHeadingProvider>
+    <PostLayoutWrapper>
+      <div onClick={() => updateHeading("xxx")}>bitch: {currentHeading}</div>
+      <Content id="top">
+        <div className="post-heading">
+          <Typography h1 noGutter>
+            {frontmatter.title}
+          </Typography>
+          <Typography>Created: {created.toDateString()}</Typography>
+          {updated && (
+            <Typography>Last updated: {updated.toDateString()}</Typography>
+          )}
+          <Typography>{time}</Typography>
+        </div>
+        <div className="table-of-contents">
+          <TableOfContents headings={headings} slug={frontmatter.slug} />
+        </div>
+        <main className="post-body">{children}</main>
+      </Content>
+    </PostLayoutWrapper>
   )
 }
 
@@ -89,38 +92,29 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
   const { resolvedTheme } = useNextTheme()
 
   return (
-    <>
+    <CurrentHeadingProvider>
       <Metadata frontmatter={frontmatter} />
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
-          theme={resolvedTheme ?? "dark"}
           components={{
             img: props => (
               <PostImage src={props.src as string} alt={props.alt as string} />
             ),
             p: props => <Typography paragraph>{props.children}</Typography>,
             h2: props => (
-              <PostHeading
-                h2
-                id={props.id as string}
-                headings={headings.map(i => i.h2 ?? i.h3)}
-              >
+              <PostHeading h2 id={props.id as string}>
                 {props.children}
               </PostHeading>
             ),
             h3: props => (
-              <PostHeading
-                h3
-                id={props.id as string}
-                headings={headings.map(i => i.h2 ?? i.h3)}
-              >
+              <PostHeading h3 id={props.id as string}>
                 {props.children}
               </PostHeading>
             ),
           }}
         />
       </PostLayout>
-    </>
+    </CurrentHeadingProvider>
   )
 }
 

@@ -12,7 +12,7 @@ export function Hero() {
         </Typography>
         <Spacer y={1} />
         <Typography paragraph>
-          I am a full-stack developer with over 6 years of professional
+          I am a full-stack developer with over 7 years of professional
           experience, specializing in building and leading web projects.
         </Typography>
         <Typography paragraph>

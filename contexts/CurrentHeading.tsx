@@ -1,9 +1,8 @@
-import useScrollDirection from "hooks/useScrollDirection"
 import { createContext, useState } from "react"
 
 export const CurrentHeadingContext = createContext({
   currentHeading: "",
-  updateHeading: (h: string[]) => undefined,
+  updateHeading: (h?: string) => undefined,
 })
 
 interface CurrentHeadingProps {
@@ -11,12 +10,11 @@ interface CurrentHeadingProps {
 }
 
 export function CurrentHeadingProvider({ children }: CurrentHeadingProps) {
-  const [currentHeading, setCurrentHeading] = useState("introduction")
-  const scrollDir = useScrollDirection()
+  const [currentHeading, setCurrentHeading] = useState("puto")
 
-  const updateHeading = (h: string[]): any => {
-    const index = scrollDir === "up" ? 0 : 1
-    setCurrentHeading(h[index].toLowerCase())
+  const updateHeading = (h: string): any => {
+    setCurrentHeading(h)
+    console.log("CONTEXT: ", currentHeading)
   }
 
   const contextValue = {
