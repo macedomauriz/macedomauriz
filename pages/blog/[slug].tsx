@@ -2,14 +2,13 @@ import { styled } from "@nextui-org/react"
 import { useTheme as useNextTheme } from "next-themes"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
-import { useContext } from "react"
 import { CurrentHeadingProvider } from "contexts/CurrentHeading"
-import { CurrentHeadingContext } from "contexts/CurrentHeading"
 import { useMemo } from "react"
 import { getAllPosts, getSinglePost, PostProps } from "utils/mdx"
 import { Typography } from "components/Typography"
 import TableOfContents from "components/TableOfContents"
 import { PostImage } from "components/PostImage"
+import { PostSection } from "components/PostSection"
 import { PostHeading } from "components/PostHeading"
 import Metadata from "components/layout/Metadata"
 
@@ -26,8 +25,6 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
   children,
   headings,
 }) => {
-  const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
-
   const PostLayoutWrapper = styled("div", {
     position: "relative",
     h2: {
@@ -66,7 +63,6 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
 
   return (
     <PostLayoutWrapper>
-      <div onClick={() => updateHeading("xxx")}>bitch: {currentHeading}</div>
       <Content id="top">
         <div className="post-heading">
           <Typography h1 noGutter>
@@ -97,6 +93,9 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
       <PostLayout frontmatter={frontmatter} time={time} headings={headings}>
         <Component
           components={{
+            PostSection(props) {
+              return <PostSection {...props} />
+            },
             img: props => (
               <PostImage src={props.src as string} alt={props.alt as string} />
             ),

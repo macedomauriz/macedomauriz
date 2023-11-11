@@ -1,39 +1,53 @@
-import { InView } from "react-intersection-observer"
+import { useInView } from "react-intersection-observer"
 import { CurrentHeadingContext } from "contexts/CurrentHeading"
-import { useContext, useRef } from "react"
-import { CurrentHeadingProvider } from "contexts/CurrentHeading"
+import { useContext, useEffect, useRef, useState } from "react"
 
 interface PostSectionProps {
-  children: any
+  children: React.ReactNode
+  isIntroduction?: boolean
 }
 
 export function PostSection({ children }: PostSectionProps) {
+  const { addHeading, removeHeading, resetHeadings } = useContext(
+    CurrentHeadingContext
+  )
+  const [elementRefId, setElementRefId] = useState<string>()
+  const { ref, inView } = useInView({
+    rootMargin: "-100px 0px -100px 0px",
+    threshold: 0,
+  })
   const elementRef: React.LegacyRef<HTMLDivElement> | undefined =
     useRef<HTMLDivElement>(null)
 
-  const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
+  useEffect(() => {
+    if (!elementRefId) {
+      const id = elementRef?.current?.previousElementSibling?.id
+      id && setElementRefId(id)
+    }
+    inView && elementRefId && addHeading(elementRefId)
+    !inView && elementRefId && removeHeading(elementRefId)
+    // eslint-disable-next-line
+  }, [inView])
 
-  console.log("currentHeading: ", currentHeading)
+  useEffect(() => {
+    // Check scroll position and call resetHeadings when scroll is at 300px from the top
+    const handleScroll = () => {
+      if (window.scrollY < 200) {
+        resetHeadings()
+      }
+    }
 
-  const updateHeadingHelper = (id?: string) => {
-    console.log("id: ", id)
-    updateHeading(id)
-  }
+    window.addEventListener("scroll", handleScroll)
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
 
   return (
-    <CurrentHeadingProvider>
-      <div ref={elementRef}>
-        noooo
-        <InView
-          as="section"
-          onChange={inView =>
-            inView &&
-            updateHeadingHelper(elementRef?.current?.previousElementSibling?.id)
-          }
-        >
-          {children}
-        </InView>
-      </div>
-    </CurrentHeadingProvider>
+    <div ref={elementRef} style={{ background: "red" }}>
+      <section ref={ref}>{children}</section>
+    </div>
   )
 }

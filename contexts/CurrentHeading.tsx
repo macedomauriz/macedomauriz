@@ -1,8 +1,15 @@
 import { createContext, useState } from "react"
 
-export const CurrentHeadingContext = createContext({
+export const CurrentHeadingContext = createContext<{
+  currentHeading: string
+  addHeading: (h: string) => void
+  removeHeading: (h: string) => void
+  resetHeadings: () => void
+}>({
   currentHeading: "",
-  updateHeading: (h?: string) => undefined,
+  addHeading: () => {},
+  removeHeading: () => {},
+  resetHeadings: () => {},
 })
 
 interface CurrentHeadingProps {
@@ -10,16 +17,27 @@ interface CurrentHeadingProps {
 }
 
 export function CurrentHeadingProvider({ children }: CurrentHeadingProps) {
-  const [currentHeading, setCurrentHeading] = useState("puto")
+  const [headingsArray, setHeadingsArray] = useState<string[]>(["introduction"])
 
-  const updateHeading = (h: string): any => {
-    setCurrentHeading(h)
-    console.log("CONTEXT: ", currentHeading)
+  const addHeading = (h: string) => {
+    const ar = [...headingsArray, h]
+    setHeadingsArray(ar)
+  }
+
+  const removeHeading = (h: string) => {
+    const ar = headingsArray.filter(item => item !== h)
+    setHeadingsArray(ar)
+  }
+
+  const resetHeadings = () => {
+    setHeadingsArray(["introduction"])
   }
 
   const contextValue = {
-    currentHeading,
-    updateHeading,
+    currentHeading: headingsArray[headingsArray.length - 1],
+    addHeading,
+    removeHeading,
+    resetHeadings,
   }
 
   return (
