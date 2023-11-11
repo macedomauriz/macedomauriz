@@ -1,5 +1,5 @@
 import { styled } from "@nextui-org/react"
-import { useTheme as useNextTheme } from "next-themes"
+// import { useTheme as useNextTheme } from "next-themes"
 import { getMDXComponent } from "mdx-bundler/client"
 import { GetStaticProps } from "next"
 import { CurrentHeadingProvider } from "contexts/CurrentHeading"
@@ -85,7 +85,7 @@ const PostLayout: React.FC<CustomLayoutProps> = ({
 
 const Post = ({ code, frontmatter, time, headings }: PostProps) => {
   const Component = useMemo(() => getMDXComponent(code), [code])
-  const { resolvedTheme } = useNextTheme()
+  // const { resolvedTheme } = useNextTheme()
 
   return (
     <CurrentHeadingProvider>

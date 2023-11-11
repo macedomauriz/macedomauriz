@@ -43,10 +43,11 @@ export function PostSection({ children }: PostSectionProps) {
     return () => {
       window.removeEventListener("scroll", handleScroll)
     }
+    // eslint-disable-next-line
   }, [])
 
   return (
-    <div ref={elementRef} style={{ background: "red" }}>
+    <div ref={elementRef}>
       <section ref={ref}>{children}</section>
     </div>
   )
