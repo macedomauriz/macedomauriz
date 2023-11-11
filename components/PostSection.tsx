@@ -30,7 +30,7 @@ export function PostSection({ children }: PostSectionProps) {
   }, [inView])
 
   useEffect(() => {
-    // Check scroll position and call resetHeadings when scroll is at 300px from the top
+    // Check scroll position and call resetHeadings when scroll is at 200px from the top
     const handleScroll = () => {
       if (window.scrollY < 200) {
         resetHeadings()

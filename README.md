@@ -47,12 +47,6 @@ Github Actions makes the deploy in AWS S3 when pushing to `master` branch
 
 ## Roadmap
 
-- Customized OpenGraph image
-- Lambda function update from GitHub Actions
-  - https://awstip.com/tutorial-updating-an-aws-lambda-function-using-github-actions-af832b493a0d
-  - https://blog.jakoblind.no/aws-lambda-github-actions/
-- Use isDark hook in every mode condition
-- Remove unused Lint hooks
 - Evaluate Speed Insights warnings
 - Videos in MDX
 - Better hero image load handling

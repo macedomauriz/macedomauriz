@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react"
 import { styled, keyframes } from "@nextui-org/react"
-import { useTheme } from "@nextui-org/react"
+import { useTheme as useNextTheme } from "next-themes"
 
 export function Animation() {
   const [isRendered, setIsRendered] = useState(false)
-  const { isDark } = useTheme()
+  const { resolvedTheme } = useNextTheme()
 
   useEffect(() => {
     setIsRendered(true)
@@ -22,7 +22,7 @@ export function Animation() {
     width: 200,
     height: 300,
     background: "url('/sprites/rodrigo.png')",
-    filter: `brightness(${isDark ? "1" : "1.3"})`,
+    filter: `brightness(${resolvedTheme === "dark" ? "1" : "1.3"})`,
     animationName: `${sprite(1400)}`,
     animationDuration: "0.4s",
     animationTimingFunction: "steps(7)",
@@ -37,7 +37,7 @@ export function Animation() {
     width: 200,
     height: 10,
     background: "url('/sprites/rodrigo-floor.png')",
-    filter: `brightness(${isDark ? "1.3" : "9"})`,
+    filter: `brightness(${resolvedTheme === "dark" ? "1.3" : "9"})`,
     animationName: `${sprite(1400)}`,
     animationDuration: "0.4s",
     animationTimingFunction: "steps(7)",
@@ -65,7 +65,7 @@ export function Animation() {
     width: 110,
     height: 110,
     background: "url('/sprites/wilson.png')",
-    filter: `brightness(${isDark ? "0.9" : "1.2"})`,
+    filter: `brightness(${resolvedTheme === "dark" ? "0.9" : "1.2"})`,
     animationName: `${sprite(440)}`,
     animationDuration: "0.25s",
     animationTimingFunction: "steps(4)",
@@ -80,7 +80,7 @@ export function Animation() {
     width: 110,
     height: 6,
     background: "url('/sprites/wilson-floor.png')",
-    filter: `brightness(${isDark ? "1.3" : "8"})`,
+    filter: `brightness(${resolvedTheme === "dark" ? "1.3" : "8"})`,
     animationName: `${sprite(440)}`,
     animationDuration: "0.25s",
     animationTimingFunction: "steps(4)",
@@ -98,7 +98,7 @@ export function Animation() {
           <Rodrigo />
         </>
       )}
-      {isRendered && !isDark && <Glasses />}
+      {isRendered && resolvedTheme !== "dark" && <Glasses />}
     </AnimationHeroWrapper>
   )
 }

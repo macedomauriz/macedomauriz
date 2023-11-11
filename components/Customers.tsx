@@ -1,5 +1,6 @@
 import { Modal, Spacer, styled } from "@nextui-org/react"
 import { useTheme } from "@nextui-org/react"
+import { useTheme as useNextTheme } from "next-themes"
 import CustomLink from "./CustomLink"
 import Image from "next/image"
 import { Typography } from "./Typography"
@@ -90,7 +91,8 @@ const customers: CustomersProps[] = [
 ]
 
 export function Customers() {
-  const { isDark, theme } = useTheme()
+  const { theme } = useTheme()
+  const { resolvedTheme } = useNextTheme()
   const [visible, setVisible] = useState(false)
   const [customerId, setCustomerId] = useState(0)
 
@@ -172,7 +174,7 @@ export function Customers() {
     },
   })
   const LogoImage = styled(Image, {
-    filter: `invert(${isDark ? "0.45" : "0.6"})`,
+    filter: `invert(${resolvedTheme === "dark" ? "0.45" : "0.6"})`,
   })
   const PrevNextButton = styled("button", {
     display: "flex",
