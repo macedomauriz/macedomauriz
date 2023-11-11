@@ -187,6 +187,7 @@ export const getSinglePost = async (slug: string) => {
   const fileContent = getFileContent(slug)
 
   const htmlContent = getHTMLContent(fileContent)
+
   const time = readingTime(striptags(htmlContent)).text
   const headings = getHeadings(htmlContent)
 

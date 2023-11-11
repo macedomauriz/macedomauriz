@@ -3,6 +3,7 @@ import { useTheme as useNextTheme } from "next-themes"
 import { CurrentHeadingContext } from "contexts/CurrentHeading"
 import { useContext } from "react"
 import { PostProps } from "utils/mdx"
+import { idFormat } from "utils/idFormat"
 import { Typography } from "./Typography"
 import jump from "jump.js"
 import {
@@ -32,7 +33,7 @@ export default function TableOfContents({
 }: TableOfContentsProps) {
   const { theme } = useTheme()
   const { resolvedTheme } = useNextTheme()
-  const { currentHeading, updateHeading } = useContext(CurrentHeadingContext)
+  const { currentHeading } = useContext(CurrentHeadingContext)
   const shareUrl = `https://macedomauriz.com/blog/${slug}`
 
   let selectedHeading: string | undefined
@@ -74,12 +75,9 @@ export default function TableOfContents({
   })
 
   const jumpToHeading = (id: string) => {
-    const headingTitle = id.replace(/-/g, " ")
     jump(`#${id}`, {
       duration: 1000,
       offset: -90,
-      callback: () =>
-        id !== "top" && updateHeading([headingTitle, headingTitle]),
     })
   }
 
@@ -119,17 +117,12 @@ export default function TableOfContents({
               css={{ margin: `0 0 0 ${heading.h3 && "20px"}` }}
               key={heading.h2 || heading.h3}
               color={
-                currentHeading ===
-                (heading.h2?.toLowerCase() || heading.h3?.toLowerCase())
+                currentHeading === idFormat(heading.h2 || heading.h3)
                   ? selectedHeading
                   : theme?.colors.gray700.value
               }
               noGutter
-              onClick={() =>
-                jumpToHeading(
-                  (heading.h2 || heading.h3).toLowerCase().replace(/\s/g, "-")
-                )
-              }
+              onClick={() => jumpToHeading(idFormat(heading.h2 || heading.h3))}
             >
               {heading.h2 || heading.h3}
             </Heading>

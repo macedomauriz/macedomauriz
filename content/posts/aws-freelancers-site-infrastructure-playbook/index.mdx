@@ -7,25 +7,24 @@ category: aws
 slug: aws-freelancers-site-infrastructure-playbook
 ---
 
-# DRAFT
-
 Having a personal website establishes your online presence, it makes it easier for potential clients to find you and showcase your work and skills. 
 
 No matter the subject of your expertise, optimizing your site to be an active platform for frequent publishing and updates requires some key and common issues to be addressed. Managing those issues if from what this post is about.
 
-1 - **Deploy a static site** with a **custom domain** using HTTPS protocol on **the edge** with a const-efficient method.
+1. **Deploy a static site** with a **custom domain** using HTTPS protocol on **the edge** with a const-efficient method.
 
-2 - Functionality for an **email-delivery-sending** form.
+2. Functionality for an **email-delivery-sending** form.
 
-3- **Automate deployments** to the site code and infrastructure by pushing new commits to a version control platform.
+3. **Automate deployments** to the site code and infrastructure by pushing new commits to a version control platform.
 
-## Prerequisites
+#### Prerequisites
 
-1 - An **AWS** account
+1. An **AWS** account
 
-2 - A **Github** account
+2. A **Github** account
 
-## AWS Services, Version Control and CI/CD
+### AWS Services, Version Control and CI/CD
+<PostSection>
 
 Let's establish what **AWS services**, **version control** software and **[CI/CD](https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-cicd-litmus/understanding-cicd.html) tools** we will use from the **AWS console**, and briefly define them for further understanding.
 
@@ -69,7 +68,11 @@ A **Lambda Function** allows you to run code in response to events without the n
 
 **GitHub Actions** is a an automation platform provided by **GitHub** that allows developers to automate various aspects of the software development lifecycle. It allows you to create workflows that are defined in a YAML file within your repository. In this article we will trigger updates to our infrastructure when commits are pushed to **GitHub**.
 
+</PostSection>
+
 ## Kickstart your frontend
+
+<PostSection>
 
 All the steps to come can be followed along using any type of frontend approach, but just for explanatory purposes and due to its popularity I'll be moving forward with [Next.js](https://nextjs.org/docs), which the tool I've used to build [this site](https://github.com/macedomauriz/me). 
 
@@ -79,7 +82,11 @@ The only time your frontend might slightly diverge from a following step is in t
 
 [Make a Github repository](https://docs.github.com/en/get-started/quickstart/create-a-repo) and push your code.
 
+</PostSection>
+
 ## Deploy your code to AWS S3
+
+<PostSection>
 
 As a Node.js-based project, Next.js, being [React](https://react.dev/) library, relies on a `package.json` file to handle dependencies and scripts. To generate the code that you'll upload to an S3 bucket, simply execute the build script defined in your `package.json` by running `npm run build` in your terminal.
 
@@ -168,7 +175,11 @@ This one will redirect to the non-www as we decided at the beginning, select **R
 
 ![Enable S3 static site redirect](./enable-s3-static-site-redirect--dark.png)
 
+</PostSection>
+
 ## Set up a domain in Route 53
+
+<PostSection>
 
 In **Route 53**, choose **Domains** and then **Registered domains,** go to **Register domains** and follow the instructions to get the one of your choice. 
 
@@ -176,7 +187,11 @@ Keep in mind that if you have a domain you'd like to use in another registrar, y
 
 Other alternatives like GoDaddy, HostGator, Namecheap or other similar registrars will work just fine.
 
+</PostSection>
+
 ## Request a SSL Certificate
+
+<PostSection>
 
 To get the SSL certificate and be able to deliver your site with the HTTPS protocol, go to **Certificate Manager**, **Request Certificate,** and add the www version and non-www version of your domain.
 
@@ -196,7 +211,11 @@ Be sure to remove the `<domain>` part when pasting it the DNS manager inputs.
 
 The verification might take a while, be patient.
 
+</PostSection>
+
 ## Set up CloudFront as a CDN
+
+<PostSection>
 
 Once you have your buckets set and your domain certified, let’s configure CloudFront. 
 
@@ -225,7 +244,11 @@ Let's set up our domain instead of this URL with one and simple step. Go to **Ro
 
 At this point the **S3** stored website must be available from the **CloudFront** edge locations in HTTPS for the non-www domain version with redirection from the www one.
 
+</PostSection>
+
 ## SES email verification
+
+<PostSection>
 
 Emails should be set from an address, so let's tell **SES** that we own the email address we will use.
 
@@ -233,7 +256,11 @@ Go to **SES** and in the left panel select **Verified Identities** and click **C
 
 To ask **SES** to send an email for us we will need a function to process that request, and to connect to that function we will need an API to talk to that function from our webpage email-sending form.
 
+</PostSection>
+
 ## Write a Lambda Function
+
+<PostSection>
 
 Before writing the function, first we need to attach a [Policy to the Role that will give the Permission](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) to our **Lambda** to do what we require.
 
@@ -283,7 +310,11 @@ def lambda_handler(event, context):
     return response
 ```
 
+</PostSection>
+
 ## Create an API Gateway
+
+<PostSection>
 
 **AWS Lambda** functions are event-driven, which means they don't have a built-in HTTP interface. An **API Gateway** acts as an HTTP endpoint that allows you to trigger Lambda functions via HTTP requests. This makes it possible to expose serverless functions as API endpoints. Let's make one.
 
@@ -321,7 +352,11 @@ To get the URL to use making the POST request from our form, go to Stages and fi
 
 ![API Gateway Stages](./api-gateway-stages--dark.png)
 
+</PostSection>
+
 ## Make a Form
+
+<PostSection>
 
 Make a UI for the mail to be composed, a `form` that accepts a `name`, `company` and `body` inputs for it to be able to be processed by the **Lambda Function**.
 
@@ -371,7 +406,11 @@ Now we have a **UI** to send a **JSON request** through an **API Gateway** that 
 
 Let's automate this setup.
 
+</PostSection>
+
 ## CI/CD
+
+<PostSection>
 
 #### Identity provider - OIDC (OpenID Connect)
 
@@ -598,3 +637,5 @@ jobs:
 ```
 
 Again, make a new push and go to `https://github.com/<GITHUB-ACCOUNT>/<GITHUB-REPO>/actions` and your should see both workflows going.
+
+</PostSection>
