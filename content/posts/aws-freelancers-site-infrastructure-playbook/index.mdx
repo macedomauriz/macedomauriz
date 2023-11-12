@@ -7,23 +7,36 @@ category: aws
 slug: aws-freelancers-site-infrastructure-playbook
 ---
 
-Having a personal website establishes your online presence, it makes it easier for potential clients to find you and showcase your work and skills. 
+Having a personal website establishes your online presence, makes it easier for potential clients to find you and showcase your work and skills. 
 
-No matter the subject of your expertise, optimizing your site to be an active platform for frequent publishing and updates requires some key and common issues to be addressed. Managing those issues if from what this post is about.
+No matter the subject of your expertise, optimizing your site to be an active platform for frequent publishing and updates requires some key and common issues to be addressed. Managing those isssues is what this post is about.
 
-1. **Deploy a static site** with a **custom domain** using HTTPS protocol on **the edge** with a const-efficient method.
+<PostCallOut>
 
-2. Functionality for an **email-delivery-sending** form.
-
-3. **Automate deployments** to the site code and infrastructure by pushing new commits to a version control platform.
-
-#### Prerequisites
+✔︎ **Prerequisites**
 
 1. An **AWS** account
 
 2. A **Github** account
 
+3. Basic **frontend** knowledge
+
+</PostCallOut>
+
+<PostCallOut>
+
+✸ **Objectives**
+
+1. **Deploy a static site** with a **custom domain** using HTTPS protocol on **the edge** with a const-efficient method.
+
+2. **Email-delivery-sending** form.
+
+3. **Continuous Integration and Continuous Delivery (CI/CD) automation** and be able to update just by pushing new commits to a version control platform.
+
+</PostCallOut>
+
 ### AWS Services, Version Control and CI/CD
+
 <PostSection>
 
 Let's establish what **AWS services**, **version control** software and **[CI/CD](https://docs.aws.amazon.com/prescriptive-guidance/latest/strategy-cicd-litmus/understanding-cicd.html) tools** we will use from the **AWS console**, and briefly define them for further understanding.
@@ -70,25 +83,25 @@ A **Lambda Function** allows you to run code in response to events without the n
 
 </PostSection>
 
-## Kickstart your frontend
-
-<PostSection>
-
-All the steps to come can be followed along using any type of frontend approach, but just for explanatory purposes and due to its popularity I'll be moving forward with [Next.js](https://nextjs.org/docs), which the tool I've used to build [this site](https://github.com/macedomauriz/me). 
-
-A vanilla HTML/CSS/JS approach or any other static site generator will also work, choose your own. 
-
-The only time your frontend might slightly diverge from a following step is in the writing of the client function that will send the `POST` request for the email to be send.
-
-[Make a Github repository](https://docs.github.com/en/get-started/quickstart/create-a-repo) and push your code.
-
-</PostSection>
-
 ## Deploy your code to AWS S3
 
 <PostSection>
 
-As a Node.js-based project, Next.js, being [React](https://react.dev/) library, relies on a `package.json` file to handle dependencies and scripts. To generate the code that you'll upload to an S3 bucket, simply execute the build script defined in your `package.json` by running `npm run build` in your terminal.
+Let's set up some code to follow along.
+
+<PostCallOut type="warning">
+
+**Note: This is not a frontend guide.**
+
+Your can go forth using **any type of frontend approach**. 
+
+Just for explanatory purposes and due to its popularity I'll be moving forward with [Next.js](https://nextjs.org/docs), which the tool I've used to build [this site](https://github.com/macedomauriz/me). 
+
+A **vanilla HTML/CSS/JS approach** or **any other static site generator** is also perfectly fine, choose your own. 
+
+</PostCallOut>
+
+As a [React](https://react.dev/) library, Next.js relies on a `package.json` file to handle dependencies and scripts. To generate the code that you'll upload to an S3 bucket, simply execute the build script defined in your `package.json` by running `npm run build` in your terminal.
 
 ```json:package.json {5} showLineNumbers
 {
@@ -104,11 +117,17 @@ As a Node.js-based project, Next.js, being [React](https://react.dev/) library, 
 ...
 ```
 
-As a result, a folder named `out` will be created, this is the [SGG](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation) output that must be uploaded to S3. If you chose another tool such as [Vue](https://vuejs.org/) or [Svelte](https://svelte.dev/), this folder can be named `dist` or `public`. If your approach is vanilla, the files you've written are enough to be served.
+As a result, a folder named `out` will be created, this is the [SGG](https://nextjs.org/docs/pages/building-your-application/rendering/static-site-generation) output that must be uploaded to S3. 
 
-It is recommended not not use the root user for everyday tasks, so to follow basic best practices create a **User** to follow along if you don't have one already.
+If you chose another tool such as [Vue](https://vuejs.org/) or [Svelte](https://svelte.dev/), this folder can be named `dist` or `public`. If your approach is vanilla, the files you've written are enough to be served.
 
-Create two buckets and fill in the **Bucket name** input as the domains they will receive traffic from, one for the www version, the other for the non-www version.
+</PostSection>
+
+### Configure your buckets
+
+<PostSection>
+
+Create two buckets and fill in the **Bucket name** field as the domains they will receive traffic from, one for the www version, the other for the non-www version.
 
 ![Create S3](./create-s3--dark.png)
 
@@ -175,11 +194,7 @@ This one will redirect to the non-www as we decided at the beginning, select **R
 
 ![Enable S3 static site redirect](./enable-s3-static-site-redirect--dark.png)
 
-</PostSection>
-
-## Set up a domain in Route 53
-
-<PostSection>
+#### Your domain in Route 53
 
 In **Route 53**, choose **Domains** and then **Registered domains,** go to **Register domains** and follow the instructions to get the one of your choice. 
 
@@ -187,13 +202,9 @@ Keep in mind that if you have a domain you'd like to use in another registrar, y
 
 Other alternatives like GoDaddy, HostGator, Namecheap or other similar registrars will work just fine.
 
-</PostSection>
+#### Request a SSL Certificate
 
-## Request a SSL Certificate
-
-<PostSection>
-
-To get the SSL certificate and be able to deliver your site with the HTTPS protocol, go to **Certificate Manager**, **Request Certificate,** and add the www version and non-www version of your domain.
+To obtain an SSL certificate and enable secure HTTPS delivery for your site with the HTTPS protocol, go to **Certificate Manager**, **Request Certificate,** and add the www version and non-www version of your domain.
 
 Pick the **DNS Validation** method, you'll get a **CNAME Name** and **CNAME Value** to add in a **CNAME type** your Route 53 DNS manager. 
 
@@ -213,7 +224,7 @@ The verification might take a while, be patient.
 
 </PostSection>
 
-## Set up CloudFront as a CDN
+### Set up CloudFront as a CDN
 
 <PostSection>
 
@@ -226,7 +237,7 @@ Once you have your buckets set and your domain certified, let’s configure Clou
 
 ![Edges map](./edges-map--dark.png)
 
-Go to AWS CloudFront service and click Create Distribution. In the Origin domain input paste the URL copied from the Bucket #1 section inside the Properties tab (do not pick a URL from the dropdown).
+Navigate to AWS CloudFront service and click Create Distribution. In the Origin domain input paste the URL copied from the Bucket #1 section inside the Properties tab (do not pick a URL from the dropdown).
 
 ![Create distribution](./create-distribution--dark.png)
 
@@ -246,21 +257,21 @@ At this point the **S3** stored website must be available from the **CloudFront*
 
 </PostSection>
 
-## SES email verification
+## Email sending
 
 <PostSection>
 
-Emails should be set from an address, so let's tell **SES** that we own the email address we will use.
+Emails should be sent from an address, so let's inform **SES** that we own the email address we will use. 
+
+We will also need an API endpoint to communicate with **SES** and a form to fill in the data to be sent.
+
+#### SES email verification
 
 Go to **SES** and in the left panel select **Verified Identities** and click **Create identity**. Pick **Email address** for the method of verification, in the **Email address** input, write your email. You will receive a message from `no-reply-aws@amazon.com` for you to verify.
 
 To ask **SES** to send an email for us we will need a function to process that request, and to connect to that function we will need an API to talk to that function from our webpage email-sending form.
 
-</PostSection>
-
-## Write a Lambda Function
-
-<PostSection>
+#### Write a Lambda Function
 
 Before writing the function, first we need to attach a [Policy to the Role that will give the Permission](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) to our **Lambda** to do what we require.
 
@@ -312,7 +323,7 @@ def lambda_handler(event, context):
 
 </PostSection>
 
-## Create an API Gateway
+### Create an API Gateway
 
 <PostSection>
 
@@ -352,11 +363,7 @@ To get the URL to use making the POST request from our form, go to Stages and fi
 
 ![API Gateway Stages](./api-gateway-stages--dark.png)
 
-</PostSection>
-
-## Make a Form
-
-<PostSection>
+#### Make a Form
 
 Make a UI for the mail to be composed, a `form` that accepts a `name`, `company` and `body` inputs for it to be able to be processed by the **Lambda Function**.
 
@@ -411,6 +418,12 @@ Let's automate this setup.
 ## CI/CD
 
 <PostSection>
+
+#### Set up Github
+
+[Make a Github repository](https://docs.github.com/en/get-started/quickstart/create-a-repo) and push your code. 
+
+Out of this repository we will trigger updates out of our commits fixing or updating the site.
 
 #### Identity provider - OIDC (OpenID Connect)
 
@@ -521,11 +534,15 @@ And one last policy.
 - `"Action": "lambda:*"`: The `"lambda:*"` wildcard allows all Lambda actions, meaning the policy permits all operations on AWS Lambda.
 - `"Resource": "arn:aws:lambda:<AWS-REGION>:<AWS-ACCOUNT-ID>:function:<LAMBDA-NAME>"`: This attribute defines the AWS resource to which the policy applies. It uses an Amazon Resource Name (ARN) to specify the AWS Lambda function to which this policy grants permissions. You should replace `<AWS-REGION>`, `<AWS-ACCOUNT-ID>`, and `<LAMBDA-NAME>` with your specific values.
 
-#### Automate deploys to S3 with Github Actions
+</PostSection>
+
+### Automate deploys to S3
+
+<PostSection>
 
 In your code, from the root, make a `.github` folder and inside it a `workflows` folder, then create a `.yaml` file with a name of your choice, let's call it `build-deploy.yaml`.
 
-Let's go through the the instructions for **GitHub Actions**.
+Let's walk through the the instructions for **GitHub Actions**.
 
 
 ```yaml showLineNumbers
@@ -591,11 +608,15 @@ jobs:
 
 Make a new push and go to `https://github.com/<GITHUB-ACCOUNT>/<GITHUB-REPO>/actions` your should see your action going.
 
-#### Update Lambda Function with Github Actions
+</PostSection>
+
+### Automate Lambda Function updates
+
+<PostSection>
 
 It would be a good idea to modify our **Lambda Function** from our code editor and update it without having to go to AWS, also it comes with the advantage of using the code formatting and linting you have running locally, plus, I prefer to have a version control of the changes the function had in the same place as the site code itself. So let's go for it.
 
-Make a new `.yaml` file with the following code.
+Create a new `.yaml` file with the following code.
 
 ```yaml showLineNumbers
 name: Deploy Lambda function from source

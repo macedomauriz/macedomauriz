@@ -9,6 +9,7 @@ import { Typography } from "components/Typography"
 import TableOfContents from "components/TableOfContents"
 import { PostImage } from "components/PostImage"
 import { PostSection } from "components/PostSection"
+import { PostCallOut } from "components/PostCallOut"
 import { PostHeading } from "components/PostHeading"
 import Metadata from "components/layout/Metadata"
 
@@ -95,6 +96,9 @@ const Post = ({ code, frontmatter, time, headings }: PostProps) => {
           components={{
             PostSection(props) {
               return <PostSection {...props} />
+            },
+            PostCallOut(props) {
+              return <PostCallOut {...props} />
             },
             img: props => (
               <PostImage src={props.src as string} alt={props.alt as string} />
