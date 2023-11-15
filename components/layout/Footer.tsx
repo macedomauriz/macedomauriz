@@ -12,7 +12,11 @@ export const Footer = () => {
     padding: "50px 10px",
     borderTop: "1px solid $gray400",
     background: "none",
+    small: {
+      textAlign: "center",
+    },
   })
+
   const currentYear = new Date().getFullYear()
 
   return (
