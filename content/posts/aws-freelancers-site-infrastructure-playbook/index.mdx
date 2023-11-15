@@ -275,7 +275,7 @@ To ask **SES** to send an email for us we will need a function to process that r
 
 Before writing the function, first we need to attach a [Policy to the Role that will give the Permission](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html) to our **Lambda** to do what we require.
 
-Go to **IAM (Identity and Access Management)** and select **Roles**, name **create a **Role**, click the dropdown menu for **Add permissions** and select **Attach policies**, pick **AmazonSESFullAccess**.
+Go to **IAM (Identity and Access Management)** and select **Roles**, name **create a **Role**, under **Use case** choose **Lambda**, click the dropdown menu for **Add permissions** and select **Attach policies**, pick **AmazonSESFullAccess**, **AWSLambdaBasicExecutionRole** and **AWSRayDaemonWriteAccess**.
 
 ![Lambda SES full access](./lambda-ses-full-access--dark.png)
 
