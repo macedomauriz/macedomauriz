@@ -1,0 +1,92 @@
+---
+title: Docker Compose to EC2 - GitHub Actions and SSM
+description: Deploying a Docker Compose file to an EC2 instance via GitHub Actions can be problematic due to the multi-line nature of the file and JSON's handling of multi-line strings.
+date: 2024/8/2
+category: aws
+slug: deploy-multi-line-docker-compose-files-to-ec2-github-actions-ssm
+---
+
+When deploying applications, especially those involving Docker containers, the workflow sometimes involves pushing your images to Amazon ECR and pulling them onto your EC2 instances. 
+
+However, you also need to manage your configuration files, such as `docker-compose-prod.yml`, on the EC2 instance to orchestrate your containers. 
+
+Handling multi-line content for these configuration files can be tricky. Traditional methods often rely on external storage solutions like S3 buckets or managing SSH connections, each with its drawbacks. 
+
+In this guide, we’ll explore a streamlined approach that avoids these issues by directly transferring multi-line configuration files to your EC2 instances using GitHub Actions and AWS Systems Manager (SSM).
+
+## The Problem
+
+Deploying configuration files can be cumbersome due to:
+
+**Complex Multi-line Content**: JSON struggles with multi-line strings, particularly when they include special characters and quotes.
+
+**Clutter from External Storage**: Storing files in buckets like S3 can lead to clutter and additional management overhead.
+
+**Security Concerns with SSH**: Using SSH for file transfers requires opening extra ports, which can introduce security vulnerabilities.
+
+## Solution Overview
+
+Our approach addresses these issues by:
+
+**Base64 Encoding the Configuration File**: This method converts the Docker Compose file into a single-line base64 string, making it easy to pass through JSON.
+
+**Avoiding External Storage**: Instead of relying on S3 buckets, we use GitHub Actions to encode and pass the file directly.
+
+**Minimizing SSH Dependencies**: By using AWS SSM for deployment, we avoid opening additional SSH ports, thus enhancing security.
+
+### GitHub Actions Workflow
+
+1. Checkout Code
+
+Start by checking out the code from your repository:
+
+```yaml showLineNumbers
+- name: Checkout code
+  uses: actions/checkout@v2
+```
+
+2. Configure AWS Credentials
+
+Set up AWS credentials to interact with AWS services:
+
+```yaml showLineNumbers
+- name: Configure AWS credentials
+  uses: aws-actions/configure-aws-credentials@v4
+  with:
+    role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+    role-session-name: GitHub_to_AWS_via_FederatedOIDC
+    aws-region: ${{ env.REGION }}
+```
+
+3. Encode Docker Compose File
+
+Convert the Docker Compose file into a base64 string and store it in an environment variable:
+
+```yaml showLineNumbers
+- name: Encode docker-compose-prod.yml
+  id: encode_file
+  run: |
+    base64 docker-compose-prod.yml | tr -d '\n' > docker-compose-prod.yml.b64
+    echo "DOCKER_COMPOSE_YML=$(cat docker-compose-prod.yml.b64)" >> $GITHUB_ENV
+```
+
+4. Deploy to EC2
+
+Send the encoded content to the EC2 instance, decode it, and write it to the file system:
+
+```yaml showLineNumbers
+- name: Deploy to EC2
+  run: |
+    aws ssm send-command \
+    --instance-ids "$INSTANCE_ID" \
+    --document-name "AWS-RunShellScript" \
+    --parameters '{
+      "commands": [
+        "sudo mkdir -p /path/to/",
+        "echo '${{ env.DOCKER_COMPOSE_YML }}' | base64 -d > /path/to/docker-compose-prod.yml"
+      ]
+    }' \
+    --region ${{ env.REGION }}
+```
+
+Integrate this approach into your CI/CD pipeline to improve deployment efficiency and maintain a clean, secure environment.
