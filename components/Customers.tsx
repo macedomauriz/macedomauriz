@@ -34,6 +34,15 @@ const customers: CustomersProps[] = [
       "Tata Consultancy Services (TCS) is a multinational information technology (IT) services, consulting, and business solutions company headquartered in Mumbai, India. TCS offers a wide range of services to clients in various industries, including banking and financial services, healthcare, retail, energy, and IT.",
   },
   {
+    src: "/logos/globallogic.svg",
+    alt: "GlobalLogic",
+    href: "https://www.globallogic.com/",
+    width: 170,
+    height: 55,
+    description:
+      "GlobalLogic is listed on top in digital product engineering companies that offers product consulting and software engineering partner services.",
+  },
+  {
     src: "/logos/tryolabs.svg",
     alt: "Tryolabs",
     href: "https://tryolabs.com/",
