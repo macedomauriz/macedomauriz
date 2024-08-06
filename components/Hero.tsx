@@ -1,6 +1,7 @@
 import { Grid, Spacer } from "@nextui-org/react"
 import { Animation } from "../components/Animation"
 import { Typography } from "../components/Typography"
+import CustomLink from "./CustomLink"
 
 export function Hero() {
   return (
@@ -9,6 +10,12 @@ export function Hero() {
         <Spacer y={1} />
         <Typography h1 noGutter>
           Rodrigo Macedo Mauriz
+        </Typography>
+        <Typography h3 noGutter>
+          Full-Stack Developer @{" "}
+          <CustomLink href="https://www.globallogic.com/">
+            GlobalLogic
+          </CustomLink>
         </Typography>
         <Spacer y={1} />
         <Typography paragraph>
